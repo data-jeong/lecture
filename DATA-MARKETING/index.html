@@ -973,6 +973,481 @@
             }
         }
 
+        /* 데이터 활용 전략 스타일 */
+        .data-feeding-strategy {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feeding-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .feeding-intro h3 {
+            color: #4ecdc4;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feeding-intro p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .feeding-process {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .process-step {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateX(10px);
+            border-color: rgba(78, 205, 196, 0.3);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-header h4 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .insight-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(78, 205, 196, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .insight-icon {
+            font-size: 1.5rem;
+        }
+
+        .tag-strategies {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .tag-category {
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .tag-category h5 {
+            color: #ffcc00;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .tag-category span {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .execution-cycle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .execution-cycle .cycle-item {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 15px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+        }
+
+        .execution-cycle .cycle-icon {
+            font-size: 1.5rem;
+        }
+
+        .execution-cycle .cycle-arrow {
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .process-arrow {
+            text-align: center;
+            color: #4ecdc4;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .feeding-bridge {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .bridge-box {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(255, 204, 0, 0.2) 100%);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: bridgePulse 2.5s ease-in-out infinite;
+        }
+
+        .bridge-icon {
+            font-size: 2rem;
+        }
+
+        .bridge-box p {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        @keyframes bridgePulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+            }
+        }
+
+        /* AI 최적화 부스팅 스타일 */
+        .ai-boosting-strategy {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .boosting-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .boosting-intro h3 {
+            color: #ffcc00;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .boosting-intro p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .boosting-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .method-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .method-1::before {
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+        }
+
+        .method-2::before {
+            background: linear-gradient(90deg, #ffcc00, #ffa502);
+        }
+
+        .method-3::before {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a52);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .method-icon {
+            font-size: 2rem;
+        }
+
+        .method-header h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .before, .after {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .before .label {
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .after .label {
+            color: #4ecdc4;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .before-after .arrow {
+            color: #ffcc00;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .pattern-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .pattern-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.8rem;
+            border-radius: 8px;
+        }
+
+        .pattern-icon {
+            font-size: 1.2rem;
+        }
+
+        .bidding-improvements {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .improvement-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .improvement-item h5 {
+            color: #ffcc00;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .improvement-item p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .method-result {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .result-icon {
+            font-size: 1.3rem;
+        }
+
+        .boosting-cycle {
+            margin-bottom: 3rem;
+        }
+
+        .boosting-cycle h3 {
+            color: #95e1d3;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .cycle-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cycle-flow .cycle-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1rem;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .cycle-flow .cycle-step:hover {
+            transform: scale(1.05);
+            border-color: rgba(149, 225, 211, 0.3);
+        }
+
+        .cycle-flow .cycle-icon {
+            font-size: 2rem;
+        }
+
+        .cycle-flow .cycle-arrow {
+            color: #95e1d3;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .boosting-promise {
+            text-align: center;
+        }
+
+        .promise-highlight {
+            background: linear-gradient(135deg, rgba(255, 204, 0, 0.3) 0%, rgba(78, 205, 196, 0.3) 100%);
+            border: 3px solid rgba(255, 204, 0, 0.5);
+            border-radius: 25px;
+            padding: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: highlightGlow 3s ease-in-out infinite;
+        }
+
+        .highlight-icon {
+            font-size: 2.5rem;
+        }
+
+        .promise-highlight p {
+            color: #ffcc00;
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        @keyframes highlightGlow {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(255, 204, 0, 0.4);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 0 50px rgba(255, 204, 0, 0.6);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .boosting-methods {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .before-after {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .before-after .arrow {
+                transform: rotate(90deg);
+            }
+            
+            .tag-strategies {
+                grid-template-columns: 1fr;
+            }
+            
+            .cycle-flow {
+                flex-direction: column;
+            }
+            
+            .cycle-flow .cycle-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
         /* 문제 제기 카드 */
         .problem-cards {
             display: grid;
@@ -1862,7 +2337,105 @@
             </div>
         </section>
 
-        <!-- 슬라이드 9: 현실 직시 -->
+        <!-- 슬라이드 9: 데이터 활용 전략 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>그럼 데이터를 어떻게 잘 '먹이지'?</h2>
+                
+                <div class="data-feeding-strategy">
+                    <div class="feeding-intro">
+                        <h3>📊 TAG로 완성하는 데이터 파이프라인</h3>
+                        <p>수집된 인사이트를 <strong>실제 성과 개선</strong>으로 연결하는 체계</p>
+                    </div>
+                    
+                    <div class="feeding-process">
+                        <div class="process-step step-1">
+                            <div class="step-header">
+                                <div class="step-number">1</div>
+                                <h4>GA4 인사이트 추출</h4>
+                            </div>
+                            <div class="step-content">
+                                <div class="insight-examples">
+                                    <div class="insight-item">
+                                        <span class="insight-icon">🎯</span>
+                                        <span>"모바일 사용자가 결제 2단계에서 68% 이탈"</span>
+                                    </div>
+                                    <div class="insight-item">
+                                        <span class="insight-icon">📊</span>
+                                        <span>"페이스북 트래픽의 장바구니 추가율이 20% 높음"</span>
+                                    </div>
+                                    <div class="insight-item">
+                                        <span class="insight-icon">💡</span>
+                                        <span>"재방문 사용자의 구매 확률이 3.2배 높음"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-arrow">↓</div>
+                        
+                        <div class="process-step step-2">
+                            <div class="step-header">
+                                <div class="step-number">2</div>
+                                <h4>TAG 전략 수립</h4>
+                            </div>
+                            <div class="step-content">
+                                <div class="tag-strategies">
+                                    <div class="tag-category">
+                                        <h5>🏷️ 맞춤 잠재고객</h5>
+                                        <span>GA4 세그먼트 → 구글 애즈 잠재고객</span>
+                                    </div>
+                                    <div class="tag-category">
+                                        <h5>🎨 크리에이티브 최적화</h5>
+                                        <span>행동 패턴 → 개인화된 메시지</span>
+                                    </div>
+                                    <div class="tag-category">
+                                        <h5>💰 입찰 전략 조정</h5>
+                                        <span>전환 데이터 → 스마트 입찰 개선</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-arrow">↓</div>
+                        
+                        <div class="process-step step-3">
+                            <div class="step-header">
+                                <div class="step-number">3</div>
+                                <h4>실행 및 검증</h4>
+                            </div>
+                            <div class="step-content">
+                                <div class="execution-cycle">
+                                    <div class="cycle-item">
+                                        <span class="cycle-icon">🚀</span>
+                                        <span>캠페인 적용</span>
+                                    </div>
+                                    <div class="cycle-arrow">→</div>
+                                    <div class="cycle-item">
+                                        <span class="cycle-icon">📈</span>
+                                        <span>성과 모니터링</span>
+                                    </div>
+                                    <div class="cycle-arrow">→</div>
+                                    <div class="cycle-item">
+                                        <span class="cycle-icon">🔄</span>
+                                        <span>지속적 최적화</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feeding-bridge">
+                        <div class="bridge-box">
+                            <span class="bridge-icon">⚡</span>
+                            <p><strong>하지만 매체들은 이미 AI로 무장하고 있습니다...</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 10: 현실 직시 -->
         <section class="slide content-slide">
             <div class="slide-content">
                 <h2>매체는 이미 AI로 무장했다</h2>
@@ -2066,7 +2639,129 @@
             </div>
         </section>
 
-        <!-- 슬라이드 6: GTM 구현 -->
+        <!-- 슬라이드 11: AI 최적화 부스팅 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>그렇다면 우리는 GA4로 AI를 더 똑똑하게!</h2>
+                
+                <div class="ai-boosting-strategy">
+                    <div class="boosting-intro">
+                        <h3>🚀 매체 머신러닝 AI 부스팅 전략</h3>
+                        <p>GA4 인사이트와 결과를 활용해 <strong>AI에게 더 나은 학습 데이터</strong>를 제공합니다</p>
+                    </div>
+                    
+                    <div class="boosting-methods">
+                        <div class="method-card method-1">
+                            <div class="method-header">
+                                <div class="method-icon">🎯</div>
+                                <h4>정밀한 전환 신호 제공</h4>
+                            </div>
+                            <div class="method-content">
+                                <div class="before-after">
+                                    <div class="before">
+                                        <span class="label">기존 방식</span>
+                                        <p>단순 구매 완료만 추적</p>
+                                    </div>
+                                    <div class="arrow">→</div>
+                                    <div class="after">
+                                        <span class="label">GA4 강화</span>
+                                        <p>구매 가치, 카테고리, 빈도까지 세분화</p>
+                                    </div>
+                                </div>
+                                <div class="method-result">
+                                    <span class="result-icon">📈</span>
+                                    <span>AI가 고가치 고객을 더 정확히 타겟팅</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="method-card method-2">
+                            <div class="method-header">
+                                <div class="method-icon">🧠</div>
+                                <h4>행동 패턴 학습 강화</h4>
+                            </div>
+                            <div class="method-content">
+                                <div class="pattern-examples">
+                                    <div class="pattern-item">
+                                        <span class="pattern-icon">⏰</span>
+                                        <span>최적 노출 시간대 학습</span>
+                                    </div>
+                                    <div class="pattern-item">
+                                        <span class="pattern-icon">📱</span>
+                                        <span>디바이스별 전환 확률 분석</span>
+                                    </div>
+                                    <div class="pattern-item">
+                                        <span class="pattern-icon">🔄</span>
+                                        <span>재방문 주기 예측 개선</span>
+                                    </div>
+                                </div>
+                                <div class="method-result">
+                                    <span class="result-icon">⚡</span>
+                                    <span>Performance Max 성능 30% 향상</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="method-card method-3">
+                            <div class="method-header">
+                                <div class="method-icon">💰</div>
+                                <h4>스마트 입찰 데이터 품질 개선</h4>
+                            </div>
+                            <div class="method-content">
+                                <div class="bidding-improvements">
+                                    <div class="improvement-item">
+                                        <h5>전환 가치 최적화</h5>
+                                        <p>실제 매출 데이터 연동으로 ROAS 정확도 증대</p>
+                                    </div>
+                                    <div class="improvement-item">
+                                        <h5>잠재고객 품질 향상</h5>
+                                        <p>GA4 세그먼트 기반 유사 잠재고객 정밀도 개선</p>
+                                    </div>
+                                </div>
+                                <div class="method-result">
+                                    <span class="result-icon">🎯</span>
+                                    <span>CPA 20% 감소, 전환율 25% 증가</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="boosting-cycle">
+                        <h3>🔄 지속적 AI 학습 사이클</h3>
+                        <div class="cycle-flow">
+                            <div class="cycle-step">
+                                <div class="cycle-icon">📊</div>
+                                <span>GA4 데이터 수집</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="cycle-icon">🧪</div>
+                                <span>인사이트 분석</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="cycle-icon">🤖</div>
+                                <span>AI 모델 피드백</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="cycle-icon">🚀</div>
+                                <span>성과 개선</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="boosting-promise">
+                        <div class="promise-highlight">
+                            <span class="highlight-icon">⭐</span>
+                            <p><strong>결과: AI와 데이터의 완벽한 협업으로 마케팅 성과 극대화!</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 12: GTM 구현 -->
         <section class="slide content-slide">
             <div class="slide-content">
                 <h2>GTM으로 태그 구현하기</h2>
@@ -2452,6 +3147,8 @@
         <span class="nav-dot" data-slide="16"></span>
         <span class="nav-dot" data-slide="17"></span>
         <span class="nav-dot" data-slide="18"></span>
+        <span class="nav-dot" data-slide="19"></span>
+        <span class="nav-dot" data-slide="20"></span>
     </div>
 
     <script>
