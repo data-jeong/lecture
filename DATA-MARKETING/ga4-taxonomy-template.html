@@ -154,12 +154,16 @@
         </div>
 
         <div class="download-section">
-            <button class="btn btn-primary" onclick="exportToExcel()">Excel로 다운로드</button>
-            <button class="btn btn-secondary" onclick="exportToCSV()">CSV로 다운로드</button>
+            <button class="btn btn-primary" onclick="exportAllToExcel()">전체 템플릿 Excel 다운로드</button>
+            <button class="btn btn-secondary" onclick="exportAllToCSV()">전체 템플릿 CSV 다운로드</button>
         </div>
 
         <div class="section">
             <h2>GA4 이벤트 택소노미 템플릿</h2>
+            <div class="download-section">
+                <button class="btn btn-primary" onclick="exportTaxonomyToExcel()">택소노미 Excel 다운로드</button>
+                <button class="btn btn-secondary" onclick="exportTaxonomyToCSV()">택소노미 CSV 다운로드</button>
+            </div>
             <table id="taxonomyTable">
                 <thead>
                     <tr>
@@ -218,6 +222,10 @@
 
         <div class="section">
             <h2>가설 검증 템플릿</h2>
+            <div class="download-section">
+                <button class="btn btn-primary" onclick="exportHypothesisToExcel()">가설 검증 Excel 다운로드</button>
+                <button class="btn btn-secondary" onclick="exportHypothesisToCSV()">가설 검증 CSV 다운로드</button>
+            </div>
             <table id="hypothesisTable">
                 <thead>
                     <tr>
@@ -260,17 +268,108 @@
     </div>
 
     <script>
-        // Excel 다운로드 함수
-        function exportToExcel() {
-            // 두 테이블의 데이터를 결합
+        // 개별 택소노미 Excel 다운로드
+        function exportTaxonomyToExcel() {
+            let excelContent = '<html><head><meta charset="utf-8"/></head><body>';
+            excelContent += '<h2>GA4 이벤트 택소노미 템플릿</h2>';
+            excelContent += document.getElementById('taxonomyTable').outerHTML;
+            excelContent += '</body></html>';
+            
+            const blob = new Blob([excelContent], {
+                type: 'application/vnd.ms-excel;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'GA4_이벤트_택소노미_템플릿.xls';
+            link.click();
+        }
+
+        // 개별 택소노미 CSV 다운로드
+        function exportTaxonomyToCSV() {
+            let csvContent = 'GA4 이벤트 택소노미 템플릿\n\n';
+            const table = document.getElementById('taxonomyTable');
+            const rows = table.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const rowData = Array.from(cells).map(cell => {
+                    let text = cell.innerText || cell.textContent;
+                    text = text.replace(/"/g, '""');
+                    if (text.includes(',') || text.includes('\n')) {
+                        text = `"${text}"`;
+                    }
+                    return text;
+                });
+                csvContent += rowData.join(',') + '\n';
+            });
+            
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csvContent], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'GA4_이벤트_택소노미_템플릿.csv';
+            link.click();
+        }
+
+        // 개별 가설 검증 Excel 다운로드
+        function exportHypothesisToExcel() {
+            let excelContent = '<html><head><meta charset="utf-8"/></head><body>';
+            excelContent += '<h2>가설 검증 템플릿</h2>';
+            excelContent += document.getElementById('hypothesisTable').outerHTML;
+            excelContent += '</body></html>';
+            
+            const blob = new Blob([excelContent], {
+                type: 'application/vnd.ms-excel;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '가설_검증_워크시트_템플릿.xls';
+            link.click();
+        }
+
+        // 개별 가설 검증 CSV 다운로드
+        function exportHypothesisToCSV() {
+            let csvContent = '가설 검증 템플릿\n\n';
+            const table = document.getElementById('hypothesisTable');
+            const rows = table.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const rowData = Array.from(cells).map(cell => {
+                    let text = cell.innerText || cell.textContent;
+                    text = text.replace(/"/g, '""');
+                    if (text.includes(',') || text.includes('\n')) {
+                        text = `"${text}"`;
+                    }
+                    return text;
+                });
+                csvContent += rowData.join(',') + '\n';
+            });
+            
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csvContent], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '가설_검증_워크시트_템플릿.csv';
+            link.click();
+        }
+
+        // 전체 Excel 다운로드
+        function exportAllToExcel() {
             let excelContent = '<html><head><meta charset="utf-8"/></head><body>';
             
-            // 첫 번째 테이블
             excelContent += '<h2>GA4 이벤트 택소노미 템플릿</h2>';
             excelContent += document.getElementById('taxonomyTable').outerHTML;
             excelContent += '<br/><br/>';
             
-            // 두 번째 테이블
             excelContent += '<h2>가설 검증 템플릿</h2>';
             excelContent += document.getElementById('hypothesisTable').outerHTML;
             
@@ -282,15 +381,14 @@
             
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'GA4_택소노미_템플릿.xls';
+            link.download = 'GA4_전체_템플릿.xls';
             link.click();
         }
 
-        // CSV 다운로드 함수
-        function exportToCSV() {
+        // 전체 CSV 다운로드
+        function exportAllToCSV() {
             let csvContent = '';
             
-            // 첫 번째 테이블
             csvContent += 'GA4 이벤트 택소노미 템플릿\n\n';
             const table1 = document.getElementById('taxonomyTable');
             const rows1 = table1.querySelectorAll('tr');
@@ -299,7 +397,6 @@
                 const cells = row.querySelectorAll('th, td');
                 const rowData = Array.from(cells).map(cell => {
                     let text = cell.innerText || cell.textContent;
-                    // CSV 형식을 위해 쉼표와 줄바꿈 처리
                     text = text.replace(/"/g, '""');
                     if (text.includes(',') || text.includes('\n')) {
                         text = `"${text}"`;
@@ -311,7 +408,6 @@
             
             csvContent += '\n\n가설 검증 템플릿\n\n';
             
-            // 두 번째 테이블
             const table2 = document.getElementById('hypothesisTable');
             const rows2 = table2.querySelectorAll('tr');
             
@@ -328,7 +424,6 @@
                 csvContent += rowData.join(',') + '\n';
             });
             
-            // BOM 추가 (한글 인코딩을 위해)
             const BOM = '\uFEFF';
             const blob = new Blob([BOM + csvContent], {
                 type: 'text/csv;charset=utf-8;'
@@ -336,7 +431,7 @@
             
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'GA4_택소노미_템플릿.csv';
+            link.download = 'GA4_전체_템플릿.csv';
             link.click();
         }
 
