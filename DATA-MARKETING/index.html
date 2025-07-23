@@ -1086,6 +1086,97 @@
             color: #ccc;
         }
 
+        /* 플랫폼별 전략 스타일 */
+        .platform-strategies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .platform-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .platform-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(78, 205, 196, 0.3);
+        }
+        .platform-header {
+            margin-bottom: 1.5rem;
+        }
+        .platform-header h4 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin: 0 0 0.5rem 0;
+        }
+        .platform-subtitle {
+            color: #4ecdc4;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        .insight-action {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+        .insight-action .insight {
+            flex: 1;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .insight-action .arrow {
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+        .insight-action .action {
+            flex: 1;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .implementation {
+            padding: 1rem;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #4ecdc4;
+            color: #4ecdc4;
+            font-size: 0.9rem;
+        }
+        .monitoring-strategy {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .monitoring-strategy h3 {
+            color: #4ecdc4;
+            margin-bottom: 2rem;
+        }
+        .monitoring-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .monitoring-step {
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+        .monitoring-step h5 {
+            color: #ffcc00;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .monitoring-step p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
         .execution-cycle {
             display: flex;
             align-items: center;
@@ -2344,83 +2435,117 @@
                 
                 <div class="data-feeding-strategy">
                     <div class="feeding-intro">
-                        <h3>📊 TAG로 완성하는 데이터 파이프라인</h3>
-                        <p>수집된 인사이트를 <strong>실제 성과 개선</strong>으로 연결하는 체계</p>
+                        <h3>📊 GA4 인사이트로 매체별 최적화 전략</h3>
+                        <p>수집된 데이터를 <strong>각 매체 특성에 맞게 활용</strong>하는 실전 방법론</p>
                     </div>
                     
-                    <div class="feeding-process">
-                        <div class="process-step step-1">
-                            <div class="step-header">
-                                <div class="step-number">1</div>
-                                <h4>GA4 인사이트 추출</h4>
+                    <div class="platform-strategies">
+                        <div class="platform-card google">
+                            <div class="platform-header">
+                                <h4>🔵 Google Ads</h4>
+                                <span class="platform-subtitle">(가장 강력한 GA4 연동)</span>
                             </div>
-                            <div class="step-content">
-                                <div class="insight-examples">
-                                    <div class="insight-item">
-                                        <span class="insight-icon">🎯</span>
-                                        <span>"모바일 사용자가 결제 2단계에서 68% 이탈"</span>
-                                    </div>
-                                    <div class="insight-item">
-                                        <span class="insight-icon">📊</span>
-                                        <span>"페이스북 트래픽의 장바구니 추가율이 20% 높음"</span>
-                                    </div>
-                                    <div class="insight-item">
-                                        <span class="insight-icon">💡</span>
-                                        <span>"재방문 사용자의 구매 확률이 3.2배 높음"</span>
-                                    </div>
+                            <div class="platform-content">
+                                <div class="insight-action">
+                                    <div class="insight">📱 "모바일 결제 2단계 68% 이탈"</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">모바일 리마케팅 캠페인 + "무료배송" 메시지</div>
+                                </div>
+                                <div class="insight-action">
+                                    <div class="insight">📊 "페이스북 트래픽 장바구니 20% 높음"</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">유사 세그먼트 생성 + Discovery 캠페인</div>
+                                </div>
+                                <div class="implementation">
+                                    <strong>실행:</strong> GA4 관리자 → 잠재고객 → Google Ads 공유
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="process-arrow">↓</div>
-                        
-                        <div class="process-step step-2">
-                            <div class="step-header">
-                                <div class="step-number">2</div>
-                                <h4>TAG 전략 수립</h4>
+                        <div class="platform-card meta">
+                            <div class="platform-header">
+                                <h4>🟦 Meta (Facebook/Instagram)</h4>
+                                <span class="platform-subtitle">픽셀 + 수동 활용</span>
                             </div>
-                            <div class="step-content">
-                                <div class="tag-strategies">
-                                    <div class="tag-category">
-                                        <h5>🏷️ 맞춤 잠재고객</h5>
-                                        <span>GA4 세그먼트 → 구글 애즈 잠재고객</span>
-                                    </div>
-                                    <div class="tag-category">
-                                        <h5>🎨 크리에이티브 최적화</h5>
-                                        <span>행동 패턴 → 개인화된 메시지</span>
-                                    </div>
-                                    <div class="tag-category">
-                                        <h5>💰 입찰 전략 조정</h5>
-                                        <span>전환 데이터 → 스마트 입찰 개선</span>
-                                    </div>
+                            <div class="platform-content">
+                                <div class="insight-action">
+                                    <div class="insight">📱 모바일 이탈 개선</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">커스텀 오디언스 + "지금 구매시 5% 추가 할인"</div>
+                                </div>
+                                <div class="insight-action">
+                                    <div class="insight">💡 재방문자 집중</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">180일 내 2회 이상 방문자 카탈로그 광고</div>
+                                </div>
+                                <div class="implementation">
+                                    <strong>구현:</strong> Meta Pixel + Conversions API 서버사이드 보완
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="process-arrow">↓</div>
-                        
-                        <div class="process-step step-3">
-                            <div class="step-header">
-                                <div class="step-number">3</div>
-                                <h4>실행 및 검증</h4>
+                        <div class="platform-card tiktok">
+                            <div class="platform-header">
+                                <h4>⚫ TikTok</h4>
+                                <span class="platform-subtitle">모바일 중심 최적화</span>
                             </div>
-                            <div class="step-content">
-                                <div class="execution-cycle">
-                                    <div class="cycle-item">
-                                        <span class="cycle-icon">🚀</span>
-                                        <span>캠페인 적용</span>
-                                    </div>
-                                    <div class="cycle-arrow">→</div>
-                                    <div class="cycle-item">
-                                        <span class="cycle-icon">📈</span>
-                                        <span>성과 모니터링</span>
-                                    </div>
-                                    <div class="cycle-arrow">→</div>
-                                    <div class="cycle-item">
-                                        <span class="cycle-icon">🔄</span>
-                                        <span>지속적 최적화</span>
-                                    </div>
+                            <div class="platform-content">
+                                <div class="insight-action">
+                                    <div class="insight">📱 모바일 플랫폼 특성</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">15초 내 핵심 메시지 + 세로형 콘텐츠</div>
                                 </div>
+                                <div class="insight-action">
+                                    <div class="insight">📊 장바구니 추가 데이터</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">Add to Cart 이벤트 최적화 + Complete Payment 추적</div>
+                                </div>
+                                <div class="implementation">
+                                    <strong>특화:</strong> Spark Ads UGC 활용 + 해시태그 챌린지 연계
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="platform-card naver">
+                            <div class="platform-header">
+                                <h4>🟢 네이버</h4>
+                                <span class="platform-subtitle">제한적 활용</span>
+                            </div>
+                            <div class="platform-content">
+                                <div class="insight-action">
+                                    <div class="insight">📱 모바일 이탈 대응</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">모바일 검색 키워드 입찰 강화 + 쇼핑 라이브</div>
+                                </div>
+                                <div class="insight-action">
+                                    <div class="insight">💡 재방문자 전략</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">브랜드 검색 키워드 방어 + 쇼핑 GFA 리타겟팅</div>
+                                </div>
+                                <div class="implementation">
+                                    <strong>최적화:</strong> 파워링크 품질지수 + 상품평/리뷰 관리
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="monitoring-strategy">
+                        <h3>📊 통합 모니터링 전략</h3>
+                        <div class="monitoring-steps">
+                            <div class="monitoring-step">
+                                <h5>1. 데이터 수집</h5>
+                                <p>GTM으로 모든 매체 동시 추적</p>
+                            </div>
+                            <div class="monitoring-step">
+                                <h5>2. 대시보드 구성</h5>
+                                <p>GA4 전체 퍼널 + 각 매체 성과 확인</p>
+                            </div>
+                            <div class="monitoring-step">
+                                <h5>3. 최적화 주기</h5>
+                                <p>일간 모니터링 → 주간 A/B 테스트 → 월간 전략 재조정</p>
+                            </div>
+                        </div>
+                    </div>
                             </div>
                         </div>
                     </div>
