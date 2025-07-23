@@ -1141,6 +1141,39 @@
             font-size: 0.9rem;
             font-weight: 500;
         }
+        .ga4-discovery {
+            padding: 1rem;
+            background: rgba(255, 204, 0, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #ffcc00;
+            margin-bottom: 1.5rem;
+        }
+        .ga4-discovery h5 {
+            color: #ffcc00;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .ga4-discovery p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .optimization-check {
+            padding: 1rem;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #4ecdc4;
+            margin-top: 1rem;
+        }
+        .optimization-check h5 {
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .optimization-check p {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
         .implementation {
             padding: 1rem;
             background: rgba(78, 205, 196, 0.1);
@@ -2431,33 +2464,39 @@
         <!-- 슬라이드 9: 데이터 활용 전략 -->
         <section class="slide content-slide">
             <div class="slide-content">
-                <h2>그럼 데이터를 어떻게 잘 '먹이지'?</h2>
+                <h2>GA4 데이터 전략의 실전 활용</h2>
                 
                 <div class="data-feeding-strategy">
                     <div class="feeding-intro">
-                        <h3>📊 GA4 인사이트로 매체별 최적화 전략</h3>
-                        <p>수집된 데이터를 <strong>각 매체 특성에 맞게 활용</strong>하는 실전 방법론</p>
+                        <h3>📊 GA4에서 발견 → 매체별 최적화 → 성과 검증</h3>
+                        <p>GA4 탐색 보고서와 잠재고객 분석으로 <strong>데이터 기반 광고 최적화</strong> 실행하기</p>
                     </div>
                     
                     <div class="platform-strategies">
                         <div class="platform-card google">
                             <div class="platform-header">
                                 <h4>🔵 Google Ads</h4>
-                                <span class="platform-subtitle">(가장 강력한 GA4 연동)</span>
+                                <span class="platform-subtitle">(GA4 직접 연동 최적화)</span>
                             </div>
                             <div class="platform-content">
+                                <div class="ga4-discovery">
+                                    <h5>🔍 GA4 발견 방법</h5>
+                                    <p>탐색 → 경로 데이터 탐색 → 결제 단계별 이탈률 분석</p>
+                                </div>
                                 <div class="insight-action">
                                     <div class="insight">📱 "모바일 결제 2단계 68% 이탈"</div>
                                     <div class="arrow">→</div>
-                                    <div class="action">모바일 리마케팅 캠페인 + "무료배송" 메시지</div>
+                                    <div class="action">결제 2단계 도달자 리마케팅 + "무료배송" 메시지</div>
                                 </div>
                                 <div class="insight-action">
-                                    <div class="insight">📊 "페이스북 트래픽 장바구니 20% 높음"</div>
+                                    <div class="insight">📊 "소셜 트래픽 장바구니 추가율 20% 높음"</div>
                                     <div class="arrow">→</div>
-                                    <div class="action">유사 세그먼트 생성 + Discovery 캠페인</div>
+                                    <div class="action">소셜 방문자 유사 잠재고객 생성 + Discovery 캠페인</div>
                                 </div>
-                                <div class="implementation">
-                                    <strong>실행:</strong> GA4 관리자 → 잠재고객 → Google Ads 공유
+                                <div class="optimization-check">
+                                    <h5>📈 최적화 검증</h5>
+                                    <p><strong>실행:</strong> GA4 잠재고객 → Google Ads 실시간 동기화<br>
+                                    <strong>검증:</strong> 전환 경로 보고서에서 캠페인별 기여도 분석</p>
                                 </div>
                             </div>
                         </div>
@@ -2465,21 +2504,27 @@
                         <div class="platform-card meta">
                             <div class="platform-header">
                                 <h4>🟦 Meta (Facebook/Instagram)</h4>
-                                <span class="platform-subtitle">픽셀 + 수동 활용</span>
+                                <span class="platform-subtitle">GA4 인사이트 수동 활용</span>
                             </div>
                             <div class="platform-content">
-                                <div class="insight-action">
-                                    <div class="insight">📱 모바일 이탈 개선</div>
-                                    <div class="arrow">→</div>
-                                    <div class="action">커스텀 오디언스 + "지금 구매시 5% 추가 할인"</div>
+                                <div class="ga4-discovery">
+                                    <h5>🔍 GA4 발견 방법</h5>
+                                    <p>탐색 → 사용자 세그먼트 비교 → 재방문 행동 패턴 분석</p>
                                 </div>
                                 <div class="insight-action">
-                                    <div class="insight">💡 재방문자 집중</div>
+                                    <div class="insight">📱 모바일 결제 페이지 68% 이탈</div>
                                     <div class="arrow">→</div>
-                                    <div class="action">180일 내 2회 이상 방문자 카탈로그 광고</div>
+                                    <div class="action">결제 페이지 방문자 커스텀 오디언스 + 할인 메시지</div>
                                 </div>
-                                <div class="implementation">
-                                    <strong>구현:</strong> Meta Pixel + Conversions API 서버사이드 보완
+                                <div class="insight-action">
+                                    <div class="insight">💡 재방문자 구매 전환율 3.2배 높음</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">180일 내 2회+ 방문자 리스트 + 카탈로그 리타겟팅</div>
+                                </div>
+                                <div class="optimization-check">
+                                    <h5>📈 최적화 검증</h5>
+                                    <p><strong>구현:</strong> Meta Pixel Helper로 이벤트 검증<br>
+                                    <strong>검증:</strong> GA4 획득 보고서에서 Meta 트래픽 행동 변화 추적</p>
                                 </div>
                             </div>
                         </div>
@@ -2487,21 +2532,27 @@
                         <div class="platform-card tiktok">
                             <div class="platform-header">
                                 <h4>⚫ TikTok</h4>
-                                <span class="platform-subtitle">모바일 중심 최적화</span>
+                                <span class="platform-subtitle">모바일 행동 데이터 활용</span>
                             </div>
                             <div class="platform-content">
-                                <div class="insight-action">
-                                    <div class="insight">📱 모바일 플랫폼 특성</div>
-                                    <div class="arrow">→</div>
-                                    <div class="action">15초 내 핵심 메시지 + 세로형 콘텐츠</div>
+                                <div class="ga4-discovery">
+                                    <h5>🔍 GA4 발견 방법</h5>
+                                    <p>보고서 → 잠재고객 → 기술 → 모바일 사용자 행동 세분화</p>
                                 </div>
                                 <div class="insight-action">
-                                    <div class="insight">📊 장바구니 추가 데이터</div>
+                                    <div class="insight">📱 모바일 사용자 평균 세션 시간 2분</div>
                                     <div class="arrow">→</div>
-                                    <div class="action">Add to Cart 이벤트 최적화 + Complete Payment 추적</div>
+                                    <div class="action">15초 내 핵심 메시지 전달 + 즉시 액션 유도</div>
                                 </div>
-                                <div class="implementation">
-                                    <strong>특화:</strong> Spark Ads UGC 활용 + 해시태그 챌린지 연계
+                                <div class="insight-action">
+                                    <div class="insight">📊 MZ세대 장바구니 추가 후 24시간 내 구매</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">Add to Cart 이벤트 기반 24시간 리타겟팅</div>
+                                </div>
+                                <div class="optimization-check">
+                                    <h5>📈 최적화 검증</h5>
+                                    <p><strong>특화:</strong> TikTok Pixel 이벤트 설정<br>
+                                    <strong>검증:</strong> GA4 연령대별 보고서에서 MZ세대 전환율 모니터링</p>
                                 </div>
                             </div>
                         </div>
@@ -2509,21 +2560,27 @@
                         <div class="platform-card naver">
                             <div class="platform-header">
                                 <h4>🟢 네이버</h4>
-                                <span class="platform-subtitle">제한적 활용</span>
+                                <span class="platform-subtitle">GA4 인사이트 간접 활용</span>
                             </div>
                             <div class="platform-content">
-                                <div class="insight-action">
-                                    <div class="insight">📱 모바일 이탈 대응</div>
-                                    <div class="arrow">→</div>
-                                    <div class="action">모바일 검색 키워드 입찰 강화 + 쇼핑 라이브</div>
+                                <div class="ga4-discovery">
+                                    <h5>🔍 GA4 발견 방법</h5>
+                                    <p>보고서 → 획득 → 트래픽 획득 → 네이버 유입 행동 분석</p>
                                 </div>
                                 <div class="insight-action">
-                                    <div class="insight">💡 재방문자 전략</div>
+                                    <div class="insight">📱 네이버 유입 모바일 비율 80%</div>
                                     <div class="arrow">→</div>
-                                    <div class="action">브랜드 검색 키워드 방어 + 쇼핑 GFA 리타겟팅</div>
+                                    <div class="action">모바일 우선 키워드 입찰 전략 + 모바일 랜딩페이지</div>
                                 </div>
-                                <div class="implementation">
-                                    <strong>최적화:</strong> 파워링크 품질지수 + 상품평/리뷰 관리
+                                <div class="insight-action">
+                                    <div class="insight">💡 브랜드 키워드 검색 후 직접 구매 70%</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action">브랜드 키워드 방어 + 쇼핑 GFA 상품 노출 강화</div>
+                                </div>
+                                <div class="optimization-check">
+                                    <h5>📈 최적화 검증</h5>
+                                    <p><strong>최적화:</strong> 네이버 서치어드바이저 연동<br>
+                                    <strong>검증:</strong> GA4에서 네이버 유입 전환율 변화 추적</p>
                                 </div>
                             </div>
                         </div>
