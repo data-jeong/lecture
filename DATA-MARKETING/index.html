@@ -761,6 +761,217 @@
             line-height: 1.6;
         }
 
+        /* 데이터 전략 개요 스타일 */
+        .strategy-overview {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .strategy-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .strategy-intro h3 {
+            color: #4ecdc4;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-intro p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .strategy-questions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+        }
+
+        .question-1::before {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a52);
+        }
+
+        .question-2::before {
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+        }
+
+        .question-3::before {
+            background: linear-gradient(90deg, #ffcc00, #ffa502);
+        }
+
+        .question-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .question-content h4 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .question-content p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .question-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .question-examples span {
+            color: #888;
+            font-size: 0.9rem;
+            padding: 0.3rem 0;
+        }
+
+        .strategy-flow {
+            margin-bottom: 3rem;
+        }
+
+        .strategy-flow h3 {
+            color: #ffcc00;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .flow-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1rem;
+            min-width: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 204, 0, 0.3);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+        }
+
+        .flow-step span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .strategy-promise {
+            text-align: center;
+        }
+
+        .promise-box {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.2) 0%, rgba(255, 204, 0, 0.2) 100%);
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: promisePulse 2s ease-in-out infinite;
+        }
+
+        .promise-icon {
+            font-size: 2rem;
+        }
+
+        .promise-box p {
+            color: #4ecdc4;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        @keyframes promisePulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 30px rgba(78, 205, 196, 0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .strategy-questions {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .flow-steps {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
         /* 문제 제기 카드 */
         .problem-cards {
             display: grid;
@@ -1370,7 +1581,99 @@
             </div>
         </section>
 
-        <!-- 슬라이드 6: 가설 기반 마케팅 -->
+        <!-- 슬라이드 6: 데이터 전략 개요 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>그래서 '데이터 전략'이 뭔데?</h2>
+                
+                <div class="strategy-overview">
+                    <div class="strategy-intro">
+                        <h3>📈 간단하게 알아보는 데이터 전략의 핵심</h3>
+                        <p>복잡해 보이지만, 결국 <strong>3가지 질문</strong>에 대한 체계적인 답변입니다</p>
+                    </div>
+                    
+                    <div class="strategy-questions">
+                        <div class="question-card question-1">
+                            <div class="question-number">1</div>
+                            <div class="question-content">
+                                <h4>무엇을 측정할 것인가?</h4>
+                                <p>비즈니스 목표와 직결된 핵심 지표 선정</p>
+                                <div class="question-examples">
+                                    <span>• 매출 증대 → 구매 완료 이벤트</span>
+                                    <span>• 브랜드 인지도 → 페이지 체류 시간</span>
+                                    <span>• 리드 확보 → 폼 제출 완료</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="question-card question-2">
+                            <div class="question-number">2</div>
+                            <div class="question-content">
+                                <h4>어떻게 수집할 것인가?</h4>
+                                <p>정확하고 일관된 데이터 수집 체계 구축</p>
+                                <div class="question-examples">
+                                    <span>• GA4 이벤트 택소노미 설계</span>
+                                    <span>• GTM을 통한 태그 관리</span>
+                                    <span>• 크로스 플랫폼 데이터 통합</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="question-card question-3">
+                            <div class="question-number">3</div>
+                            <div class="question-content">
+                                <h4>어떻게 활용할 것인가?</h4>
+                                <p>데이터를 액션으로 연결하는 실행 방법론</p>
+                                <div class="question-examples">
+                                    <span>• 가설 기반 A/B 테스트</span>
+                                    <span>• 세그먼트별 개인화</span>
+                                    <span>• ROI 기반 예산 최적화</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="strategy-flow">
+                        <h3>🔄 데이터 전략의 실행 흐름</h3>
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="step-icon">🎯</div>
+                                <span>목표 설정</span>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon">📊</div>
+                                <span>지표 정의</span>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon">🔧</div>
+                                <span>수집 설정</span>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon">🧪</div>
+                                <span>가설 검증</span>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon">🚀</div>
+                                <span>액션 실행</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="strategy-promise">
+                        <div class="promise-box">
+                            <span class="promise-icon">✨</span>
+                            <p><strong>이제 구체적인 방법론을 하나씩 알아보겠습니다!</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 7: 가설 기반 마케팅 -->
         <section class="slide content-slide">
             <div class="slide-content">
                 <h2>1부: 가설 기반 마케팅의 기술</h2>
@@ -2147,6 +2450,7 @@
         <span class="nav-dot" data-slide="15"></span>
         <span class="nav-dot" data-slide="16"></span>
         <span class="nav-dot" data-slide="17"></span>
+        <span class="nav-dot" data-slide="18"></span>
     </div>
 
     <script>
