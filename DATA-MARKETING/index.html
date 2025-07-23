@@ -782,6 +782,111 @@
             font-size: 1.2rem;
             color: #ccc;
         }
+        
+        /* 큰 카드 레이아웃 스타일 */
+        .strategy-cards-large {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        .part-3 {
+            grid-column: 1 / -1;
+        }
+        .strategy-card-large {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 280px;
+        }
+        .strategy-card-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+        }
+        .part-1::before {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a52);
+        }
+        .part-2::before {
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+        }
+        .part-3::before {
+            background: linear-gradient(90deg, #ffcc00, #ff9f00);
+        }
+        .strategy-card-large:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .part-number {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .part-1 .part-number {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+        .part-3 .part-number {
+            background: linear-gradient(135deg, #ffcc00, #ff9f00);
+        }
+        .card-header h3 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .card-subtitle {
+            color: #ccc;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+        .content-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .content-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .content-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .item-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .content-item span:last-child {
+            color: #fff;
+            font-size: 1rem;
+        }
 
         .strategy-questions {
             display: grid;
@@ -959,6 +1064,36 @@
         }
 
         @media (max-width: 768px) {
+            .strategy-cards-large {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 2rem;
+            }
+            
+            .strategy-card-large {
+                min-height: auto;
+                padding: 2rem;
+            }
+            
+            .card-header {
+                gap: 1rem;
+            }
+            
+            .part-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+            
+            .card-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .card-subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
             .strategy-questions {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -2188,46 +2323,85 @@
                 
                 <div class="strategy-overview">
                     <div class="strategy-intro">
-                        <h3>📈 간단하게 알아보는 데이터 전략의 핵심</h3>
-                        <p>복잡해 보이지만, 결국 <strong>3가지 질문</strong>에 대한 체계적인 답변입니다</p>
+                        <h3>📈 데이터 전략의 3단계 프레임워크</h3>
+                        <p>체계적인 데이터 마케팅을 위한 <strong>측정-수집-활용</strong> 로드맵</p>
                     </div>
                     
-                    <div class="strategy-questions">
-                        <div class="question-card question-1">
-                            <div class="question-number">1부</div>
-                            <div class="question-content">
-                                <h4>무엇을 측정할 것인가?</h4>
-                                <p><strong>가설 기반 마케팅</strong>으로 측정할 지표를 명확히 정의</p>
-                                <div class="question-examples">
-                                    <span>• 구조화된 가설 문장 작성법</span>
-                                    <span>• 비즈니스 목표 → 측정 지표 연결</span>
-                                    <span>• A/B 테스트 설계 방법론</span>
+                    <div class="strategy-cards-large">
+                        <div class="strategy-card-large part-1">
+                            <div class="card-header">
+                                <div class="part-number">1부</div>
+                                <h3>무엇을 측정할 것인가?</h3>
+                            </div>
+                            <div class="card-subtitle">
+                                <strong>가설 기반 마케팅</strong>으로 측정할 지표를 명확히 정의
+                            </div>
+                            <div class="card-content">
+                                <div class="content-items">
+                                    <div class="content-item">
+                                        <span class="item-icon">📝</span>
+                                        <span>구조화된 가설 문장 작성법</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="item-icon">🎯</span>
+                                        <span>비즈니스 목표 → 측정 지표 연결</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="item-icon">🧪</span>
+                                        <span>A/B 테스트 설계 방법론</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="question-card question-2">
-                            <div class="question-number">2부</div>
-                            <div class="question-content">
-                                <h4>어떻게 수집할 것인가?</h4>
-                                <p><strong>GA4 고급 분석</strong>으로 정확한 데이터 수집 체계 구축</p>
-                                <div class="question-examples">
-                                    <span>• 탐색 보고서 활용법</span>
-                                    <span>• 사용자/세션/이벤트 세그먼트</span>
-                                    <span>• 잠재고객 구축 및 활용</span>
+                        <div class="strategy-card-large part-2">
+                            <div class="card-header">
+                                <div class="part-number">2부</div>
+                                <h3>어떻게 수집할 것인가?</h3>
+                            </div>
+                            <div class="card-subtitle">
+                                <strong>GA4 고급 분석</strong>으로 정확한 데이터 수집 체계 구축
+                            </div>
+                            <div class="card-content">
+                                <div class="content-items">
+                                    <div class="content-item">
+                                        <span class="item-icon">🔍</span>
+                                        <span>탐색 보고서 활용법</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="item-icon">👥</span>
+                                        <span>사용자/세션/이벤트 세그먼트</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="item-icon">🎪</span>
+                                        <span>잠재고객 구축 및 활용</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="question-card question-3">
-                            <div class="question-number">3부</div>
-                            <div class="question-content">
-                                <h4>어떻게 활용할 것인가?</h4>
-                                <p><strong>가치 증명 리포팅</strong>으로 데이터를 액션으로 연결</p>
-                                <div class="question-examples">
-                                    <span>• Looker Studio 대시보드 구축</span>
-                                    <span>• ROI 중심 리포팅 체계</span>
-                                    <span>• 클라이언트 설득 전략</span>
+                        <div class="strategy-card-large part-3">
+                            <div class="card-header">
+                                <div class="part-number">3부</div>
+                                <h3>어떻게 활용할 것인가?</h3>
+                            </div>
+                            <div class="card-subtitle">
+                                <strong>가치 증명 리포팅</strong>으로 데이터를 액션으로 연결
+                            </div>
+                            <div class="card-content">
+                                <div class="content-items">
+                                    <div class="content-item">
+                                        <span class="item-icon">📊</span>
+                                        <span>Looker Studio 대시보드 구축</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="item-icon">💰</span>
+                                        <span>ROI 중심 리포팅 체계</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="item-icon">🤝</span>
+                                        <span>클라이언트 설득 전략</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
