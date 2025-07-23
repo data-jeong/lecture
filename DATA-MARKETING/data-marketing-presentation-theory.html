@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 시대의 데이터 마케팅: GA4 태그부터 머신러닝 최적화까지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* 슬라이드 컨테이너 */
+        .presentation-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        /* 타이틀 슬라이드 */
+        .title-slide {
+            background: radial-gradient(circle at 30% 50%, rgba(255, 198, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(0, 123, 255, 0.1) 0%, transparent 50%),
+                        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .title-content {
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff 0%, #ffcc00 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #888;
+            margin-bottom: 3rem;
+        }
+
+        .highlight {
+            color: #ffcc00;
+            font-weight: 600;
+        }
+
+        /* 콘텐츠 슬라이드 */
+        .content-slide {
+            background: #0a0a0a;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1.5rem;
+            color: #ffcc00;
+        }
+
+        /* 문제 제기 카드 */
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 198, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 198, 0, 0.2);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 프로세스 플로우 */
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #ffcc00;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            background: #ffcc00;
+            color: #000;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 택소노미 테이블 */
+        .taxonomy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        .taxonomy-table th,
+        .taxonomy-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .taxonomy-table th {
+            background: rgba(255, 198, 0, 0.1);
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+        }
+
+        .taxonomy-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .taxonomy-table code {
+            background: rgba(255, 198, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: #ffcc00;
+        }
+
+        /* 가설 검증 워크시트 */
+        .hypothesis-worksheet {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 198, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .worksheet-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .worksheet-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .worksheet-label {
+            font-weight: 700;
+            color: #ffcc00;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .worksheet-example {
+            color: #888;
+            font-style: italic;
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid rgba(255, 198, 0, 0.3);
+        }
+
+        /* 코드 블록 */
+        .code-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            overflow-x: auto;
+        }
+
+        .code-comment {
+            color: #666;
+        }
+
+        .code-key {
+            color: #ffcc00;
+        }
+
+        .code-value {
+            color: #4ecdc4;
+        }
+
+        /* AI 섹션 */
+        .ai-section {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(255, 198, 0, 0.1) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .ai-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ai-benefit {
+            text-align: center;
+        }
+
+        .ai-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 실전 예시 */
+        .case-study {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #ffcc00;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .case-study-title {
+            color: #ffcc00;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* GTM 스크린샷 스타일 */
+        .gtm-screenshot {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gtm-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .gtm-logo {
+            width: 40px;
+            height: 40px;
+            background: #4285f4;
+            border-radius: 8px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .gtm-nav {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gtm-nav-item {
+            padding: 0.5rem 0;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .gtm-nav-item.active {
+            color: #4285f4;
+            border-bottom-color: #4285f4;
+        }
+
+        .gtm-content {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .gtm-field {
+            margin-bottom: 1rem;
+        }
+
+        .gtm-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .gtm-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+        }
+
+        /* GA4 DebugView 스타일 */
+        .debug-view {
+            background: #202124;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        .debug-event {
+            background: rgba(66, 133, 244, 0.1);
+            border: 1px solid rgba(66, 133, 244, 0.3);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .debug-event-name {
+            color: #4285f4;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .debug-param {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+            color: #888;
+        }
+
+        .debug-param-key {
+            color: #ffcc00;
+        }
+
+        /* 다운로드 버튼 */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #ffcc00 0%, #ff9500 100%);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 198, 0, 0.4);
+        }
+
+        .download-btn::before {
+            content: '📥';
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* CTA */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffcc00 0%, #ff9500 100%);
+            color: #000;
+            padding: 1rem 3rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 198, 0, 0.4);
+        }
+
+        /* 네비게이션 */
+        .slide-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            display: block;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #ffcc00;
+            transform: scale(1.5);
+        }
+
+        /* 스크롤 테이블 */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .process-flow {
+                flex-direction: column;
+            }
+            
+            .process-step::after {
+                display: none;
+            }
+            
+            .slide-nav {
+                display: none;
+            }
+            
+            .taxonomy-table {
+                font-size: 0.8rem;
+            }
+            
+            .taxonomy-table th,
+            .taxonomy-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- 슬라이드 1: 타이틀 -->
+        <section class="slide title-slide">
+            <div class="title-content">
+                <h1>AI 시대의 데이터 마케팅</h1>
+                <p class="subtitle">
+                    매체가 머신러닝으로 최적화하는 시대,<br>
+                    <span class="highlight">우리는 무엇을 해야 하는가?</span>
+                </p>
+                <div style="margin-top: 4rem; font-size: 1.2rem;">
+                    <p>📊 GA4 텍소노미 설계 및 태그 삽입 교육</p>
+                    <p>🎯 데이터를 활용한 효과적 마케팅 전략 기획하기</p>
+                    <p>🤖 AI 시대의 퍼포먼스 마케팅 전략</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 2: 현실 직시 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>매체는 이미 AI로 무장했다</h2>
+                
+                <div class="problem-cards">
+                    <div class="problem-card">
+                        <div class="problem-icon">🤖</div>
+                        <h4>구글 Performance Max</h4>
+                        <p>머신러닝이 자동으로 타겟팅, 입찰, 크리에이티브 최적화</p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">📱</div>
+                        <h4>메타 Advantage+</h4>
+                        <p>AI가 오디언스 확장과 크리에이티브 조합 자동 테스트</p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">💡</div>
+                        <h4>네이버 성과형DA</h4>
+                        <p>AI 기반 자동입찰로 전환 가능성 높은 유저 타겟팅</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <h3 style="color: #ff3b30;">그런데 우리는?</h3>
+                    <p style="font-size: 1.5rem; color: #888;">
+                        "아직도 엑셀로 ROAS 계산하고 계신가요?"<br>
+                        "매체 리포트만 믿고 클라이언트에게 보고하시나요?"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 3: 솔루션 제시 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>AI에게 더 나은 데이터를 먹이자</h2>
+                
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>비즈니스 전략</h4>
+                        <p>명확한 목표와<br>KPI 설정</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>텍소노미 설계</h4>
+                        <p>구조화된<br>데이터 수집 체계</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>태그 구현</h4>
+                        <p>GTM으로<br>정교한 추적</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4>매체 피드백</h4>
+                        <p>Enhanced Conversions<br>& 오디언스 공유</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h4>AI 최적화</h4>
+                        <p>머신러닝 성능<br>극대화</p>
+                    </div>
+                </div>
+
+                <div class="case-study">
+                    <div class="case-study-title">💡 핵심 인사이트</div>
+                    <p>매체의 AI는 우리가 제공하는 데이터 품질만큼만 똑똑해집니다.<br>
+                    정교한 전환 데이터 = 더 나은 머신러닝 = 높은 ROAS</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 4: GA4 텍소노미 설계 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>Part 1: GA4 텍소노미 설계</h2>
+                
+                <h3>왜 텍소노미가 중요한가?</h3>
+                <p style="font-size: 1.2rem; color: #888; margin-bottom: 2rem;">
+                    "측정할 수 없으면 개선할 수 없다" - 피터 드러커
+                </p>
+
+                <div class="table-container">
+                    <table class="taxonomy-table">
+                        <thead>
+                            <tr>
+                                <th>비즈니스 질문</th>
+                                <th>사용자 행동</th>
+                                <th>이벤트명 (snake_case)</th>
+                                <th>GTM 트리거 조건</th>
+                                <th>매개변수 (Key: Value)</th>
+                                <th>GA4 맞춤 측정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>어떤 블로그 카테고리가 가장 많은 뉴스레터 구독을 유도하는가?</td>
+                                <td>블로그 게시물 하단의 '구독' 버튼 클릭</td>
+                                <td><code>generate_lead</code></td>
+                                <td>클릭 트리거, CSS 선택자 <code>.blog-subscribe-btn</code></td>
+                                <td><code>form_location: 'blog_post_footer'</code><br><code>content_category: {{DLV - postCategory}}</code></td>
+                                <td>Form Location<br>Content Category</td>
+                            </tr>
+                            <tr>
+                                <td>어떤 프로모션 배너가 가장 많은 클릭을 유도하는가?</td>
+                                <td>메인 페이지의 프로모션 배너 클릭</td>
+                                <td><code>select_promotion</code></td>
+                                <td>클릭 트리거, Click Element는 CSS 선택자 <code>.promo-banner</code>와 일치</td>
+                                <td><code>promotion_name: {{DLV - promoName}}</code><br><code>creative_slot: 'main_banner_1'</code></td>
+                                <td>Promotion Name<br>Creative Slot</td>
+                            </tr>
+                            <tr>
+                                <td>사용자들이 회원가입 과정에서 어느 단계에서 가장 많이 이탈하는가?</td>
+                                <td>회원가입 양식의 각 필드 입력 완료 후 다음 버튼 클릭</td>
+                                <td><code>signup_progress</code></td>
+                                <td>클릭 트리거, 각 단계별 버튼 ID</td>
+                                <td><code>signup_step: 'step_2_verify_email'</code></td>
+                                <td>Signup Step</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <a href="#" class="download-btn">GA4 이벤트 텍소노미 템플릿 다운로드</a>
+            </div>
+        </section>
+
+        <!-- 슬라이드 5: 가설 검증 워크시트 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>데이터 기반 가설 검증 프레임워크</h2>
+
+                <div class="hypothesis-worksheet">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">가설 검증 워크시트</h3>
+                    
+                    <div class="worksheet-item">
+                        <div class="worksheet-label">📋 문제 정의</div>
+                        <p>해결하고자 하는 비즈니스 문제는 무엇인가?</p>
+                        <div class="worksheet-example">
+                            예: 모바일 사용자의 구매 전환율이 데스크톱 사용자보다 30% 낮다.
+                        </div>
+                    </div>
+
+                    <div class="worksheet-item">
+                        <div class="worksheet-label">💡 가설</div>
+                        <p>"우리는...라고 믿는다" 형식의 완전한 문장</p>
+                        <div class="worksheet-example">
+                            예: 우리는 모바일 결제 프로세스를 3단계에서 1단계로 줄이면, 모바일 구매 전환율이 15% 증가할 것이라고 믿는다.
+                        </div>
+                    </div>
+
+                    <div class="worksheet-item">
+                        <div class="worksheet-label">👥 타겟 잠재고객/세그먼트</div>
+                        <p>이 테스트는 누구를 대상으로 하는가?</p>
+                        <div class="worksheet-example">
+                            예: 모든 모바일 기기 사용자
+                        </div>
+                    </div>
+
+                    <div class="worksheet-item">
+                        <div class="worksheet-label">📊 성공 지표 (주요 & 가드레일)</div>
+                        <p>변화를 기대하는 주요 KPI는 무엇인가? 악화되어서는 안 되는 KPI는 무엇인가?</p>
+                        <div class="worksheet-example">
+                            예: 주요 지표: 세션 전환율, 가드레일 지표: 평균 주문 가치
+                        </div>
+                    </div>
+
+                    <div class="worksheet-item">
+                        <div class="worksheet-label">🔧 실행 세부사항</div>
+                        <p>정확히 무엇을 변경/구축해야 하는가?</p>
+                        <div class="worksheet-example">
+                            예: 원클릭 결제 버튼 도입, GTM을 통해 결제 완료 이벤트 추적
+                        </div>
+                    </div>
+
+                    <div class="worksheet-item">
+                        <div class="worksheet-label">📈 결과</div>
+                        <p>테스트에서 얻은 정량적 데이터</p>
+                        <div class="worksheet-example">
+                            예: 실험군 전환율 3.5%, 대조군 전환율 3.1%, 통계적 유의성 95%
+                        </div>
+                    </div>
+
+                    <div class="worksheet-item">
+                        <div class="worksheet-label">✅ 결론 및 다음 단계</div>
+                        <p>가설이 검증되었는가? 무엇을 배웠는가? 전면 도입할 것인가, 반복할 것인가, 포기할 것인가?</p>
+                        <div class="worksheet-example">
+                            예: 가설 검증됨. 모바일 결제 프로세스 변경안을 전체 트래픽에 적용한다.
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="download-btn">가설 검증 워크시트 템플릿 다운로드</a>
+            </div>
+        </section>
+
+        <!-- 슬라이드 6: GTM 구현 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>GTM으로 태그 구현하기</h2>
+
+                <div class="gtm-screenshot">
+                    <div class="gtm-header">
+                        <div class="gtm-logo">GTM</div>
+                        <div>
+                            <h4 style="margin: 0;">Google Tag Manager</h4>
+                            <p style="margin: 0; color: #666; font-size: 0.9rem;">컨테이너: GTM-XXXXXX</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gtm-nav">
+                        <div class="gtm-nav-item active">태그</div>
+                        <div class="gtm-nav-item">트리거</div>
+                        <div class="gtm-nav-item">변수</div>
+                    </div>
+                    
+                    <div class="gtm-content">
+                        <h5 style="margin-bottom: 1rem;">새 태그 만들기: GA4 이벤트 - 구매 완료</h5>
+                        
+                        <div class="gtm-field">
+                            <div class="gtm-label">태그 유형</div>
+                            <div class="gtm-input">Google Analytics: GA4 이벤트</div>
+                        </div>
+                        
+                        <div class="gtm-field">
+                            <div class="gtm-label">이벤트 이름</div>
+                            <div class="gtm-input">purchase</div>
+                        </div>
+                        
+                        <div class="gtm-field">
+                            <div class="gtm-label">이벤트 매개변수</div>
+                            <div style="background: white; padding: 0.5rem; border-radius: 4px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>transaction_id</span>
+                                    <span style="color: #4285f4;">{{DLV - transactionId}}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>value</span>
+                                    <span style="color: #4285f4;">{{DLV - purchaseValue}}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>items</span>
+                                    <span style="color: #4285f4;">{{DLV - purchaseItems}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-section" style="margin-top: 2rem;">
+                    <h3>🚀 Pro Tip: 서버사이드 태깅</h3>
+                    <p>iOS 14.5+와 광고 차단기 대응을 위한 필수 전략</p>
+                    <ul style="margin-top: 1rem; padding-left: 2rem;">
+                        <li>데이터 수집률 15-30% 향상</li>
+                        <li>퍼스트파티 쿠키로 정확도 개선</li>
+                        <li>Enhanced Conversions 자동 처리</li>
+                        <li>페이지 로딩 속도 개선</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 7: GA4 디버그뷰 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>실시간 디버깅으로 데이터 검증</h2>
+
+                <div class="debug-view">
+                    <h4 style="color: #fff; margin-bottom: 1.5rem;">GA4 DebugView</h4>
+                    
+                    <div class="debug-event">
+                        <div class="debug-event-name">🎯 purchase</div>
+                        <div class="debug-param">
+                            <span class="debug-param-key">transaction_id</span>
+                            <span>ORD-2024-0125</span>
+                        </div>
+                        <div class="debug-param">
+                            <span class="debug-param-key">value</span>
+                            <span>89,900</span>
+                        </div>
+                        <div class="debug-param">
+                            <span class="debug-param-key">currency</span>
+                            <span>KRW</span>
+                        </div>
+                        <div class="debug-param">
+                            <span class="debug-param-key">items</span>
+                            <span>[Array(2)]</span>
+                        </div>
+                    </div>
+
+                    <div class="debug-event">
+                        <div class="debug-event-name">📱 add_to_cart</div>
+                        <div class="debug-param">
+                            <span class="debug-param-key">item_id</span>
+                            <span>SKU-12345</span>
+                        </div>
+                        <div class="debug-param">
+                            <span class="debug-param-key">item_category</span>
+                            <span>cosmetics</span>
+                        </div>
+                        <div class="debug-param">
+                            <span class="debug-param-key">price</span>
+                            <span>45,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-flow" style="margin-top: 3rem;">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>GTM Preview</h4>
+                        <p>태그 실행 확인</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>GA4 DebugView</h4>
+                        <p>이벤트 수신 확인</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>실시간 보고서</h4>
+                        <p>데이터 흐름 검증</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 8: 매체 연동 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>Part 2: 매체와 데이터 연동</h2>
+
+                <h3>Enhanced Conversions 설정</h3>
+                <p style="color: #888; margin-bottom: 2rem;">매체 AI의 학습 능력을 극대화하는 핵심</p>
+
+                <div class="problem-cards">
+                    <div class="problem-card">
+                        <div class="problem-icon">📧</div>
+                        <h4>이메일 해시</h4>
+                        <p>사용자 이메일을 SHA256으로 암호화하여 전송</p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">📱</div>
+                        <h4>전화번호 매칭</h4>
+                        <p>전화번호로 크로스 디바이스 사용자 매칭</p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">🎯</div>
+                        <h4>오프라인 전환</h4>
+                        <p>매장 구매 데이터를 온라인 캠페인과 연결</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <span class="code-comment">// Enhanced Conversions 데이터 전송 예시</span><br>
+                    gtag('event', 'purchase', {<br>
+                    &nbsp;&nbsp;<span class="code-key">'transaction_id'</span>: <span class="code-value">'12345'</span>,<br>
+                    &nbsp;&nbsp;<span class="code-key">'value'</span>: <span class="code-value">89900</span>,<br>
+                    &nbsp;&nbsp;<span class="code-key">'currency'</span>: <span class="code-value">'KRW'</span>,<br>
+                    &nbsp;&nbsp;<span class="code-comment">// Enhanced Conversions 데이터</span><br>
+                    &nbsp;&nbsp;<span class="code-key">'user_data'</span>: {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'email'</span>: <span class="code-value">'hashed_email_here'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'phone_number'</span>: <span class="code-value">'hashed_phone_here'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'address'</span>: {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'first_name'</span>: <span class="code-value">'김'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'last_name'</span>: <span class="code-value">'철수'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'city'</span>: <span class="code-value">'서울'</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;}<br>
+                    });
+                </div>
+
+                <div class="case-study">
+                    <div class="case-study-title">📊 실제 성과</div>
+                    <p><strong>패션 이커머스 A사:</strong> Enhanced Conversions 도입 후</p>
+                    <ul style="margin-top: 1rem; padding-left: 2rem;">
+                        <li>전환 추적 정확도 28% 향상</li>
+                        <li>구글 쇼핑 ROAS 45% 개선</li>
+                        <li>페이스북 카탈로그 광고 CPA 32% 감소</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 9: GA4 분석 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>GA4에서 인사이트 도출하기</h2>
+
+                <h3>탐색 분석 활용법</h3>
+
+                <div class="ai-benefits">
+                    <div class="ai-benefit">
+                        <div class="ai-icon">🔍</div>
+                        <h4>경로 탐색</h4>
+                        <p>사용자 여정의<br>병목 구간 발견</p>
+                    </div>
+                    
+                    <div class="ai-benefit">
+                        <div class="ai-icon">📊</div>
+                        <h4>세그먼트 분석</h4>
+                        <p>고가치 고객군<br>행동 패턴 파악</p>
+                    </div>
+                    
+                    <div class="ai-benefit">
+                        <div class="ai-icon">🎯</div>
+                        <h4>유입경로 분석</h4>
+                        <p>전환 퍼널의<br>이탈 지점 최적화</p>
+                    </div>
+                    
+                    <div class="ai-benefit">
+                        <div class="ai-icon">⏱️</div>
+                        <h4>코호트 분석</h4>
+                        <p>시간에 따른<br>리텐션 변화 추적</p>
+                    </div>
+                </div>
+
+                <div class="code-block" style="margin-top: 3rem;">
+                    <span class="code-comment">// BigQuery로 고급 분석하기</span><br>
+                    SELECT<br>
+                    &nbsp;&nbsp;traffic_source.source,<br>
+                    &nbsp;&nbsp;COUNT(DISTINCT user_pseudo_id) as users,<br>
+                    &nbsp;&nbsp;SUM(ecommerce.purchase_revenue) as revenue,<br>
+                    &nbsp;&nbsp;SUM(ecommerce.purchase_revenue) / COUNT(DISTINCT user_pseudo_id) as revenue_per_user<br>
+                    FROM `project.dataset.events_*`<br>
+                    WHERE _TABLE_SUFFIX BETWEEN '20240101' AND '20240131'<br>
+                    GROUP BY traffic_source.source<br>
+                    ORDER BY revenue DESC
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 10: AI 마케팅 전략 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>Part 3: AI 시대의 마케팅 전략</h2>
+
+                <h3>데이터가 만드는 AI 마케팅의 차이</h3>
+
+                <div class="process-flow" style="margin-bottom: 3rem;">
+                    <div class="process-step">
+                        <div class="step-number">📊</div>
+                        <h4>정교한 데이터</h4>
+                        <p>구조화된 이벤트<br>풍부한 컨텍스트</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">🤖</div>
+                        <h4>AI 학습</h4>
+                        <p>패턴 인식<br>예측 모델 생성</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">🎯</div>
+                        <h4>자동 최적화</h4>
+                        <p>타겟팅 정교화<br>입찰 최적화</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">📈</div>
+                        <h4>성과 개선</h4>
+                        <p>ROAS 상승<br>CPA 감소</p>
+                    </div>
+                </div>
+
+                <div class="ai-section">
+                    <h3>실전 AI 마케팅 체크리스트</h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="color: #ffcc00; margin-bottom: 1rem;">✅ 데이터 준비</h4>
+                            <ul style="padding-left: 1.5rem;">
+                                <li>마이크로 전환 이벤트 설정</li>
+                                <li>가치 기반 입찰을 위한 value 파라미터</li>
+                                <li>Enhanced Conversions 구현</li>
+                                <li>오프라인 전환 업로드</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 style="color: #ffcc00; margin-bottom: 1rem;">✅ 캠페인 설정</h4>
+                            <ul style="padding-left: 1.5rem;">
+                                <li>Performance Max 활용</li>
+                                <li>가치 기반 입찰 전략</li>
+                                <li>동적 리마케팅 피드</li>
+                                <li>예측 타겟팅 활성화</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-study" style="margin-top: 3rem;">
+                    <div class="case-study-title">🚀 성공 사례: 뷰티 브랜드 B사</div>
+                    <p><strong>도전 과제:</strong> 신제품 런칭 시 타겟 고객 찾기 어려움</p>
+                    <p><strong>솔루션:</strong></p>
+                    <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                        <li>기존 제품 구매자의 상세 행동 데이터 수집 (GA4)</li>
+                        <li>유사 잠재고객 생성을 위한 Enhanced Conversions</li>
+                        <li>가치 기반 입찰로 고가치 고객 우선 타겟팅</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>결과:</strong> 신제품 ROAS 380%, 기존 대비 2.5배 향상</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 11: 실행 로드맵 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>지금 당장 시작하는 액션 플랜</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                    <div class="problem-card">
+                        <h3 style="color: #ffcc00; margin-bottom: 1rem;">Week 1-2</h3>
+                        <h4>기초 점검</h4>
+                        <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                            <li>GA4 기본 설정 감사</li>
+                            <li>필수 이벤트 3개 정의</li>
+                            <li>GTM 컨테이너 정리</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <h3 style="color: #ffcc00; margin-bottom: 1rem;">Week 3-4</h3>
+                        <h4>구현</h4>
+                        <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                            <li>핵심 이벤트 태깅</li>
+                            <li>Enhanced Conversions 설정</li>
+                            <li>매체 연동 테스트</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <h3 style="color: #ffcc00; margin-bottom: 1rem;">Week 5-6</h3>
+                        <h4>최적화</h4>
+                        <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                            <li>데이터 품질 검증</li>
+                            <li>AI 캠페인 테스트</li>
+                            <li>성과 모니터링 시작</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 4rem;">
+                    <h3 style="margin-bottom: 2rem;">기억하세요</h3>
+                    <p style="font-size: 1.5rem; line-height: 2;">
+                        <span class="highlight">좋은 데이터</span> → <span class="highlight">똑똑한 AI</span> → <span class="highlight">높은 ROAS</span>
+                    </p>
+                    <p style="font-size: 1.2rem; color: #888; margin-top: 2rem;">
+                        "AI는 마법이 아닙니다. 우리가 제공하는 데이터만큼 똑똑해집니다."
+                    </p>
+                    
+                    <a href="#" class="cta-button">지금 시작하기 →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 네비게이션 -->
+    <div class="slide-nav">
+        <span class="nav-dot active" data-slide="0"></span>
+        <span class="nav-dot" data-slide="1"></span>
+        <span class="nav-dot" data-slide="2"></span>
+        <span class="nav-dot" data-slide="3"></span>
+        <span class="nav-dot" data-slide="4"></span>
+        <span class="nav-dot" data-slide="5"></span>
+        <span class="nav-dot" data-slide="6"></span>
+        <span class="nav-dot" data-slide="7"></span>
+        <span class="nav-dot" data-slide="8"></span>
+        <span class="nav-dot" data-slide="9"></span>
+        <span class="nav-dot" data-slide="10"></span>
+    </div>
+
+    <script>
+        // 슬라이드 네비게이션
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.nav-dot');
+        const container = document.querySelector('.presentation-container');
+
+        // 현재 슬라이드 추적
+        let currentSlide = 0;
+
+        // Intersection Observer로 현재 보이는 슬라이드 감지
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const slideIndex = Array.from(slides).indexOf(entry.target);
+                    currentSlide = slideIndex;
+                    updateNavigation();
+                }
+            });
+        }, {
+            root: container,
+            threshold: 0.5
+        });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // 네비게이션 업데이트
+        function updateNavigation() {
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // 네비게이션 클릭
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                slides[index].scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // 키보드 네비게이션
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                if (currentSlide < slides.length - 1) {
+                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentSlide > 0) {
+                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // 마우스 휠 부드러운 스크롤 (선택사항)
+        let isScrolling = false;
+        container.addEventListener('wheel', (e) => {
+            if (!isScrolling) {
+                isScrolling = true;
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 1000);
+                
+                if (e.deltaY > 0 && currentSlide < slides.length - 1) {
+                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+                } else if (e.deltaY < 0 && currentSlide > 0) {
+                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
