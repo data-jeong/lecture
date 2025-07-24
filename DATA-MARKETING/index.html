@@ -2617,6 +2617,35 @@
             flex: 1;
         }
 
+        /* 인사이트 박스 스타일 */
+        .platform-key-insight {
+            margin-top: 2rem;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, rgba(32, 201, 151, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
+            border: 2px solid rgba(32, 201, 151, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .insight-icon {
+            font-size: 2rem;
+        }
+
+        .insight-content h4 {
+            color: #20c997;
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-content p {
+            color: #ddd;
+            margin: 0;
+        }
+
         /* 액션 플랜 스타일 */
         .action-phases {
             display: grid;
@@ -3218,146 +3247,137 @@
         <!-- 슬라이드 9: 데이터 활용 전략 -->
         <section class="slide content-slide">
             <div class="slide-content">
-                <h2>GA4 데이터 전략의 실전 활용</h2>
+                <span class="slide-number">15 / 17</span>
+                <h2>플랫폼별 데이터 전략 실전 적용</h2>
                 
-                <div class="data-feeding-strategy">
-                    <div class="feeding-intro">
-                        <h3>📊 측정 → 수집 → 활용 프레임워크로 매체 최적화</h3>
-                        <p>각 매체별로 <strong>가설 기반 측정 → GA4 데이터 수집 → 리포팅 활용</strong> 체계 적용하기</p>
-                    </div>
-                    
-                    <div class="platform-strategies">
-                        <div class="platform-card google">
-                            <div class="platform-header">
-                                <h4>🔵 Google Ads</h4>
-                                <span class="platform-subtitle">GA4 직접 연동의 강력함</span>
-                            </div>
-                            <div class="platform-content">
-                                <div class="strategy-step step-1">
-                                    <h5>1부: 무엇을 측정할 것인가?</h5>
-                                    <p><strong>가설:</strong> "모바일 사용자의 결제 단계별 이탈률을 줄이면 전환율이 15% 개선될 것이다"</p>
-                                    <p><strong>측정 지표:</strong> 결제 단계별 이탈률, 모바일 전환율, 장바구니 포기율</p>
-                                </div>
-                                <div class="strategy-step step-2">
-                                    <h5>2부: 어떻게 수집할 것인가?</h5>
-                                    <p><strong>GA4 수집:</strong> 탐색 → 경로 데이터 탐색 → 결제 퍼널 분석</p>
-                                    <p><strong>세그먼트:</strong> 모바일 사용자, 결제 단계별 행동, 디바이스별 전환 경로</p>
-                                </div>
-                                <div class="strategy-step step-3">
-                                    <h5>3부: 어떻게 활용할 것인가?</h5>
-                                    <p><strong>실행:</strong> GA4 잠재고객 → Google Ads 실시간 동기화</p>
-                                    <p><strong>리포팅:</strong> 전환 경로 보고서에서 캠페인별 기여도 분석</p>
-                                    <p><strong>ROI 측정:</strong> 결제 단계 개선 후 ROAS 변화 추적</p>
+                <div class="platform-intro">
+                    <h3>📊 측정 → 수집 → 활용의 3단계 프레임워크</h3>
+                    <p>각 매체의 특성에 맞는 최적화 전략</p>
+                </div>
+                
+                <div class="platform-grid-compact">
+                    <div class="platform-compact">
+                        <h4>🔵 Google Ads</h4>
+                        <div class="platform-steps">
+                            <div class="step-compact">
+                                <div class="step-number-compact">1</div>
+                                <div class="step-content">
+                                    <h5>측정</h5>
+                                    <p>모바일 결제 이탈률 추적</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="platform-card meta">
-                            <div class="platform-header">
-                                <h4>🟦 Meta (Facebook/Instagram)</h4>
-                                <span class="platform-subtitle">GA4 인사이트 수동 적용</span>
-                            </div>
-                            <div class="platform-content">
-                                <div class="strategy-step step-1">
-                                    <h5>1부: 무엇을 측정할 것인가?</h5>
-                                    <p><strong>가설:</strong> "재방문 사용자 대상 개인화 광고를 통해 구매 전환율을 25% 향상시킬 수 있다"</p>
-                                    <p><strong>측정 지표:</strong> 재방문자 전환율, 카탈로그 광고 CTR, 개인화 메시지 반응률</p>
-                                </div>
-                                <div class="strategy-step step-2">
-                                    <h5>2부: 어떻게 수집할 것인가?</h5>
-                                    <p><strong>GA4 수집:</strong> 탐색 → 사용자 세그먼트 비교 → 재방문 행동 패턴</p>
-                                    <p><strong>세그먼트:</strong> 방문 횟수별 사용자, 구매 이력, 관심 상품 카테고리</p>
-                                </div>
-                                <div class="strategy-step step-3">
-                                    <h5>3부: 어떻게 활용할 것인가?</h5>
-                                    <p><strong>실행:</strong> Meta Pixel + Conversions API로 오디언스 생성</p>
-                                    <p><strong>리포팅:</strong> GA4 획득 보고서에서 Meta 트래픽 성과 분석</p>
-                                    <p><strong>ROI 측정:</strong> 재방문자 광고 vs 신규 유저 광고 ROAS 비교</p>
+                            <div class="step-compact">
+                                <div class="step-number-compact">2</div>
+                                <div class="step-content">
+                                    <h5>수집</h5>
+                                    <p>GA4 경로 탐색으로 퍼널 분석</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="platform-card tiktok">
-                            <div class="platform-header">
-                                <h4>⚫ TikTok</h4>
-                                <span class="platform-subtitle">MZ세대 타겟 전략</span>
-                            </div>
-                            <div class="platform-content">
-                                <div class="strategy-step step-1">
-                                    <h5>1부: 무엇을 측정할 것인가?</h5>
-                                    <p><strong>가설:</strong> "MZ세대 대상 15초 내 액션 유도 콘텐츠로 즉시 구매 전환율을 30% 높일 수 있다"</p>
-                                    <p><strong>측정 지표:</strong> MZ세대 전환율, 15초 내 액션률, 24시간 내 구매 완료율</p>
-                                </div>
-                                <div class="strategy-step step-2">
-                                    <h5>2부: 어떻게 수집할 것인가?</h5>
-                                    <p><strong>GA4 수집:</strong> 보고서 → 잠재고객 → 연령대별 모바일 행동 분석</p>
-                                    <p><strong>세그먼트:</strong> 18-29세 사용자, 모바일 세션 시간, 콘텐츠 소비 패턴</p>
-                                </div>
-                                <div class="strategy-step step-3">
-                                    <h5>3부: 어떻게 활용할 것인가?</h5>
-                                    <p><strong>실행:</strong> TikTok Pixel 이벤트 기반 24시간 리타겟팅</p>
-                                    <p><strong>리포팅:</strong> GA4 연령대별 보고서에서 MZ세대 성과 추적</p>
-                                    <p><strong>ROI 측정:</strong> 연령대별 ROAS 비교 및 콘텐츠 최적화</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="platform-card naver">
-                            <div class="platform-header">
-                                <h4>🟢 네이버</h4>
-                                <span class="platform-subtitle">브랜드 키워드 방어 전략</span>
-                            </div>
-                            <div class="platform-content">
-                                <div class="strategy-step step-1">
-                                    <h5>1부: 무엇을 측정할 것인가?</h5>
-                                    <p><strong>가설:</strong> "브랜드 키워드 검색자 대상 모바일 최적화로 직접 구매율을 20% 증가시킬 수 있다"</p>
-                                    <p><strong>측정 지표:</strong> 브랜드 키워드 전환율, 모바일 구매 완료률, 쇼핑 GFA 클릭률</p>
-                                </div>
-                                <div class="strategy-step step-2">
-                                    <h5>2부: 어떻게 수집할 것인가?</h5>
-                                    <p><strong>GA4 수집:</strong> 보고서 → 획득 → 트래픽 획득 → 네이버 유입 경로 분석</p>
-                                    <p><strong>세그먼트:</strong> 네이버 유입 사용자, 브랜드 키워드 검색자, 모바일 구매 행동</p>
-                                </div>
-                                <div class="strategy-step step-3">
-                                    <h5>3부: 어떻게 활용할 것인가?</h5>
-                                    <p><strong>실행:</strong> 네이버 서치어드바이저 연동 + 모바일 랜딩페이지 최적화</p>
-                                    <p><strong>리포팅:</strong> GA4에서 네이버 유입 전환율 변화 추적</p>
-                                    <p><strong>ROI 측정:</strong> 브랜드 키워드 방어 비용 vs 직접 매출 증가율</p>
+                            <div class="step-compact">
+                                <div class="step-number-compact">3</div>
+                                <div class="step-content">
+                                    <h5>활용</h5>
+                                    <p>잠재고객 자동 동기화로 리타겟팅</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="monitoring-strategy">
-                        <h3>📊 통합 모니터링 전략</h3>
-                        <div class="monitoring-steps">
-                            <div class="monitoring-step">
-                                <h5>1. 데이터 수집</h5>
-                                <p>GTM으로 모든 매체 동시 추적</p>
+
+                    <div class="platform-compact">
+                        <h4>🟦 Meta</h4>
+                        <div class="platform-steps">
+                            <div class="step-compact">
+                                <div class="step-number-compact">1</div>
+                                <div class="step-content">
+                                    <h5>측정</h5>
+                                    <p>재방문자 구매 전환율 분석</p>
+                                </div>
                             </div>
-                            <div class="monitoring-step">
-                                <h5>2. 대시보드 구성</h5>
-                                <p>GA4 전체 퍼널 + 각 매체 성과 확인</p>
+                            <div class="step-compact">
+                                <div class="step-number-compact">2</div>
+                                <div class="step-content">
+                                    <h5>수집</h5>
+                                    <p>사용자 세그먼트별 행동 패턴</p>
+                                </div>
                             </div>
-                            <div class="monitoring-step">
-                                <h5>3. 최적화 주기</h5>
-                                <p>일간 모니터링 → 주간 A/B 테스트 → 월간 전략 재조정</p>
+                            <div class="step-compact">
+                                <div class="step-number-compact">3</div>
+                                <div class="step-content">
+                                    <h5>활용</h5>
+                                    <p>Conversions API로 고급 매칭</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="platform-compact">
+                        <h4>⚫ TikTok</h4>
+                        <div class="platform-steps">
+                            <div class="step-compact">
+                                <div class="step-number-compact">1</div>
+                                <div class="step-content">
+                                    <h5>측정</h5>
+                                    <p>MZ세대 15초 내 액션률</p>
+                                </div>
+                            </div>
+                            <div class="step-compact">
+                                <div class="step-number-compact">2</div>
+                                <div class="step-content">
+                                    <h5>수집</h5>
+                                    <p>연령대별 콘텐츠 소비 패턴</p>
+                                </div>
+                            </div>
+                            <div class="step-compact">
+                                <div class="step-number-compact">3</div>
+                                <div class="step-content">
+                                    <h5>활용</h5>
+                                    <p>24시간 내 즉시 리타겟팅</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="feeding-bridge">
-                        <div class="bridge-box">
-                            <span class="bridge-icon">🚀</span>
-                            <p><strong>잘 먹인 데이터들로 매체 머신러닝까지 부스팅!!</strong></p>
+
+                    <div class="platform-compact">
+                        <h4>🟢 네이버</h4>
+                        <div class="platform-steps">
+                            <div class="step-compact">
+                                <div class="step-number-compact">1</div>
+                                <div class="step-content">
+                                    <h5>측정</h5>
+                                    <p>브랜드 키워드 전환 효율</p>
+                                </div>
+                            </div>
+                            <div class="step-compact">
+                                <div class="step-number-compact">2</div>
+                                <div class="step-content">
+                                    <h5>수집</h5>
+                                    <p>검색 유입 경로별 성과</p>
+                                </div>
+                            </div>
+                            <div class="step-compact">
+                                <div class="step-number-compact">3</div>
+                                <div class="step-content">
+                                    <h5>활용</h5>
+                                    <p>서치어드바이저 연동 최적화</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-key-insight">
+                    <div class="insight-box">
+                        <span class="insight-icon">💡</span>
+                        <div class="insight-content">
+                            <h4>핵심 인사이트</h4>
+                            <p>각 플랫폼의 강점을 활용하되, GA4를 중심으로 통합 관리<br>
+                            데이터의 일관성과 정확성이 AI 최적화의 성공을 결정합니다</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- 슬라이드 10: GTM 데이터 전략 -->
         <section class="slide content-slide">
