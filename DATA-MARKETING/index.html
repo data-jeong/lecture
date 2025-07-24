@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 시대의 데이터 마케팅: GA4 태그부터 머신러닝 최적화까지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -140,6 +141,193 @@
             color: #ffcc00;
             font-size: 1.5rem;
             font-weight: bold;
+        }
+
+        /* 새로운 데이터 전략 슬라이드 스타일 */
+        .strategy-framework-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .strategy-framework-visual .framework-step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .strategy-framework-visual .framework-step .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .strategy-framework-visual .framework-step h4 {
+            margin: 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .strategy-framework-visual .framework-step p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .strategy-framework-visual .framework-arrow {
+            font-size: 2rem;
+            color: #ffcc00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* 파트 상세 설명 스타일 */
+        .part-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .part-header {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+            margin-bottom: 2rem;
+        }
+
+        .part-header h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .part-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .part-content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .content-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-card .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffcc00;
+        }
+
+        .content-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .content-card p {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* 실행 흐름 스타일 */
+        .execution-flow {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-item {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .flow-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .flow-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-item p {
+            font-size: 0.85rem;
+            color: #ccc;
+        }
+
+        .flow-connector {
+            font-size: 1.5rem;
+            color: #ffcc00;
+            opacity: 0.6;
+        }
+
+        .flow-summary {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .flow-summary p {
+            font-size: 1rem;
+            color: #ccc;
         }
 
         .framework-note {
@@ -3083,125 +3271,183 @@
                 
                 <div class="strategy-overview">
                     <div class="strategy-intro">
-                        <h3>📈 데이터 전략의 3단계 프레임워크</h3>
+                        <h3><i class="fas fa-chart-line"></i> 데이터 전략의 3단계 프레임워크</h3>
                         <p>체계적인 데이터 마케팅을 위한 <strong>측정-수집-활용</strong> 로드맵</p>
                     </div>
                     
-                    <div class="strategy-cards-large">
-                        <div class="strategy-card-large part-1">
-                            <div class="card-header">
-                                <div class="part-number">1부</div>
-                                <h3>무엇을 측정할 것인가?</h3>
-                            </div>
-                            <div class="card-subtitle">
-                                <strong>가설 기반 마케팅</strong>으로 측정할 지표를 명확히 정의
-                            </div>
-                            <div class="card-content">
-                                <div class="content-items">
-                                    <div class="content-item">
-                                        <span class="item-icon">📝</span>
-                                        <span>구조화된 가설 문장 작성법</span>
-                                    </div>
-                                    <div class="content-item">
-                                        <span class="item-icon">🎯</span>
-                                        <span>비즈니스 목표 → 측정 지표 연결</span>
-                                    </div>
-                                    <div class="content-item">
-                                        <span class="item-icon">🧪</span>
-                                        <span>A/B 테스트 설계 방법론</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="strategy-framework-visual">
+                        <div class="framework-step" style="background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);">
+                            <div class="step-number">1</div>
+                            <h4>무엇을 측정할 것인가?</h4>
+                            <p>가설 기반 마케팅으로<br>측정 지표 정의</p>
                         </div>
-                        
-                        <div class="strategy-card-large part-2">
-                            <div class="card-header">
-                                <div class="part-number">2부</div>
-                                <h3>어떻게 수집할 것인가?</h3>
-                            </div>
-                            <div class="card-subtitle">
-                                <strong>GA4 고급 분석</strong>으로 정확한 데이터 수집 체계 구축
-                            </div>
-                            <div class="card-content">
-                                <div class="content-items">
-                                    <div class="content-item">
-                                        <span class="item-icon">🔍</span>
-                                        <span>탐색 보고서 활용법</span>
-                                    </div>
-                                    <div class="content-item">
-                                        <span class="item-icon">👥</span>
-                                        <span>사용자/세션/이벤트 세그먼트</span>
-                                    </div>
-                                    <div class="content-item">
-                                        <span class="item-icon">🎪</span>
-                                        <span>잠재고객 구축 및 활용</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="framework-arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="framework-step" style="background: linear-gradient(135deg, #4834D4 0%, #686DE0 100%);">
+                            <div class="step-number">2</div>
+                            <h4>어떻게 수집할 것인가?</h4>
+                            <p>GA4 고급 분석으로<br>데이터 수집 체계 구축</p>
                         </div>
+                        <div class="framework-arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="framework-step" style="background: linear-gradient(135deg, #00D2D3 0%, #22A6B3 100%);">
+                            <div class="step-number">3</div>
+                            <h4>어떻게 활용할 것인가?</h4>
+                            <p>가치 증명 리포팅으로<br>데이터를 액션으로 연결</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 6-1: 1부 상세 설명 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>1부: 무엇을 측정할 것인가?</h2>
+                
+                <div class="part-detail">
+                    <div class="part-header" style="background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);">
+                        <h3><i class="fas fa-bullseye"></i> 가설 기반 마케팅</h3>
+                        <p>측정할 지표를 명확히 정의하는 체계적 접근법</p>
+                    </div>
+                    
+                    <div class="part-content-grid">
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-pencil-alt"></i></div>
+                            <h4>구조화된 가설 문장 작성법</h4>
+                            <p>"우리는 [타겟]을 대상으로 [행동]을 하면 [결과]를 얻을 것이다"</p>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-link"></i></div>
+                            <h4>비즈니스 목표 → 측정 지표 연결</h4>
+                            <p>전략적 목표를 구체적인 KPI로 변환하는 프레임워크</p>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-flask"></i></div>
+                            <h4>A/B 테스트 설계 방법론</h4>
+                            <p>통계적으로 유의미한 실험 설계와 해석 기법</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 6-2: 2부 상세 설명 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>2부: 어떻게 수집할 것인가?</h2>
+                
+                <div class="part-detail">
+                    <div class="part-header" style="background: linear-gradient(135deg, #4834D4 0%, #686DE0 100%);">
+                        <h3><i class="fas fa-database"></i> GA4 고급 분석</h3>
+                        <p>정확한 데이터 수집 체계 구축을 위한 실전 가이드</p>
+                    </div>
+                    
+                    <div class="part-content-grid">
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-search"></i></div>
+                            <h4>탐색 보고서 활용법</h4>
+                            <p>경로 탐색, 유입경로 분석 등 고급 분석 기법</p>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-users"></i></div>
+                            <h4>사용자/세션/이벤트 세그먼트</h4>
+                            <p>타겟 그룹별 행동 패턴 분석과 인사이트 도출</p>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-user-circle"></i></div>
+                            <h4>잠재고객 구축 및 활용</h4>
+                            <p>리마케팅과 광고 최적화를 위한 오디언스 설계</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 6-3: 3부 상세 설명 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>3부: 어떻게 활용할 것인가?</h2>
+                
+                <div class="part-detail">
+                    <div class="part-header" style="background: linear-gradient(135deg, #00D2D3 0%, #22A6B3 100%);">
+                        <h3><i class="fas fa-chart-pie"></i> 가치 증명 리포팅</h3>
+                        <p>데이터를 액션으로 연결하는 실행 전략</p>
+                    </div>
+                    
+                    <div class="part-content-grid">
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                            <h4>Looker Studio 대시보드 구축</h4>
+                            <p>실시간 모니터링과 인사이트 시각화 기법</p>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
+                            <h4>ROI 중심 리포팅 체계</h4>
+                            <p>비즈니스 성과와 마케팅 효과를 연결하는 지표 설계</p>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                            <h4>클라이언트 설득 전략</h4>
+                            <p>데이터 기반 스토리텔링과 커뮤니케이션 기법</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 6-4: 실행 흐름 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2><i class="fas fa-sync-alt"></i> 데이터 전략의 실행 흐름</h2>
+                
+                <div class="execution-flow">
+                    <div class="flow-container">
+                        <div class="flow-item">
+                            <div class="flow-icon" style="background: #FF6B6B;">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h4>목표 설정</h4>
+                            <p>비즈니스 목표 정의</p>
+                        </div>
+                        <div class="flow-connector"><i class="fas fa-chevron-right"></i></div>
                         
-                        <div class="strategy-card-large part-3">
-                            <div class="card-header">
-                                <div class="part-number">3부</div>
-                                <h3>어떻게 활용할 것인가?</h3>
+                        <div class="flow-item">
+                            <div class="flow-icon" style="background: #4834D4;">
+                                <i class="fas fa-chart-line"></i>
                             </div>
-                            <div class="card-subtitle">
-                                <strong>가치 증명 리포팅</strong>으로 데이터를 액션으로 연결
+                            <h4>지표 정의</h4>
+                            <p>KPI 및 측정 지표 설정</p>
+                        </div>
+                        <div class="flow-connector"><i class="fas fa-chevron-right"></i></div>
+                        
+                        <div class="flow-item">
+                            <div class="flow-icon" style="background: #00D2D3;">
+                                <i class="fas fa-cogs"></i>
                             </div>
-                            <div class="card-content">
-                                <div class="content-items">
-                                    <div class="content-item">
-                                        <span class="item-icon">📊</span>
-                                        <span>Looker Studio 대시보드 구축</span>
-                                    </div>
-                                    <div class="content-item">
-                                        <span class="item-icon">💰</span>
-                                        <span>ROI 중심 리포팅 체계</span>
-                                    </div>
-                                    <div class="content-item">
-                                        <span class="item-icon">🤝</span>
-                                        <span>클라이언트 설득 전략</span>
-                                    </div>
-                                </div>
+                            <h4>수집 설정</h4>
+                            <p>GA4 태그 및 이벤트 구성</p>
+                        </div>
+                        <div class="flow-connector"><i class="fas fa-chevron-right"></i></div>
+                        
+                        <div class="flow-item">
+                            <div class="flow-icon" style="background: #F39C12;">
+                                <i class="fas fa-flask"></i>
                             </div>
+                            <h4>가설 검증</h4>
+                            <p>A/B 테스트 실행</p>
+                        </div>
+                        <div class="flow-connector"><i class="fas fa-chevron-right"></i></div>
+                        
+                        <div class="flow-item">
+                            <div class="flow-icon" style="background: #27AE60;">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h4>액션 실행</h4>
+                            <p>인사이트 기반 최적화</p>
                         </div>
                     </div>
                     
-                    <div class="strategy-flow">
-                        <h3>🔄 데이터 전략의 실행 흐름</h3>
-                        <div class="flow-steps">
-                            <div class="flow-step">
-                                <div class="step-icon">🎯</div>
-                                <span>목표 설정</span>
-                            </div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-step">
-                                <div class="step-icon">📊</div>
-                                <span>지표 정의</span>
-                            </div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-step">
-                                <div class="step-icon">🔧</div>
-                                <span>수집 설정</span>
-                            </div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-step">
-                                <div class="step-icon">🧪</div>
-                                <span>가설 검증</span>
-                            </div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-step">
-                                <div class="step-icon">🚀</div>
-                                <span>액션 실행</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="strategy-promise">
-                        <div class="promise-box">
-                            <span class="promise-icon">🚀</span>
-                            <p><strong>이제 1부, 2부, 3부 순서대로 실전 방법론을 알아보겠습니다!</strong></p>
-                        </div>
+                    <div class="flow-summary">
+                        <p><i class="fas fa-info-circle"></i> 이 과정은 반복적으로 수행되며, 각 단계에서 얻은 인사이트가 다음 사이클의 입력값이 됩니다.</p>
                     </div>
                 </div>
             </div>
@@ -3398,7 +3644,7 @@
         <!-- 슬라이드 9: 데이터 활용 전략 -->
         <section class="slide content-slide">
             <div class="slide-content">
-                <span class="slide-number">15 / 17</span>
+                <span class="slide-number">9 / 21</span>
                 <h2>플랫폼별 데이터 전략 실전 적용</h2>
                 
                 <div class="platform-intro">
@@ -3533,8 +3779,8 @@
         <!-- 슬라이드 10: GTM 데이터 전략 -->
         <section class="slide content-slide">
             <div class="slide-content">
-                <span class="slide-number">10 / 17</span>
-                <h2>GTM 마스터하기: 데이터 수집의 기초</h2>
+                <span class="slide-number">10 / 21</span>
+                <h2>좋은 데이터 전략은 좋은 데이터서부터</h2>
                 
                 <div class="gtm-strategy-container">
                     <div class="gtm-intro">
@@ -3567,138 +3813,60 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="gtm-impact">
+                        <div class="impact-message">
+                            <span class="impact-icon">💡</span>
+                            <p><strong>핵심 원칙: 측정 가능한 것만 개선할 수 있다</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 슬라이드 11: GTM 실무 활용 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <span class="slide-number">11 / 21</span>
+                <h2>GTM 실무: 깨끗하고 확장 가능한 구조 만들기</h2>
+                
+                <div class="gtm-strategy-container">
                     <div class="gtm-principles">
                         <div class="principle-card">
                             <div class="principle-header">
                                 <span class="principle-icon">🧹</span>
-                                <h4>깨끗한 작업 공간 유지</h4>
+                                <h4>3가지 핵심 원칙</h4>
                             </div>
                             <div class="principle-content">
                                 <div class="principle-section">
-                                    <h5>엄격한 이름 규칙</h5>
-                                    <div class="naming-examples">
-                                        <div class="naming-item">
-                                            <span class="label">태그:</span>
-                                            <code>GA4 Event - Clicks - Main Nav</code>
-                                        </div>
-                                        <div class="naming-item">
-                                            <span class="label">트리거:</span>
-                                            <code>Trigger - Click - CTA Button</code>
-                                        </div>
-                                        <div class="naming-item">
-                                            <span class="label">변수:</span>
-                                            <code>DLV - Product Category</code>
-                                        </div>
-                                    </div>
+                                    <h5>1. 일관된 네이밍</h5>
+                                    <code>GA4 - [액션] - [위치]</code>
+                                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">예: GA4 - Click - Header CTA</p>
                                 </div>
                                 <div class="principle-section">
-                                    <h5>폴더 구조화</h5>
-                                    <ul>
-                                        <li>📁 GA4 Events</li>
-                                        <li>📁 Conversion Tracking</li>
-                                        <li>📁 Third Party Tags</li>
-                                        <li>📁 Variables</li>
-                                    </ul>
+                                    <h5>2. 폴더로 정리</h5>
+                                    <p>태그/트리거/변수를 목적별로 분류</p>
                                 </div>
                                 <div class="principle-section">
-                                    <h5>버전 관리</h5>
-                                    <p class="version-tip">✅ 모든 버전 게시 시 상세한 설명 작성<br>
-                                    "Added purchase event tracking with enhanced ecommerce parameters - v2.3.1"</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="principle-card">
-                            <div class="principle-header">
-                                <span class="principle-icon">🚀</span>
-                                <h4>확장성을 위한 GTM 변수 마스터하기</h4>
-                            </div>
-                            <div class="principle-content">
-                                <div class="variable-section">
-                                    <h5>데이터 영역 (Data Layer)</h5>
-                                    <p class="description">웹사이트와 GTM 간의 구조화된 통신 계층</p>
-                                    <div class="data-layer-example">
-                                        <code>
-dataLayer.push({
-  'event': 'purchase',
-  'ecommerce': {
-    'transaction_id': '12345',
-    'value': 25000,
-    'currency': 'KRW',
-    'items': [{
-      'item_id': 'SKU123',
-      'item_name': '프리미엄 상품',
-      'price': 25000,
-      'quantity': 1
-    }]
-  },
-  'user_data': {
-    'user_id': 'USER789',
-    'user_type': 'premium'
-  }
-});
-                                        </code>
-                                    </div>
-                                </div>
-                                
-                                <div class="variable-section">
-                                    <h5>GA4 이벤트 설정 변수</h5>
-                                    <p class="description">공통 매개변수를 한 곳에서 정의하고 모든 GA4 이벤트에 적용</p>
-                                    <div class="config-benefits">
-                                        <div class="benefit-item">
-                                            <span class="benefit-icon">🎯</span>
-                                            <span>중복 제거</span>
-                                        </div>
-                                        <div class="benefit-item">
-                                            <span class="benefit-icon">🔒</span>
-                                            <span>일관성 보장</span>
-                                        </div>
-                                        <div class="benefit-item">
-                                            <span class="benefit-icon">⚡</span>
-                                            <span>유지보수 효율성</span>
-                                        </div>
-                                    </div>
-                                    <div class="config-example">
-                                        <p class="example-title">공통 파라미터 예시:</p>
-                                        <ul>
-                                            <li><code>page_location</code></li>
-                                            <li><code>user_id</code></li>
-                                            <li><code>session_id</code></li>
-                                            <li><code>user_properties</code></li>
-                                        </ul>
-                                    </div>
+                                    <h5>3. 상세한 버전 기록</h5>
+                                    <p>무엇을, 왜 변경했는지 명시</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="gtm-best-practices">
-                        <h3>💡 GTM 구현 체크리스트</h3>
+                        <h3>💡 실무 체크리스트</h3>
                         <div class="checklist-grid">
                             <div class="checklist-item">
                                 <input type="checkbox" id="check1">
-                                <label for="check1">태그, 트리거, 변수 네이밍 컨벤션 문서화</label>
+                                <label for="check1">네이밍 규칙 문서화</label>
                             </div>
                             <div class="checklist-item">
                                 <input type="checkbox" id="check2">
-                                <label for="check2">데이터 레이어 스펙 개발팀과 공유</label>
+                                <label for="check2">Preview 모드로 검증</label>
                             </div>
                             <div class="checklist-item">
                                 <input type="checkbox" id="check3">
-                                <label for="check3">GA4 설정 변수로 공통 파라미터 통합</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check4">
-                                <label for="check4">Preview 모드로 모든 이벤트 검증</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check5">
-                                <label for="check5">버전 히스토리에 변경사항 상세 기록</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check6">
-                                <label for="check6">팀원과 GTM 컨테이너 접근 권한 관리</label>
+                                <label for="check3">팀원과 접근 권한 관리</label>
                             </div>
                         </div>
                     </div>
@@ -3706,16 +3874,17 @@ dataLayer.push({
                     <div class="gtm-impact">
                         <div class="impact-message">
                             <span class="impact-icon">🎯</span>
-                            <p><strong>깨끗하고 확장 가능한 GTM 구조 = 정확한 데이터 수집 = AI 최적화 성공</strong></p>
+                            <p><strong>깨끗한 GTM = 정확한 데이터 = AI 최적화 성공</strong></p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 슬라이드 11: 현실 직시 -->
+        <!-- 슬라이드 12: 현실 직시 -->
         <section class="slide content-slide">
             <div class="slide-content">
+                <span class="slide-number">12 / 21</span>
                 <h2>매체는 이미 AI로 무장했다</h2>
                 
                 <div class="problem-cards">
@@ -3748,9 +3917,10 @@ dataLayer.push({
             </div>
         </section>
 
-        <!-- 슬라이드 3: 솔루션 제시 -->
+        <!-- 슬라이드 13: 솔루션 제시 -->
         <section class="slide content-slide">
             <div class="slide-content">
+                <span class="slide-number">13 / 21</span>
                 <h2>AI에게 더 나은 데이터를 먹이자</h2>
                 
                 <div class="process-flow">
@@ -3793,9 +3963,10 @@ dataLayer.push({
             </div>
         </section>
 
-        <!-- 슬라이드 4: GA4 텍소노미 설계 -->
+        <!-- 슬라이드 14: GA4 텍소노미 설계 -->
         <section class="slide content-slide">
             <div class="slide-content">
+                <span class="slide-number">14 / 21</span>
                 <h2>Part 1: GA4 텍소노미 설계</h2>
                 
                 <h3>왜 텍소노미가 중요한가?</h3>
@@ -4039,369 +4210,11 @@ dataLayer.push({
             </div>
         </section>
 
-        <!-- 슬라이드 13: GTM 구현 -->
-        <section class="slide content-slide">
-            <div class="slide-content">
-                <h2>GTM으로 태그 구현하기</h2>
 
-                <div class="gtm-screenshot">
-                    <div class="gtm-header">
-                        <div class="gtm-logo">GTM</div>
-                        <div>
-                            <h4 style="margin: 0;">Google Tag Manager</h4>
-                            <p style="margin: 0; color: #666; font-size: 0.9rem;">컨테이너: GTM-XXXXXX</p>
-                        </div>
-                    </div>
-                    
-                    <div class="gtm-nav">
-                        <div class="gtm-nav-item active">태그</div>
-                        <div class="gtm-nav-item">트리거</div>
-                        <div class="gtm-nav-item">변수</div>
-                    </div>
-                    
-                    <div class="gtm-content">
-                        <h5 style="margin-bottom: 1rem;">새 태그 만들기: GA4 이벤트 - 구매 완료</h5>
-                        
-                        <div class="gtm-field">
-                            <div class="gtm-label">태그 유형</div>
-                            <div class="gtm-input">Google Analytics: GA4 이벤트</div>
-                        </div>
-                        
-                        <div class="gtm-field">
-                            <div class="gtm-label">이벤트 이름</div>
-                            <div class="gtm-input">purchase</div>
-                        </div>
-                        
-                        <div class="gtm-field">
-                            <div class="gtm-label">이벤트 매개변수</div>
-                            <div style="background: white; padding: 0.5rem; border-radius: 4px;">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span>transaction_id</span>
-                                    <span style="color: #4285f4;">{{DLV - transactionId}}</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span>value</span>
-                                    <span style="color: #4285f4;">{{DLV - purchaseValue}}</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span>items</span>
-                                    <span style="color: #4285f4;">{{DLV - purchaseItems}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="ai-section" style="margin-top: 2rem;">
-                    <h3>🚀 Pro Tip: 서버사이드 태깅</h3>
-                    <p>iOS 14.5+와 광고 차단기 대응을 위한 필수 전략</p>
-                    <ul style="margin-top: 1rem; padding-left: 2rem;">
-                        <li>데이터 수집률 15-30% 향상</li>
-                        <li>퍼스트파티 쿠키로 정확도 개선</li>
-                        <li>Enhanced Conversions 자동 처리</li>
-                        <li>페이지 로딩 속도 개선</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
 
-        <!-- 슬라이드 7: GA4 디버그뷰 -->
-        <section class="slide content-slide">
-            <div class="slide-content">
-                <h2>실시간 디버깅으로 데이터 검증</h2>
 
-                <div class="debug-view">
-                    <h4 style="color: #fff; margin-bottom: 1.5rem;">GA4 DebugView</h4>
-                    
-                    <div class="debug-event">
-                        <div class="debug-event-name">🎯 purchase</div>
-                        <div class="debug-param">
-                            <span class="debug-param-key">transaction_id</span>
-                            <span>ORD-2024-0125</span>
-                        </div>
-                        <div class="debug-param">
-                            <span class="debug-param-key">value</span>
-                            <span>89,900</span>
-                        </div>
-                        <div class="debug-param">
-                            <span class="debug-param-key">currency</span>
-                            <span>KRW</span>
-                        </div>
-                        <div class="debug-param">
-                            <span class="debug-param-key">items</span>
-                            <span>[Array(2)]</span>
-                        </div>
-                    </div>
 
-                    <div class="debug-event">
-                        <div class="debug-event-name">📱 add_to_cart</div>
-                        <div class="debug-param">
-                            <span class="debug-param-key">item_id</span>
-                            <span>SKU-12345</span>
-                        </div>
-                        <div class="debug-param">
-                            <span class="debug-param-key">item_category</span>
-                            <span>cosmetics</span>
-                        </div>
-                        <div class="debug-param">
-                            <span class="debug-param-key">price</span>
-                            <span>45,000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="process-flow" style="margin-top: 3rem;">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h4>GTM Preview</h4>
-                        <p>태그 실행 확인</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h4>GA4 DebugView</h4>
-                        <p>이벤트 수신 확인</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h4>실시간 보고서</h4>
-                        <p>데이터 흐름 검증</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 슬라이드 8: 매체 연동 -->
-        <section class="slide content-slide">
-            <div class="slide-content">
-                <h2>Part 2: 매체와 데이터 연동</h2>
-
-                <h3>Enhanced Conversions 설정</h3>
-                <p style="color: #888; margin-bottom: 2rem;">매체 AI의 학습 능력을 극대화하는 핵심</p>
-
-                <div class="problem-cards">
-                    <div class="problem-card">
-                        <div class="problem-icon">📧</div>
-                        <h4>이메일 해시</h4>
-                        <p>사용자 이메일을 SHA256으로 암호화하여 전송</p>
-                    </div>
-                    
-                    <div class="problem-card">
-                        <div class="problem-icon">📱</div>
-                        <h4>전화번호 매칭</h4>
-                        <p>전화번호로 크로스 디바이스 사용자 매칭</p>
-                    </div>
-                    
-                    <div class="problem-card">
-                        <div class="problem-icon">🎯</div>
-                        <h4>오프라인 전환</h4>
-                        <p>매장 구매 데이터를 온라인 캠페인과 연결</p>
-                    </div>
-                </div>
-
-                <div class="code-block">
-                    <span class="code-comment">// Enhanced Conversions 데이터 전송 예시</span><br>
-                    gtag('event', 'purchase', {<br>
-                    &nbsp;&nbsp;<span class="code-key">'transaction_id'</span>: <span class="code-value">'12345'</span>,<br>
-                    &nbsp;&nbsp;<span class="code-key">'value'</span>: <span class="code-value">89900</span>,<br>
-                    &nbsp;&nbsp;<span class="code-key">'currency'</span>: <span class="code-value">'KRW'</span>,<br>
-                    &nbsp;&nbsp;<span class="code-comment">// Enhanced Conversions 데이터</span><br>
-                    &nbsp;&nbsp;<span class="code-key">'user_data'</span>: {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'email'</span>: <span class="code-value">'hashed_email_here'</span>,<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'phone_number'</span>: <span class="code-value">'hashed_phone_here'</span>,<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'address'</span>: {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'first_name'</span>: <span class="code-value">'김'</span>,<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'last_name'</span>: <span class="code-value">'철수'</span>,<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">'city'</span>: <span class="code-value">'서울'</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                    &nbsp;&nbsp;}<br>
-                    });
-                </div>
-
-                <div class="case-study">
-                    <div class="case-study-title">📊 실제 성과</div>
-                    <p><strong>패션 이커머스 A사:</strong> Enhanced Conversions 도입 후</p>
-                    <ul style="margin-top: 1rem; padding-left: 2rem;">
-                        <li>전환 추적 정확도 28% 향상</li>
-                        <li>구글 쇼핑 ROAS 45% 개선</li>
-                        <li>페이스북 카탈로그 광고 CPA 32% 감소</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 슬라이드 9: GA4 분석 -->
-        <section class="slide content-slide">
-            <div class="slide-content">
-                <h2>GA4에서 인사이트 도출하기</h2>
-
-                <h3>탐색 분석 활용법</h3>
-
-                <div class="ai-benefits">
-                    <div class="ai-benefit">
-                        <div class="ai-icon">🔍</div>
-                        <h4>경로 탐색</h4>
-                        <p>사용자 여정의<br>병목 구간 발견</p>
-                    </div>
-                    
-                    <div class="ai-benefit">
-                        <div class="ai-icon">📊</div>
-                        <h4>세그먼트 분석</h4>
-                        <p>고가치 고객군<br>행동 패턴 파악</p>
-                    </div>
-                    
-                    <div class="ai-benefit">
-                        <div class="ai-icon">🎯</div>
-                        <h4>유입경로 분석</h4>
-                        <p>전환 퍼널의<br>이탈 지점 최적화</p>
-                    </div>
-                    
-                    <div class="ai-benefit">
-                        <div class="ai-icon">⏱️</div>
-                        <h4>코호트 분석</h4>
-                        <p>시간에 따른<br>리텐션 변화 추적</p>
-                    </div>
-                </div>
-
-                <div class="code-block" style="margin-top: 3rem;">
-                    <span class="code-comment">// BigQuery로 고급 분석하기</span><br>
-                    SELECT<br>
-                    &nbsp;&nbsp;traffic_source.source,<br>
-                    &nbsp;&nbsp;COUNT(DISTINCT user_pseudo_id) as users,<br>
-                    &nbsp;&nbsp;SUM(ecommerce.purchase_revenue) as revenue,<br>
-                    &nbsp;&nbsp;SUM(ecommerce.purchase_revenue) / COUNT(DISTINCT user_pseudo_id) as revenue_per_user<br>
-                    FROM `project.dataset.events_*`<br>
-                    WHERE _TABLE_SUFFIX BETWEEN '20240101' AND '20240131'<br>
-                    GROUP BY traffic_source.source<br>
-                    ORDER BY revenue DESC
-                </div>
-            </div>
-        </section>
-
-        <!-- 슬라이드 14: AI 마케팅 전략 -->
-        <section class="slide content-slide">
-            <div class="slide-content">
-                <h2>Part 3: AI 시대의 마케팅 전략</h2>
-
-                <h3>데이터가 만드는 AI 마케팅의 차이</h3>
-
-                <div class="process-flow" style="margin-bottom: 3rem;">
-                    <div class="process-step">
-                        <div class="step-number">📊</div>
-                        <h4>정교한 데이터</h4>
-                        <p>구조화된 이벤트<br>풍부한 컨텍스트</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">🤖</div>
-                        <h4>AI 학습</h4>
-                        <p>패턴 인식<br>예측 모델 생성</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">🎯</div>
-                        <h4>자동 최적화</h4>
-                        <p>타겟팅 정교화<br>입찰 최적화</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">📈</div>
-                        <h4>성과 개선</h4>
-                        <p>ROAS 상승<br>CPA 감소</p>
-                    </div>
-                </div>
-
-                <div class="ai-section">
-                    <h3>실전 AI 마케팅 체크리스트</h3>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
-                        <div>
-                            <h4 style="color: #ffcc00; margin-bottom: 1rem;">✅ 데이터 준비</h4>
-                            <ul style="padding-left: 1.5rem;">
-                                <li>마이크로 전환 이벤트 설정</li>
-                                <li>가치 기반 입찰을 위한 value 파라미터</li>
-                                <li>Enhanced Conversions 구현</li>
-                                <li>오프라인 전환 업로드</li>
-                            </ul>
-                        </div>
-                        
-                        <div>
-                            <h4 style="color: #ffcc00; margin-bottom: 1rem;">✅ 캠페인 설정</h4>
-                            <ul style="padding-left: 1.5rem;">
-                                <li>Performance Max 활용</li>
-                                <li>가치 기반 입찰 전략</li>
-                                <li>동적 리마케팅 피드</li>
-                                <li>예측 타겟팅 활성화</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="case-study" style="margin-top: 3rem;">
-                    <div class="case-study-title">🚀 성공 사례: 뷰티 브랜드 B사</div>
-                    <p><strong>도전 과제:</strong> 신제품 런칭 시 타겟 고객 찾기 어려움</p>
-                    <p><strong>솔루션:</strong></p>
-                    <ul style="margin-top: 0.5rem; padding-left: 2rem;">
-                        <li>기존 제품 구매자의 상세 행동 데이터 수집 (GA4)</li>
-                        <li>유사 잠재고객 생성을 위한 Enhanced Conversions</li>
-                        <li>가치 기반 입찰로 고가치 고객 우선 타겟팅</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>결과:</strong> 신제품 ROAS 380%, 기존 대비 2.5배 향상</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 슬라이드 11: 실행 로드맵 -->
-        <section class="slide content-slide">
-            <div class="slide-content">
-                <h2>지금 당장 시작하는 액션 플랜</h2>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0;">
-                    <div class="problem-card">
-                        <h3 style="color: #ffcc00; margin-bottom: 1rem;">Week 1-2</h3>
-                        <h4>기초 점검</h4>
-                        <ul style="padding-left: 1.5rem; margin-top: 1rem;">
-                            <li>GA4 기본 설정 감사</li>
-                            <li>필수 이벤트 3개 정의</li>
-                            <li>GTM 컨테이너 정리</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="problem-card">
-                        <h3 style="color: #ffcc00; margin-bottom: 1rem;">Week 3-4</h3>
-                        <h4>구현</h4>
-                        <ul style="padding-left: 1.5rem; margin-top: 1rem;">
-                            <li>핵심 이벤트 태깅</li>
-                            <li>Enhanced Conversions 설정</li>
-                            <li>매체 연동 테스트</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="problem-card">
-                        <h3 style="color: #ffcc00; margin-bottom: 1rem;">Week 5-6</h3>
-                        <h4>최적화</h4>
-                        <ul style="padding-left: 1.5rem; margin-top: 1rem;">
-                            <li>데이터 품질 검증</li>
-                            <li>AI 캠페인 테스트</li>
-                            <li>성과 모니터링 시작</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 4rem;">
-                    <h3 style="margin-bottom: 2rem;">기억하세요</h3>
-                    <p style="font-size: 1.5rem; line-height: 2;">
-                        <span class="highlight">좋은 데이터</span> → <span class="highlight">똑똑한 AI</span> → <span class="highlight">높은 ROAS</span>
-                    </p>
-                    <p style="font-size: 1.2rem; color: #888; margin-top: 2rem;">
-                        "AI는 마법이 아닙니다. 우리가 제공하는 데이터만큼 똑똑해집니다."
-                    </p>
-                    
-                    <a href="#" class="cta-button">지금 시작하기 →</a>
-                </div>
-            </div>
-        </section>
     </div>
 
     <!-- 네비게이션 -->
