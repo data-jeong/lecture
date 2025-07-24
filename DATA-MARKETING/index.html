@@ -2173,12 +2173,64 @@
 
         .gtm-intro {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .gtm-intro h3 {
             color: #20c997;
             margin-bottom: 1rem;
+        }
+
+        .gtm-theory-section {
+            margin-bottom: 2rem;
+        }
+
+        .gtm-theory-section h4 {
+            color: #ffc107;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .gtm-concepts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .concept-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .concept-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .concept-item h5 {
+            color: #20c997;
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-item p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .concept-item em {
+            display: block;
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
         }
 
         .gtm-principles {
@@ -3382,12 +3434,39 @@
         <!-- 슬라이드 10: GTM 데이터 전략 -->
         <section class="slide content-slide">
             <div class="slide-content">
-                <h2>데이터 전략의 핵심: GTM으로 올바른 데이터 먹이기</h2>
+                <span class="slide-number">10 / 17</span>
+                <h2>GTM 마스터하기: 데이터 수집의 기초</h2>
                 
                 <div class="gtm-strategy-container">
                     <div class="gtm-intro">
-                        <h3>🏷️ GTM 태그 및 이벤트 택소노미의 중요성</h3>
-                        <p>데이터 수집의 품질이 AI 최적화의 성능을 결정합니다</p>
+                        <h3>🏷️ Google Tag Manager가 왜 중요한가?</h3>
+                        <p><strong>개발자 없이도</strong> 마케터가 직접 데이터 수집을 관리할 수 있는 유일한 방법</p>
+                    </div>
+
+                    <div class="gtm-theory-section">
+                        <h4>📚 GTM의 핵심 개념 이해하기</h4>
+                        <div class="gtm-concepts">
+                            <div class="concept-item">
+                                <div class="concept-icon">🏷️</div>
+                                <h5>태그 (Tags)</h5>
+                                <p>실행할 작업<br><em>"GA4에 이벤트 보내기"</em></p>
+                            </div>
+                            <div class="concept-item">
+                                <div class="concept-icon">⚡</div>
+                                <h5>트리거 (Triggers)</h5>
+                                <p>언제 실행할지<br><em>"버튼 클릭 시"</em></p>
+                            </div>
+                            <div class="concept-item">
+                                <div class="concept-icon">📦</div>
+                                <h5>변수 (Variables)</h5>
+                                <p>어떤 데이터를<br><em>"클릭한 버튼 텍스트"</em></p>
+                            </div>
+                            <div class="concept-item">
+                                <div class="concept-icon">🔄</div>
+                                <h5>데이터 레이어</h5>
+                                <p>정보 전달 통로<br><em>"구매 정보 전달"</em></p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="gtm-principles">
