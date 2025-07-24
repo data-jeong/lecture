@@ -240,41 +240,161 @@
         </div>
 
         <div class="hypothesis-section">
-            <h2>추가 가설 검증 워크시트</h2>
-            <p style="margin-bottom: 20px; color: #666;">여러 가설을 동시에 관리할 때 사용하세요.</p>
-            <table id="additionalHypothesisTable">
+            <h2>산업별 가설 예시</h2>
+            <p style="margin-bottom: 20px; color: #666;">귀하의 산업에 맞는 예시를 참고하여 가설을 수립하세요.</p>
+            
+            <h3 style="color: #1a73e8; margin-bottom: 15px;">🛍️ 이커머스</h3>
+            <table style="margin-bottom: 30px;">
                 <tbody>
                     <tr>
-                        <th>문제 정의</th>
-                        <td contenteditable="true" class="editable"></td>
+                        <th>문제</th>
+                        <td>장바구니 포기율이 70%로 업계 평균(69.8%)보다 높음</td>
                     </tr>
                     <tr>
                         <th>가설</th>
-                        <td contenteditable="true" class="editable"></td>
+                        <td>우리는 체크아웃 페이지에 "예상 배송일"과 "무료 반품" 정보를 명시하면 장바구니 포기율이 10% 감소할 것이라고 믿는다</td>
                     </tr>
                     <tr>
-                        <th>타겟 잠재고객/세그먼트</th>
-                        <td contenteditable="true" class="editable"></td>
+                        <th>측정 지표</th>
+                        <td>주요: 장바구니→구매 전환율 / 가드레일: 반품률, 고객 문의 수</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: #34a853; margin-bottom: 15px;">💰 금융/핀테크</h3>
+            <table style="margin-bottom: 30px;">
+                <tbody>
+                    <tr>
+                        <th>문제</th>
+                        <td>신규 가입 후 첫 거래까지의 전환율이 15%에 불과</td>
                     </tr>
                     <tr>
-                        <th>성공 지표<br>(주요 & 가드레일)</th>
-                        <td contenteditable="true" class="editable"></td>
+                        <th>가설</th>
+                        <td>우리는 온보딩 과정에서 "5분 안에 첫 투자하기" 가이드와 1만원 체험금을 제공하면 첫 거래 전환율이 25%로 증가할 것이라고 믿는다</td>
                     </tr>
                     <tr>
-                        <th>실행 세부사항</th>
-                        <td contenteditable="true" class="editable"></td>
+                        <th>측정 지표</th>
+                        <td>주요: 7일 내 첫 거래 완료율 / 가드레일: CAC, 30일 리텐션</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: #ea4335; margin-bottom: 15px;">🎮 게임/엔터테인먼트</h3>
+            <table style="margin-bottom: 30px;">
+                <tbody>
+                    <tr>
+                        <th>문제</th>
+                        <td>튜토리얼 완료율이 45%로 낮아 초기 이탈이 심각</td>
                     </tr>
                     <tr>
-                        <th>테스트 기간 및 샘플 크기</th>
-                        <td contenteditable="true" class="editable"></td>
+                        <th>가설</th>
+                        <td>우리는 튜토리얼을 10단계에서 5단계로 단순화하고 각 단계마다 즉시 보상을 제공하면 완료율이 70%로 증가할 것이라고 믿는다</td>
                     </tr>
                     <tr>
-                        <th>결과</th>
-                        <td contenteditable="true" class="editable"></td>
+                        <th>측정 지표</th>
+                        <td>주요: 튜토리얼 완료율, D1 리텐션 / 가드레일: 평균 플레이 시간</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: #fbbc04; margin-bottom: 15px;">📚 교육/SaaS</h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>문제</th>
+                        <td>무료 체험 → 유료 전환율이 8%로 목표(15%) 대비 저조</td>
                     </tr>
                     <tr>
-                        <th>결론 및 다음 단계</th>
+                        <th>가설</th>
+                        <td>우리는 무료 체험 3일차에 개인화된 사용 리포트와 ROI 계산기를 이메일로 발송하면 유료 전환율이 12%로 증가할 것이라고 믿는다</td>
+                    </tr>
+                    <tr>
+                        <th>측정 지표</th>
+                        <td>주요: 14일 무료체험→유료 전환율 / 가드레일: 이메일 수신거부율, NPS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="hypothesis-section">
+            <h2>가설 우선순위 매트릭스</h2>
+            <div class="description">
+                <p>여러 가설 중 어떤 것을 먼저 테스트할지 결정하는 프레임워크입니다.</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>가설</th>
+                        <th>예상 임팩트<br>(1-5점)</th>
+                        <th>구현 난이도<br>(1-5점)</th>
+                        <th>필요 리소스</th>
+                        <th>우선순위<br>(임팩트/난이도)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td contenteditable="true" class="editable">체크아웃 단순화</td>
+                        <td contenteditable="true" class="editable">5</td>
+                        <td contenteditable="true" class="editable">3</td>
+                        <td contenteditable="true" class="editable">개발 2주, 디자인 1주</td>
+                        <td contenteditable="true" class="editable">1.67</td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true" class="editable">추천 알고리즘 개선</td>
+                        <td contenteditable="true" class="editable">4</td>
+                        <td contenteditable="true" class="editable">5</td>
+                        <td contenteditable="true" class="editable">데이터 사이언스 4주</td>
+                        <td contenteditable="true" class="editable">0.80</td>
+                    </tr>
+                    <tr>
                         <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="hypothesis-section">
+            <h2>A/B 테스트 설계 체크리스트</h2>
+            <div class="description">
+                <p>성공적인 A/B 테스트를 위한 필수 점검 사항입니다.</p>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 30px;">☐</td>
+                        <td><strong>통계적 유의성 계산:</strong> 필요한 샘플 크기를 사전에 계산했는가? (최소 효과 크기, 신뢰수준 95%, 검정력 80%)</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td><strong>무작위 할당:</strong> 사용자를 대조군/실험군에 무작위로 할당하는 메커니즘이 있는가?</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td><strong>단일 변수 테스트:</strong> 한 번에 하나의 변수만 변경하는가?</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td><strong>충분한 기간:</strong> 주중/주말, 계절성 등을 고려한 충분한 테스트 기간인가?</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td><strong>AA 테스트:</strong> 시스템이 제대로 작동하는지 확인하기 위한 AA 테스트를 실시했는가?</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td><strong>세그먼트 분석 계획:</strong> 전체 결과뿐만 아니라 주요 세그먼트별 분석 계획이 있는가?</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td><strong>2차 지표 모니터링:</strong> 주요 지표 외에 영향받을 수 있는 다른 지표들을 추적하는가?</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td><strong>롤백 계획:</strong> 문제 발생 시 즉시 원복할 수 있는 계획이 있는가?</td>
                     </tr>
                 </tbody>
             </table>
