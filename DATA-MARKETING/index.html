@@ -3935,43 +3935,178 @@
         <section class="slide content-slide">
             <div class="slide-content">
                 <span class="slide-number">13 / 24</span>
-                <h2>좋은 데이터 전략은 좋은 데이터서부터</h2>
+                <h2 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                           -webkit-background-clip: text;
+                           -webkit-text-fill-color: transparent;
+                           text-align: center;
+                           font-size: 3rem;
+                           font-weight: 800;
+                           margin-bottom: 3rem;
+                           text-shadow: 0 0 40px rgba(102, 126, 234, 0.5);">좋은 데이터 전략은 좋은 데이터부터</h2>
                 
-                <div class="gtm-strategy-container">
-                    <div class="gtm-intro">
-                        <h3>🏷️ Google Tag Manager가 왜 중요한가?</h3>
-                        <p><strong>개발자 없이도</strong> 마케터가 직접 데이터 수집을 관리할 수 있는 유일한 방법</p>
-                    </div>
-
-                    <div class="gtm-theory-section">
-                        <h4>📚 GTM의 핵심 개념 이해하기</h4>
-                        <div class="gtm-concepts">
-                            <div class="concept-item">
-                                <div class="concept-icon">🏷️</div>
-                                <h5>태그 (Tags)</h5>
-                                <p>실행할 작업<br><em>"GA4에 이벤트 보내기"</em></p>
-                            </div>
-                            <div class="concept-item">
-                                <div class="concept-icon">⚡</div>
-                                <h5>트리거 (Triggers)</h5>
-                                <p>언제 실행할지<br><em>"버튼 클릭 시"</em></p>
-                            </div>
-                            <div class="concept-item">
-                                <div class="concept-icon">📦</div>
-                                <h5>변수 (Variables)</h5>
-                                <p>어떤 데이터를<br><em>"클릭한 버튼 텍스트"</em></p>
-                            </div>
-                            <div class="concept-item">
-                                <div class="concept-icon">🔄</div>
-                                <h5>데이터 레이어</h5>
-                                <p>정보 전달 통로<br><em>"구매 정보 전달"</em></p>
+                <div class="gtm-strategy-container" style="padding: 0 2rem;">
+                    <!-- 중앙 메인 메시지 -->
+                    <div class="gtm-hero-message" style="text-align: center; margin-bottom: 3rem;">
+                        <div style="display: inline-block; position: relative;">
+                            <div style="position: absolute; inset: -20px; background: radial-gradient(circle at center, rgba(102, 126, 234, 0.3) 0%, transparent 70%); filter: blur(40px);"></div>
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+                                        border: 2px solid rgba(102, 126, 234, 0.3);
+                                        border-radius: 20px;
+                                        padding: 2rem 3rem;
+                                        position: relative;
+                                        overflow: hidden;
+                                        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3),
+                                                    inset 0 1px 0 rgba(255, 255, 255, 0.1);">
+                                <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 600;">
+                                    🚀 Google Tag Manager의 힘
+                                </h3>
+                                <p style="color: #e0e0e0; font-size: 1.2rem; margin: 0;">
+                                    <span style="color: #667eea; font-weight: bold;">개발자 없이도</span> 마케터가 직접 데이터 수집을 관리할 수 있는 <span style="color: #764ba2; font-weight: bold;">유일한 방법</span>
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="gtm-impact">
-                        <div class="impact-message">
-                            <span class="impact-icon">💡</span>
-                            <p><strong>핵심 원칙: 측정 가능한 것만 개선할 수 있다</strong></p>
+
+                    <!-- GTM 핵심 개념 카드 -->
+                    <div class="gtm-concepts-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem;">
+                        <!-- 태그 카드 -->
+                        <div class="concept-card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+                                                         border-radius: 20px;
+                                                         padding: 2rem 1.5rem;
+                                                         text-align: center;
+                                                         border: 1px solid rgba(255, 107, 107, 0.3);
+                                                         position: relative;
+                                                         overflow: hidden;
+                                                         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                                                         cursor: pointer;"
+                             onmouseover="this.style.transform='translateY(-10px) scale(1.05)'; 
+                                          this.style.boxShadow='0 20px 40px rgba(255, 107, 107, 0.4)';
+                                          this.style.borderColor='#ff6b6b';"
+                             onmouseout="this.style.transform='translateY(0) scale(1)'; 
+                                         this.style.boxShadow='none';
+                                         this.style.borderColor='rgba(255, 107, 107, 0.3)';">
+                            <div style="position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; 
+                                        background: radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, transparent 70%); 
+                                        border-radius: 50%;"></div>
+                            <div class="concept-icon" style="font-size: 3rem; margin-bottom: 1rem; 
+                                                            filter: drop-shadow(0 4px 8px rgba(255, 107, 107, 0.5));
+                                                            animation: float 3s ease-in-out infinite;">🏷️</div>
+                            <h5 style="color: #ff6b6b; font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">태그</h5>
+                            <p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.5;">
+                                실행할 작업<br>
+                                <em style="color: #888; font-size: 0.85rem;">"GA4에 이벤트 보내기"</em>
+                            </p>
+                        </div>
+
+                        <!-- 트리거 카드 -->
+                        <div class="concept-card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+                                                         border-radius: 20px;
+                                                         padding: 2rem 1.5rem;
+                                                         text-align: center;
+                                                         border: 1px solid rgba(78, 205, 196, 0.3);
+                                                         position: relative;
+                                                         overflow: hidden;
+                                                         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                                                         cursor: pointer;"
+                             onmouseover="this.style.transform='translateY(-10px) scale(1.05)'; 
+                                          this.style.boxShadow='0 20px 40px rgba(78, 205, 196, 0.4)';
+                                          this.style.borderColor='#4ecdc4';"
+                             onmouseout="this.style.transform='translateY(0) scale(1)'; 
+                                         this.style.boxShadow='none';
+                                         this.style.borderColor='rgba(78, 205, 196, 0.3)';">
+                            <div style="position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; 
+                                        background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%); 
+                                        border-radius: 50%;"></div>
+                            <div class="concept-icon" style="font-size: 3rem; margin-bottom: 1rem; 
+                                                            filter: drop-shadow(0 4px 8px rgba(78, 205, 196, 0.5));
+                                                            animation: float 3s ease-in-out infinite 0.5s;">⚡</div>
+                            <h5 style="color: #4ecdc4; font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">트리거</h5>
+                            <p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.5;">
+                                언제 실행할지<br>
+                                <em style="color: #888; font-size: 0.85rem;">"버튼 클릭 시"</em>
+                            </p>
+                        </div>
+
+                        <!-- 변수 카드 -->
+                        <div class="concept-card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+                                                         border-radius: 20px;
+                                                         padding: 2rem 1.5rem;
+                                                         text-align: center;
+                                                         border: 1px solid rgba(255, 204, 0, 0.3);
+                                                         position: relative;
+                                                         overflow: hidden;
+                                                         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                                                         cursor: pointer;"
+                             onmouseover="this.style.transform='translateY(-10px) scale(1.05)'; 
+                                          this.style.boxShadow='0 20px 40px rgba(255, 204, 0, 0.4)';
+                                          this.style.borderColor='#ffcc00';"
+                             onmouseout="this.style.transform='translateY(0) scale(1)'; 
+                                         this.style.boxShadow='none';
+                                         this.style.borderColor='rgba(255, 204, 0, 0.3)';">
+                            <div style="position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; 
+                                        background: radial-gradient(circle, rgba(255, 204, 0, 0.3) 0%, transparent 70%); 
+                                        border-radius: 50%;"></div>
+                            <div class="concept-icon" style="font-size: 3rem; margin-bottom: 1rem; 
+                                                            filter: drop-shadow(0 4px 8px rgba(255, 204, 0, 0.5));
+                                                            animation: float 3s ease-in-out infinite 1s;">📦</div>
+                            <h5 style="color: #ffcc00; font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">변수</h5>
+                            <p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.5;">
+                                어떤 데이터를<br>
+                                <em style="color: #888; font-size: 0.85rem;">"클릭한 버튼 텍스트"</em>
+                            </p>
+                        </div>
+
+                        <!-- 데이터 레이어 카드 -->
+                        <div class="concept-card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+                                                         border-radius: 20px;
+                                                         padding: 2rem 1.5rem;
+                                                         text-align: center;
+                                                         border: 1px solid rgba(102, 126, 234, 0.3);
+                                                         position: relative;
+                                                         overflow: hidden;
+                                                         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                                                         cursor: pointer;"
+                             onmouseover="this.style.transform='translateY(-10px) scale(1.05)'; 
+                                          this.style.boxShadow='0 20px 40px rgba(102, 126, 234, 0.4)';
+                                          this.style.borderColor='#667eea';"
+                             onmouseout="this.style.transform='translateY(0) scale(1)'; 
+                                         this.style.boxShadow='none';
+                                         this.style.borderColor='rgba(102, 126, 234, 0.3)';">
+                            <div style="position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; 
+                                        background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%); 
+                                        border-radius: 50%;"></div>
+                            <div class="concept-icon" style="font-size: 3rem; margin-bottom: 1rem; 
+                                                            filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.5));
+                                                            animation: float 3s ease-in-out infinite 1.5s;">🔄</div>
+                            <h5 style="color: #667eea; font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">데이터 레이어</h5>
+                            <p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.5;">
+                                정보 전달 통로<br>
+                                <em style="color: #888; font-size: 0.85rem;">"구매 정보 전달"</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 하단 핵심 메시지 -->
+                    <div class="gtm-impact" style="text-align: center;">
+                        <div class="impact-message" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+                                                          border: 2px solid rgba(255, 255, 255, 0.2);
+                                                          border-radius: 50px;
+                                                          padding: 1.5rem 3rem;
+                                                          display: inline-block;
+                                                          position: relative;
+                                                          overflow: hidden;
+                                                          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2),
+                                                                      inset 0 1px 0 rgba(255, 255, 255, 0.1);">
+                            <div style="position: absolute; inset: 0; 
+                                        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+                                        animation: shimmer 3s infinite;"></div>
+                            <span class="impact-icon" style="font-size: 2rem; margin-right: 1rem; vertical-align: middle;">💡</span>
+                            <p style="display: inline; color: #fff; font-size: 1.3rem; font-weight: 600; margin: 0;">
+                                핵심 원칙: <span style="background: linear-gradient(90deg, #ff6b6b, #4ecdc4); 
+                                                       -webkit-background-clip: text; 
+                                                       -webkit-text-fill-color: transparent;
+                                                       font-weight: 800;">측정 가능한 것만 개선할 수 있다</span>
+                            </p>
                         </div>
                     </div>
                 </div>
