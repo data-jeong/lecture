@@ -2164,6 +2164,258 @@
                 padding: 0.5rem;
             }
         }
+
+        /* GTM 데이터 전략 스타일 */
+        .gtm-strategy-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gtm-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gtm-intro h3 {
+            color: #20c997;
+            margin-bottom: 1rem;
+        }
+
+        .gtm-principles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .principle-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .principle-header {
+            background: linear-gradient(135deg, #007bff 0%, #20c997 100%);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .principle-icon {
+            font-size: 2rem;
+        }
+
+        .principle-header h4 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .principle-content {
+            padding: 2rem;
+        }
+
+        .principle-section {
+            margin-bottom: 2rem;
+        }
+
+        .principle-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .principle-section h5 {
+            color: #ffc107;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .naming-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .naming-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .naming-item .label {
+            color: #888;
+            min-width: 80px;
+        }
+
+        .naming-item code,
+        .data-layer-example code {
+            background: rgba(0, 0, 0, 0.8);
+            color: #4ecdc4;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .data-layer-example code {
+            display: block;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        .principle-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .principle-section li {
+            padding: 0.5rem 0;
+            color: #ddd;
+        }
+
+        .version-tip {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 3px solid #ffc107;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        .variable-section {
+            margin-bottom: 2rem;
+        }
+
+        .variable-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .description {
+            color: #aaa;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .config-benefits {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 1.2rem;
+        }
+
+        .config-example {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .example-title {
+            color: #20c997;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .config-example ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .config-example li {
+            padding: 0.3rem 0;
+            color: #ddd;
+        }
+
+        .gtm-best-practices {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .gtm-best-practices h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ffc107;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            color: #ddd;
+        }
+
+        .gtm-impact {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .impact-message {
+            background: linear-gradient(135deg, rgba(32, 201, 151, 0.2) 0%, rgba(0, 123, 255, 0.2) 100%);
+            border: 2px solid #20c997;
+            border-radius: 15px;
+            padding: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .impact-icon {
+            font-size: 2rem;
+        }
+
+        .impact-message p {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #20c997;
+        }
+
+        @media (max-width: 768px) {
+            .gtm-principles {
+                grid-template-columns: 1fr;
+            }
+
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .config-benefits {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2824,7 +3076,163 @@
             </div>
         </section>
 
-        <!-- 슬라이드 10: 현실 직시 -->
+        <!-- 슬라이드 10: GTM 데이터 전략 -->
+        <section class="slide content-slide">
+            <div class="slide-content">
+                <h2>데이터 전략의 핵심: GTM으로 올바른 데이터 먹이기</h2>
+                
+                <div class="gtm-strategy-container">
+                    <div class="gtm-intro">
+                        <h3>🏷️ GTM 태그 및 이벤트 택소노미의 중요성</h3>
+                        <p>데이터 수집의 품질이 AI 최적화의 성능을 결정합니다</p>
+                    </div>
+
+                    <div class="gtm-principles">
+                        <div class="principle-card">
+                            <div class="principle-header">
+                                <span class="principle-icon">🧹</span>
+                                <h4>깨끗한 작업 공간 유지</h4>
+                            </div>
+                            <div class="principle-content">
+                                <div class="principle-section">
+                                    <h5>엄격한 이름 규칙</h5>
+                                    <div class="naming-examples">
+                                        <div class="naming-item">
+                                            <span class="label">태그:</span>
+                                            <code>GA4 Event - Clicks - Main Nav</code>
+                                        </div>
+                                        <div class="naming-item">
+                                            <span class="label">트리거:</span>
+                                            <code>Trigger - Click - CTA Button</code>
+                                        </div>
+                                        <div class="naming-item">
+                                            <span class="label">변수:</span>
+                                            <code>DLV - Product Category</code>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="principle-section">
+                                    <h5>폴더 구조화</h5>
+                                    <ul>
+                                        <li>📁 GA4 Events</li>
+                                        <li>📁 Conversion Tracking</li>
+                                        <li>📁 Third Party Tags</li>
+                                        <li>📁 Variables</li>
+                                    </ul>
+                                </div>
+                                <div class="principle-section">
+                                    <h5>버전 관리</h5>
+                                    <p class="version-tip">✅ 모든 버전 게시 시 상세한 설명 작성<br>
+                                    "Added purchase event tracking with enhanced ecommerce parameters - v2.3.1"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="principle-card">
+                            <div class="principle-header">
+                                <span class="principle-icon">🚀</span>
+                                <h4>확장성을 위한 GTM 변수 마스터하기</h4>
+                            </div>
+                            <div class="principle-content">
+                                <div class="variable-section">
+                                    <h5>데이터 영역 (Data Layer)</h5>
+                                    <p class="description">웹사이트와 GTM 간의 구조화된 통신 계층</p>
+                                    <div class="data-layer-example">
+                                        <code>
+dataLayer.push({
+  'event': 'purchase',
+  'ecommerce': {
+    'transaction_id': '12345',
+    'value': 25000,
+    'currency': 'KRW',
+    'items': [{
+      'item_id': 'SKU123',
+      'item_name': '프리미엄 상품',
+      'price': 25000,
+      'quantity': 1
+    }]
+  },
+  'user_data': {
+    'user_id': 'USER789',
+    'user_type': 'premium'
+  }
+});
+                                        </code>
+                                    </div>
+                                </div>
+                                
+                                <div class="variable-section">
+                                    <h5>GA4 이벤트 설정 변수</h5>
+                                    <p class="description">공통 매개변수를 한 곳에서 정의하고 모든 GA4 이벤트에 적용</p>
+                                    <div class="config-benefits">
+                                        <div class="benefit-item">
+                                            <span class="benefit-icon">🎯</span>
+                                            <span>중복 제거</span>
+                                        </div>
+                                        <div class="benefit-item">
+                                            <span class="benefit-icon">🔒</span>
+                                            <span>일관성 보장</span>
+                                        </div>
+                                        <div class="benefit-item">
+                                            <span class="benefit-icon">⚡</span>
+                                            <span>유지보수 효율성</span>
+                                        </div>
+                                    </div>
+                                    <div class="config-example">
+                                        <p class="example-title">공통 파라미터 예시:</p>
+                                        <ul>
+                                            <li><code>page_location</code></li>
+                                            <li><code>user_id</code></li>
+                                            <li><code>session_id</code></li>
+                                            <li><code>user_properties</code></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gtm-best-practices">
+                        <h3>💡 GTM 구현 체크리스트</h3>
+                        <div class="checklist-grid">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check1">
+                                <label for="check1">태그, 트리거, 변수 네이밍 컨벤션 문서화</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check2">
+                                <label for="check2">데이터 레이어 스펙 개발팀과 공유</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check3">
+                                <label for="check3">GA4 설정 변수로 공통 파라미터 통합</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check4">
+                                <label for="check4">Preview 모드로 모든 이벤트 검증</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check5">
+                                <label for="check5">버전 히스토리에 변경사항 상세 기록</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check6">
+                                <label for="check6">팀원과 GTM 컨테이너 접근 권한 관리</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gtm-impact">
+                        <div class="impact-message">
+                            <span class="impact-icon">🎯</span>
+                            <p><strong>깨끗하고 확장 가능한 GTM 구조 = 정확한 데이터 수집 = AI 최적화 성공</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 슬라이드 11: 현실 직시 -->
         <section class="slide content-slide">
             <div class="slide-content">
                 <h2>매체는 이미 AI로 무장했다</h2>
@@ -3028,7 +3436,7 @@
             </div>
         </section>
 
-        <!-- 슬라이드 11: AI 최적화 부스팅 -->
+        <!-- 슬라이드 12: AI 최적화 부스팅 -->
         <section class="slide content-slide">
             <div class="slide-content">
                 <h2>그렇다면 우리는 GA4로 AI를 더 똑똑하게!</h2>
@@ -3150,7 +3558,7 @@
             </div>
         </section>
 
-        <!-- 슬라이드 12: GTM 구현 -->
+        <!-- 슬라이드 13: GTM 구현 -->
         <section class="slide content-slide">
             <div class="slide-content">
                 <h2>GTM으로 태그 구현하기</h2>
@@ -3390,7 +3798,7 @@
             </div>
         </section>
 
-        <!-- 슬라이드 10: AI 마케팅 전략 -->
+        <!-- 슬라이드 14: AI 마케팅 전략 -->
         <section class="slide content-slide">
             <div class="slide-content">
                 <h2>Part 3: AI 시대의 마케팅 전략</h2>
