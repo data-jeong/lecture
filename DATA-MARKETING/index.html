@@ -2763,6 +2763,96 @@
             color: #20c997;
         }
 
+        /* 최종 메시지 스타일 */
+        .action-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .action-intro h3 {
+            color: #20c997;
+            margin-bottom: 0.5rem;
+        }
+
+        .final-message {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .message-box h3 {
+            color: #ffc107;
+            margin-bottom: 1.5rem;
+        }
+
+        .key-formula {
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .key-formula span {
+            background: linear-gradient(135deg, #007bff 0%, #20c997 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .closing-quote {
+            font-size: 1.1rem;
+            color: #aaa;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .resources-section {
+            margin-top: 2rem;
+        }
+
+        .resources-section h4 {
+            color: #20c997;
+            margin-bottom: 1rem;
+        }
+
+        .resource-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .resource-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(32, 201, 151, 0.5);
+            color: #20c997;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .resource-btn:hover {
+            background: rgba(32, 201, 151, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(32, 201, 151, 0.3);
+        }
+
+        .resource-icon {
+            font-size: 1.5rem;
+        }
+
         @media (max-width: 768px) {
             .hypothesis-process {
                 flex-direction: column;
@@ -2778,6 +2868,15 @@
 
             .action-phases {
                 grid-template-columns: 1fr;
+            }
+
+            .gtm-concepts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .key-formula {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
