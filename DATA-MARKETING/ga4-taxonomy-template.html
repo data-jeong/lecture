@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA4 택소노미 템플릿</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .example-row {
+            background-color: #f0f7ff;
+        }
+
+        .editable {
+            background-color: white;
+            min-height: 40px;
+        }
+
+        .download-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1557b0;
+        }
+
+        .btn-secondary {
+            background-color: #34a853;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #2d8e47;
+        }
+
+        .description {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GA4 택소노미 템플릿</h1>
+        <p class="subtitle">모든 클라이언트 프로젝트의 기초적인 "솔루션 디자인" 문서</p>
+
+        <div class="description">
+            <p>이 템플릿은 구조화된 사고를 강제하고 구현 전에 모든 필수 구성 요소가 계획되도록 보장합니다. 
+            빈 페이지는 막막함을 주지만, 이 템플릿은 구조화된 시작점을 제공합니다. 
+            모든 기술적 구현 세부 사항(이벤트 이름, 매개변수)을 전략적 비즈니스 질문과 연결하도록 유도하여 
+            '허영 지표' 수집을 방지하고 모든 데이터 조각에 목적이 있음을 보장합니다.</p>
+        </div>
+
+        <div class="download-section">
+            <button class="btn btn-primary" onclick="exportAllToExcel()">전체 템플릿 Excel 다운로드</button>
+            <button class="btn btn-secondary" onclick="exportAllToCSV()">전체 템플릿 CSV 다운로드</button>
+        </div>
+
+        <div class="section">
+            <h2>1. 핵심 전환 이벤트 택소노미</h2>
+            <div class="download-section">
+                <button class="btn btn-primary" onclick="exportTaxonomyToExcel()">택소노미 Excel 다운로드</button>
+                <button class="btn btn-secondary" onclick="exportTaxonomyToCSV()">택소노미 CSV 다운로드</button>
+            </div>
+            <table id="taxonomyTable">
+                <thead>
+                    <tr>
+                        <th>비즈니스 질문</th>
+                        <th>사용자 행동</th>
+                        <th>이벤트 이름 (snake_case)</th>
+                        <th>GTM 트리거 유형 및 조건</th>
+                        <th>매개변수 (Key: Value)</th>
+                        <th>GA4 맞춤 측정기준/측정항목 매핑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="example-row">
+                        <td>어떤 상품 카테고리가 가장 높은 구매 전환율을 보이는가?</td>
+                        <td>상품 구매 완료</td>
+                        <td><code>purchase</code></td>
+                        <td>페이지뷰 트리거, URL 경로 = /purchase-complete</td>
+                        <td><code>transaction_id: {{DLV - transactionId}}</code>, <code>value: {{DLV - purchaseValue}}</code>, <code>currency: 'KRW'</code>, <code>items: {{DLV - purchaseItems}}</code></td>
+                        <td>Transaction ID, Purchase Value, Item Category</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>어떤 블로그 카테고리가 가장 많은 뉴스레터 구독을 유도하는가?</td>
+                        <td>블로그 게시물 하단의 '구독' 버튼 클릭</td>
+                        <td><code>generate_lead</code></td>
+                        <td>클릭 트리거, CSS 선택자 = .blog-subscribe-btn</td>
+                        <td><code>form_location: 'blog_post_footer'</code>, <code>content_category: {{DLV - postCategory}}</code>, <code>lead_type: 'newsletter'</code></td>
+                        <td>Form Location, Content Category, Lead Type</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>사용자들이 회원가입 과정에서 어느 단계에서 가장 많이 이탈하는가?</td>
+                        <td>회원가입 양식의 각 필드 입력 완료 후 다음 버튼 클릭</td>
+                        <td><code>signup_progress</code></td>
+                        <td>클릭 트리거, 각 단계별 버튼 ID</td>
+                        <td><code>signup_step: 'step_2_verify_email'</code>, <code>form_type: 'registration'</code></td>
+                        <td>Signup Step, Form Type</td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>2. 참여도 측정 이벤트</h2>
+            <table id="engagementTable">
+                <thead>
+                    <tr>
+                        <th>비즈니스 질문</th>
+                        <th>사용자 행동</th>
+                        <th>이벤트 이름</th>
+                        <th>GTM 트리거 설정</th>
+                        <th>주요 매개변수</th>
+                        <th>활용 방안</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="example-row">
+                        <td>어떤 콘텐츠가 가장 높은 참여도를 보이는가?</td>
+                        <td>페이지 90% 이상 스크롤</td>
+                        <td><code>scroll</code></td>
+                        <td>스크롤 깊이 트리거, 90% 임계값</td>
+                        <td><code>percent_scrolled: 90</code>, <code>content_type: {{Page Type}}</code></td>
+                        <td>콘텐츠 품질 평가, 리타겟팅 잠재고객</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>동영상 콘텐츠의 실제 시청률은?</td>
+                        <td>동영상 25%, 50%, 75%, 100% 지점 도달</td>
+                        <td><code>video_progress</code></td>
+                        <td>YouTube 동영상 트리거</td>
+                        <td><code>video_title: {{Video Title}}</code>, <code>video_percent: {{Video Percent}}</code></td>
+                        <td>동영상 최적화, 콘텐츠 전략</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>어떤 프로모션 배너가 가장 많은 클릭을 유도하는가?</td>
+                        <td>메인 페이지의 프로모션 배너 클릭</td>
+                        <td><code>select_promotion</code></td>
+                        <td>클릭 트리거, CSS 선택자 = .promo-banner</td>
+                        <td><code>promotion_name: {{DLV - promoName}}</code>, <code>creative_slot: {{DLV - bannerPosition}}</code></td>
+                        <td>배너 위치 및 디자인 최적화</td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>3. Enhanced E-commerce 이벤트</h2>
+            <table id="ecommerceTable">
+                <thead>
+                    <tr>
+                        <th>퍼널 단계</th>
+                        <th>이벤트 이름</th>
+                        <th>필수 매개변수</th>
+                        <th>선택 매개변수</th>
+                        <th>구현 우선순위</th>
+                        <th>비즈니스 인사이트</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="example-row">
+                        <td>상품 노출</td>
+                        <td><code>view_item_list</code></td>
+                        <td><code>item_list_id</code>, <code>item_list_name</code>, <code>items[]</code></td>
+                        <td><code>user_id</code>, <code>session_id</code></td>
+                        <td>높음</td>
+                        <td>카테고리별 성과, 상품 배치 최적화</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>상품 상세 조회</td>
+                        <td><code>view_item</code></td>
+                        <td><code>currency</code>, <code>value</code>, <code>items[]</code></td>
+                        <td><code>content_type</code>, <code>item_list_id</code></td>
+                        <td>높음</td>
+                        <td>상품 관심도, 가격 민감도</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>장바구니 추가</td>
+                        <td><code>add_to_cart</code></td>
+                        <td><code>currency</code>, <code>value</code>, <code>items[]</code></td>
+                        <td><code>coupon</code></td>
+                        <td>필수</td>
+                        <td>구매 의도, 장바구니 포기율</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>결제 시작</td>
+                        <td><code>begin_checkout</code></td>
+                        <td><code>currency</code>, <code>value</code>, <code>items[]</code></td>
+                        <td><code>coupon</code></td>
+                        <td>필수</td>
+                        <td>결제 프로세스 진입률</td>
+                    </tr>
+                    <tr class="example-row">
+                        <td>구매 완료</td>
+                        <td><code>purchase</code></td>
+                        <td><code>transaction_id</code>, <code>value</code>, <code>currency</code>, <code>items[]</code></td>
+                        <td><code>tax</code>, <code>shipping</code>, <code>coupon</code></td>
+                        <td>필수</td>
+                        <td>매출, AOV, 상품별 수익성</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>4. 맞춤 이벤트 설계 가이드</h2>
+            <div class="description">
+                <h3>이벤트 명명 규칙</h3>
+                <ul>
+                    <li><strong>snake_case 사용:</strong> 모든 이벤트명은 소문자와 언더스코어만 사용 (예: user_login, content_share)</li>
+                    <li><strong>동작 우선:</strong> 동사_명사 형태로 작성 (예: view_item, submit_form)</li>
+                    <li><strong>일관성 유지:</strong> 유사한 행동은 동일한 패턴 사용 (예: view_item, view_cart, view_promotion)</li>
+                    <li><strong>예약어 피하기:</strong> GA4 자동 수집 이벤트명과 중복 방지</li>
+                </ul>
+            </div>
+            <table id="customEventTable">
+                <thead>
+                    <tr>
+                        <th>카테고리</th>
+                        <th>권장 이벤트명</th>
+                        <th>사용 시나리오</th>
+                        <th>필수 매개변수</th>
+                        <th>측정 가치</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>콘텐츠 상호작용</td>
+                        <td><code>content_interaction</code></td>
+                        <td>탭, 아코디언, 툴팁 등 UI 요소 클릭</td>
+                        <td><code>interaction_type</code>, <code>element_id</code></td>
+                        <td>UX 개선점 파악</td>
+                    </tr>
+                    <tr>
+                        <td>검색 행동</td>
+                        <td><code>view_search_results</code></td>
+                        <td>내부 검색 결과 페이지 조회</td>
+                        <td><code>search_term</code>, <code>results_count</code></td>
+                        <td>검색 품질 및 콘텐츠 갭 분석</td>
+                    </tr>
+                    <tr>
+                        <td>오류 추적</td>
+                        <td><code>form_error</code></td>
+                        <td>폼 제출 시 유효성 검사 오류</td>
+                        <td><code>error_type</code>, <code>form_id</code>, <code>field_name</code></td>
+                        <td>사용자 경험 장애물 제거</td>
+                    </tr>
+                    <tr contenteditable="true" class="editable">
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // 전체 템플릿 Excel 다운로드
+        function exportAllToExcel() {
+            let excelContent = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
+            excelContent += '<head><meta charset="utf-8"/><style>table { border-collapse: collapse; } th, td { border: 1px solid #ddd; padding: 8px; } th { background-color: #f8f9fa; } .example-row { background-color: #f0f7ff; }</style></head><body>';
+            excelContent += '<h1>GA4 택소노미 템플릿</h1>';
+            excelContent += '<p>모든 클라이언트 프로젝트의 기초적인 "솔루션 디자인" 문서</p><br/>';
+            
+            // 모든 섹션 추가
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                excelContent += section.innerHTML;
+                excelContent += '<br/><br/>';
+            });
+            
+            excelContent += '</body></html>';
+            
+            const blob = new Blob([excelContent], {
+                type: 'application/vnd.ms-excel;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'GA4_택소노미_전체_템플릿.xls';
+            link.click();
+        }
+
+        // 전체 템플릿 CSV 다운로드
+        function exportAllToCSV() {
+            let csvContent = 'GA4 택소노미 템플릿\n';
+            csvContent += '모든 클라이언트 프로젝트의 기초적인 솔루션 디자인 문서\n\n';
+            
+            const tables = document.querySelectorAll('table');
+            tables.forEach((table, index) => {
+                const title = table.closest('.section').querySelector('h2').textContent;
+                csvContent += `\n${title}\n`;
+                
+                const rows = table.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('th, td');
+                    const rowData = Array.from(cells).map(cell => {
+                        let text = cell.innerText || cell.textContent;
+                        text = text.replace(/"/g, '""');
+                        if (text.includes(',') || text.includes('\n')) {
+                            text = `"${text}"`;
+                        }
+                        return text;
+                    });
+                    csvContent += rowData.join(',') + '\n';
+                });
+                csvContent += '\n';
+            });
+            
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csvContent], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'GA4_택소노미_전체_템플릿.csv';
+            link.click();
+        }
+
+        // 개별 택소노미 Excel 다운로드
+        function exportTaxonomyToExcel() {
+            let excelContent = '<html><head><meta charset="utf-8"/></head><body>';
+            excelContent += '<h2>GA4 이벤트 택소노미 템플릿</h2>';
+            excelContent += document.getElementById('taxonomyTable').outerHTML;
+            excelContent += '</body></html>';
+            
+            const blob = new Blob([excelContent], {
+                type: 'application/vnd.ms-excel;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'GA4_이벤트_택소노미_템플릿.xls';
+            link.click();
+        }
+
+        // 개별 택소노미 CSV 다운로드
+        function exportTaxonomyToCSV() {
+            let csvContent = 'GA4 이벤트 택소노미 템플릿\n\n';
+            const table = document.getElementById('taxonomyTable');
+            const rows = table.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const rowData = Array.from(cells).map(cell => {
+                    let text = cell.innerText || cell.textContent;
+                    text = text.replace(/"/g, '""');
+                    if (text.includes(',') || text.includes('\n')) {
+                        text = `"${text}"`;
+                    }
+                    return text;
+                });
+                csvContent += rowData.join(',') + '\n';
+            });
+            
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csvContent], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'GA4_이벤트_택소노미_템플릿.csv';
+            link.click();
+        }
+
+
+        // 새로운 행 추가 기능
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab' && e.target.contentEditable === 'true') {
+                const currentRow = e.target.parentElement;
+                const cells = currentRow.querySelectorAll('td');
+                const lastCell = cells[cells.length - 1];
+                
+                // 마지막 셀에서 Tab을 누르면 새 행 추가
+                if (e.target === lastCell && !e.shiftKey) {
+                    e.preventDefault();
+                    const tbody = currentRow.parentElement;
+                    const newRow = document.createElement('tr');
+                    
+                    for (let i = 0; i < cells.length; i++) {
+                        const newCell = document.createElement('td');
+                        newCell.contentEditable = 'true';
+                        newCell.className = 'editable';
+                        newRow.appendChild(newCell);
+                    }
+                    
+                    tbody.appendChild(newRow);
+                    newRow.querySelector('td').focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
