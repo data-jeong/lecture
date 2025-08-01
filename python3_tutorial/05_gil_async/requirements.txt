@@ -1,0 +1,30 @@
+# 비동기 파일 처리기 의존성
+
+# 비동기 프로그래밍
+asyncio  # 표준 라이브러리
+aiohttp>=3.9.0  # 비동기 HTTP 클라이언트
+aiofiles>=23.0.0  # 비동기 파일 I/O
+
+# 병렬 처리
+multiprocessing  # 표준 라이브러리
+concurrent.futures  # 표준 라이브러리
+
+# 웹 스크래핑
+beautifulsoup4>=4.12.0  # HTML 파싱
+lxml>=4.9.0  # XML/HTML 파서
+
+# 이미지 처리
+Pillow>=10.0.0  # 이미지 처리
+numpy>=1.24.0  # 수치 계산
+
+# 시스템 모니터링
+psutil>=5.9.0  # 시스템 리소스 모니터링
+
+# 테스트
+pytest>=7.4.0  # 테스트 프레임워크
+pytest-asyncio>=0.21.0  # 비동기 테스트 지원
+
+# 개발 도구
+black>=23.0.0  # 코드 포매터
+mypy>=1.5.0  # 타입 체커
+ruff>=0.1.0  # 린터
