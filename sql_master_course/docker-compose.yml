@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: sql_course_postgres
+    environment:
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: sql_master_2024
+      POSTGRES_DB: sql_course
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init_scripts/postgres:/docker-entrypoint-initdb.d
+    networks:
+      - sql_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: sql_course_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: student
+      MYSQL_PASSWORD: sql_master_2024
+      MYSQL_DATABASE: sql_course
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init_scripts/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - sql_network
+
+  adminer:
+    image: adminer
+    container_name: sql_course_adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - sql_network
+    depends_on:
+      - postgres
+      - mysql
+
+volumes:
+  postgres_data:
+  mysql_data:
+
+networks:
+  sql_network:
+    driver: bridge
