@@ -1,0 +1,187 @@
+/* Custom CSS for Streamlit Dashboard */
+
+/* Main container styling */
+.main {
+    padding: 1rem;
+}
+
+/* Header styling */
+.dashboard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+/* Card styling */
+.metric-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Button styling */
+.stButton > button {
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Sidebar styling */
+.css-1d391kg {
+    background-color: #f8f9fa;
+}
+
+/* Tab styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #f0f2f6;
+    border-radius: 5px 5px 0 0;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Data table styling */
+.dataframe {
+    font-size: 14px;
+}
+
+.dataframe thead th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 600;
+}
+
+.dataframe tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Progress bar styling */
+.stProgress > div > div > div > div {
+    background-color: #4CAF50;
+}
+
+/* Alert styling */
+.stAlert {
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+/* Metric styling */
+[data-testid="metric-container"] {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Expander styling */
+.streamlit-expanderHeader {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* Select box styling */
+.stSelectbox > div > div {
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* Text input styling */
+.stTextInput > div > div > input {
+    border-radius: 5px;
+}
+
+/* File uploader styling */
+.stFileUploader > div {
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+/* Chart container styling */
+.js-plotly-plot {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Loading spinner */
+.stSpinner > div {
+    border-color: #4CAF50;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    .metric-card {
+        background: #1e1e1e;
+        color: white;
+    }
+    
+    .dashboard-header {
+        background: linear-gradient(135deg, #434343 0%, #000000 100%);
+    }
+    
+    [data-testid="metric-container"] {
+        background-color: #2b2b2b;
+        border-color: #444;
+    }
+}
