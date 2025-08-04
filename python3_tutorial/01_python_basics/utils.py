@@ -17,8 +17,9 @@ def format_number(number):
         # 정수로 표현 가능하면 정수로
         if number.is_integer():
             return str(int(number))
-        # 소수점 6자리까지만 표시
-        return f"{number:.6f}".rstrip('0').rstrip('.')
+        # 소수점 4자리까지만 표시
+        formatted = f"{number:.4f}".rstrip('0').rstrip('.')
+        return formatted
     return str(number)
 
 def save_history(history, filename="calculator_history.json"):
@@ -114,3 +115,17 @@ class Calculator:
     def get_history(self, limit=10):
         """최근 계산 기록을 반환합니다"""
         return self.history[-limit:]
+    
+    def clear_history(self):
+        """계산 기록을 모두 지웁니다"""
+        self.history = []
+        self.last_result = 0
+
+
+def is_valid_number(value):
+    """문자열이 유효한 숫자인지 확인합니다"""
+    try:
+        float(value)
+        return True
+    except (ValueError, TypeError):
+        return False
