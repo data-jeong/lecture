@@ -1,0 +1,74 @@
+# FastAPI Blog API Requirements
+
+# Core Framework
+fastapi==0.109.0
+uvicorn[standard]==0.25.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.23
+alembic==1.13.0
+psycopg2-binary==2.9.9
+asyncpg==0.29.0
+
+# Authentication & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-dotenv==1.0.0
+pydantic[email]==2.5.2
+pydantic-settings==2.1.0
+
+# Redis & Caching
+redis==5.0.1
+aioredis==2.0.1
+fastapi-cache2==0.2.1
+
+# CORS & Security
+fastapi-cors==0.0.6
+slowapi==0.1.9
+
+# Email
+fastapi-mail==1.4.1
+
+# WebSocket
+python-socketio==5.10.0
+
+# File Upload
+aiofiles==23.2.1
+pillow==10.1.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
+factory-boy==3.3.0
+faker==20.1.0
+
+# Development
+black==23.12.0
+flake8==6.1.0
+mypy==1.7.1
+ipython==8.18.1
+
+# Monitoring & Logging
+loguru==0.7.2
+prometheus-fastapi-instrumentator==6.1.0
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.5.2
+
+# Date & Time
+python-dateutil==2.8.2
+pytz==2023.3
+
+# Validation
+email-validator==2.1.0
+
+# Task Queue (Optional)
+celery==5.3.4
+flower==2.0.1
+
+# Data Processing
+pandas==2.1.4
+numpy==1.26.2
