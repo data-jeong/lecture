@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Processing - 릴스 데모</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .phone {
+            width: 390px;
+            height: 844px;
+            background: #1e1e2e;
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            animation: float-up 4s linear infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.5s ease-out;
+            z-index: 10;
+            position: relative;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 30px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255,107,107,0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(78,205,196,0.8)); }
+        }
+
+        .text-area {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        .text-input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+            width: 100%;
+            resize: none;
+            outline: none;
+            font-family: 'Courier New', monospace;
+        }
+
+        .text-input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .typing-effect {
+            color: #4ECDC4;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end) infinite;
+        }
+
+        @keyframes typing {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: slideUp 0.8s ease-out 0.6s both;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transform: scale(0);
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.8s; }
+        .feature-card:nth-child(2) { animation-delay: 0.9s; }
+        .feature-card:nth-child(3) { animation-delay: 1.0s; }
+        .feature-card:nth-child(4) { animation-delay: 1.1s; }
+
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .feature-title {
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .feature-desc {
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+        }
+
+        .process-animation {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: slideInRight 0.8s ease-out 1.5s both;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .process-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .process-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            border-radius: 10px;
+            animation: fillBar 3s ease-out 2s both, shimmer 1s linear infinite;
+        }
+
+        @keyframes fillBar {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 2.3s; }
+        .stat-item:nth-child(2) { animation-delay: 2.5s; }
+        .stat-item:nth-child(3) { animation-delay: 2.7s; }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4ECDC4;
+        }
+
+        .code-window {
+            background: #0d0d0d;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            animation: slideUp 0.8s ease-out 3s both;
+        }
+
+        .code-line {
+            color: #4ECDC4;
+            margin: 5px 0;
+            opacity: 0;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .code-line:nth-child(1) { animation-delay: 3.2s; }
+        .code-line:nth-child(2) { animation-delay: 3.4s; }
+        .code-line:nth-child(3) { animation-delay: 3.6s; }
+
+        .keyword { color: #FF6B6B; }
+        .function { color: #4ECDC4; }
+        .string { color: #95E1D3; }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 20px;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        .floating-icon:nth-child(1) { top: 15%; right: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 45%; left: 5%; animation-delay: 1s; }
+        .floating-icon:nth-child(3) { bottom: 25%; right: 15%; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="particles" id="particles"></div>
+        
+        <div class="floating-icon">📝</div>
+        <div class="floating-icon">🔍</div>
+        <div class="floating-icon">⚡</div>
+
+        <div class="header">
+            <h1>Text Processing Utils</h1>
+            <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Project 02 - Functions & Modules</p>
+        </div>
+
+        <div class="text-area">
+            <div class="typing-effect">Hello, World! → 안녕, 세계!</div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">통계 분석</div>
+                <div class="feature-desc">단어, 문장 카운트</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-title">텍스트 변환</div>
+                <div class="feature-desc">대소문자, 인코딩</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-title">패턴 검색</div>
+                <div class="feature-desc">이메일, URL, 날짜</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <div class="feature-title">파일 처리</div>
+                <div class="feature-desc">읽기, 쓰기, 병합</div>
+            </div>
+        </div>
+
+        <div class="process-animation">
+            <div class="process-bar">
+                <div class="process-fill"></div>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value">156</div>
+                    <div>Words</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">12</div>
+                    <div>Sentences</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3.2s</div>
+                    <div>Read Time</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="code-window">
+            <div class="code-line">
+                <span class="keyword">from</span> <span class="function">text_utils</span> <span class="keyword">import</span> *
+            </div>
+            <div class="code-line">
+                text = <span class="string">"Hello World"</span>
+            </div>
+            <div class="code-line">
+                result = <span class="function">analyze_text</span>(text) ✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 파티클 생성
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 4 + 's';
+            particle.style.animationDuration = (4 + Math.random() * 2) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // 통계 숫자 애니메이션
+        function animateValue(element, start, end, duration) {
+            const startTime = performance.now();
+            const update = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (end - start) * progress);
+                element.textContent = current;
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            };
+            requestAnimationFrame(update);
+        }
+
+        // 3초 후 통계 애니메이션 시작
+        setTimeout(() => {
+            const statValues = document.querySelectorAll('.stat-value');
+            animateValue(statValues[0], 0, 156, 1000);
+            animateValue(statValues[1], 0, 12, 1000);
+        }, 3000);
+    </script>
+</body>
+</html>
