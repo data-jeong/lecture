@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Calculator - Interactive Learning Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .phone {
+            width: 390px;
+            height: 844px;
+            background: #1a1a2e;
+            border-radius: 40px;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 학습 단계 인디케이터 */
+        .learning-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .progress-step.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .progress-step:last-child::after {
+            display: none;
+        }
+
+        .progress-step.completed {
+            background: #10b981;
+            color: white;
+        }
+
+        /* 헤더 */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 2px 10px rgba(102, 126, 234, 0.5));
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+        }
+
+        /* 학습 모드 토글 */
+        .mode-toggle {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border-radius: 25px;
+            padding: 3px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            border-radius: 22px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* 계산기 화면 */
+        .calculator-screen {
+            background: #0f0f23;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screen-hint {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #667eea;
+            font-size: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .expression {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .result {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: right;
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        /* 계산기 버튼 */
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .calc-btn {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .calc-btn:active::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .calc-btn.number {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .calc-btn.operator {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .calc-btn.special {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .calc-btn.equals {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            grid-column: span 2;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 학습 패널 */
+        .learning-panel {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .learning-title {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-example {
+            background: #0f0f23;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            border-left: 3px solid #667eea;
+        }
+
+        .code-keyword { color: #667eea; }
+        .code-function { color: #764ba2; }
+        .code-string { color: #10b981; }
+        .code-number { color: #f59e0b; }
+        .code-comment { color: #64748b; font-style: italic; }
+
+        /* 힌트 시스템 */
+        .hint-bubble {
+            position: absolute;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .hint-bubble.show {
+            opacity: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 성과 뱃지 */
+        .achievements {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            margin-top: auto;
+        }
+
+        .achievement {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .achievement.unlocked {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            animation: achievementPop 0.5s ease-out;
+        }
+
+        @keyframes achievementPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .achievement-tooltip {
+            position: absolute;
+            bottom: 50px;
+            background: #1a1a2e;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .achievement:hover .achievement-tooltip {
+            opacity: 1;
+        }
+
+        /* 파티클 효과 */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #667eea;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 3s ease-out forwards;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 스크롤바 커스텀 */
+        .learning-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .learning-panel::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 2px;
+        }
+
+        .learning-panel::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <!-- 학습 진행도 -->
+        <div class="learning-progress">
+            <div class="progress-step completed">1</div>
+            <div class="progress-step completed">2</div>
+            <div class="progress-step active">3</div>
+            <div class="progress-step">4</div>
+            <div class="progress-step">5</div>
+        </div>
+
+        <!-- 헤더 -->
+        <div class="header">
+            <h1>🧮 Python Calculator</h1>
+            <p>Interactive Learning Experience</p>
+        </div>
+
+        <!-- 학습 모드 선택 -->
+        <div class="mode-toggle">
+            <button class="mode-btn active" onclick="setMode('basic')">기초</button>
+            <button class="mode-btn" onclick="setMode('advanced')">심화</button>
+            <button class="mode-btn" onclick="setMode('challenge')">도전</button>
+        </div>
+
+        <!-- 계산기 화면 -->
+        <div class="calculator-screen">
+            <div class="screen-hint">타입 힌트 활성화</div>
+            <div class="expression" id="expression">10 + 5 * 2</div>
+            <div class="result" id="result">20</div>
+        </div>
+
+        <!-- 계산기 버튼 -->
+        <div class="calculator-buttons">
+            <button class="calc-btn special" onclick="clearScreen()">C</button>
+            <button class="calc-btn operator" onclick="appendOperator('(')">(</button>
+            <button class="calc-btn operator" onclick="appendOperator(')')">)</button>
+            <button class="calc-btn operator" onclick="appendOperator('/')">÷</button>
+            
+            <button class="calc-btn number" onclick="appendNumber('7')">7</button>
+            <button class="calc-btn number" onclick="appendNumber('8')">8</button>
+            <button class="calc-btn number" onclick="appendNumber('9')">9</button>
+            <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
+            
+            <button class="calc-btn number" onclick="appendNumber('4')">4</button>
+            <button class="calc-btn number" onclick="appendNumber('5')">5</button>
+            <button class="calc-btn number" onclick="appendNumber('6')">6</button>
+            <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
+            
+            <button class="calc-btn number" onclick="appendNumber('1')">1</button>
+            <button class="calc-btn number" onclick="appendNumber('2')">2</button>
+            <button class="calc-btn number" onclick="appendNumber('3')">3</button>
+            <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
+            
+            <button class="calc-btn number" onclick="appendNumber('0')">0</button>
+            <button class="calc-btn number" onclick="appendNumber('.')">.</button>
+            <button class="calc-btn equals" onclick="calculate()">=</button>
+        </div>
+
+        <!-- 학습 패널 -->
+        <div class="learning-panel">
+            <div class="learning-title">
+                <span>💡</span>
+                <span>현재 학습 중: 연산자 우선순위</span>
+            </div>
+            <div class="code-example">
+                <div><span class="code-comment"># Python 연산자 우선순위</span></div>
+                <div><span class="code-keyword">def</span> <span class="code-function">calculate</span>(expression: <span class="code-keyword">str</span>) -> <span class="code-keyword">float</span>:</div>
+                <div>    <span class="code-comment"># 1. 괄호 ()</span></div>
+                <div>    <span class="code-comment"># 2. 지수 **</span></div>
+                <div>    <span class="code-comment"># 3. 곱셈/나눗셈 *, /</span></div>
+                <div>    <span class="code-comment"># 4. 덧셈/뺄셈 +, -</span></div>
+                <div>    <span class="code-keyword">return</span> <span class="code-function">eval</span>(expression)</div>
+            </div>
+            <div class="code-example">
+                <div><span class="code-comment"># 예제: 10 + 5 * 2</span></div>
+                <div><span class="code-comment"># = 10 + (5 * 2)</span></div>
+                <div><span class="code-comment"># = 10 + 10</span></div>
+                <div><span class="code-comment"># = 20</span></div>
+            </div>
+        </div>
+
+        <!-- 성과 뱃지 -->
+        <div class="achievements">
+            <div class="achievement unlocked">
+                🎯
+                <div class="achievement-tooltip">첫 계산 완료!</div>
+            </div>
+            <div class="achievement unlocked">
+                🔢
+                <div class="achievement-tooltip">10개 연산 마스터</div>
+            </div>
+            <div class="achievement">
+                🧠
+                <div class="achievement-tooltip">복잡한 수식 해결</div>
+            </div>
+            <div class="achievement">
+                ⚡
+                <div class="achievement-tooltip">스피드 계산가</div>
+            </div>
+            <div class="achievement">
+                🏆
+                <div class="achievement-tooltip">계산기 마스터</div>
+            </div>
+        </div>
+
+        <!-- 힌트 버블 -->
+        <div class="hint-bubble" id="hint">
+            💡 괄호를 사용해 우선순위를 바꿔보세요!
+        </div>
+    </div>
+
+    <script>
+        let expression = '';
+        let currentMode = 'basic';
+        let calculations = 0;
+        let achievements = [true, true, false, false, false];
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // 모드별 학습 내용 변경
+            updateLearningContent(mode);
+        }
+
+        function updateLearningContent(mode) {
+            const panel = document.querySelector('.learning-panel');
+            const contents = {
+                basic: `
+                    <div class="learning-title">
+                        <span>📚</span>
+                        <span>기초: 변수와 타입</span>
+                    </div>
+                    <div class="code-example">
+                        <div><span class="code-comment"># 변수 선언</span></div>
+                        <div>x = <span class="code-number">10</span></div>
+                        <div>y = <span class="code-number">3.14</span></div>
+                        <div>name = <span class="code-string">"Python"</span></div>
+                    </div>
+                `,
+                advanced: `
+                    <div class="learning-title">
+                        <span>🚀</span>
+                        <span>심화: 함수와 람다</span>
+                    </div>
+                    <div class="code-example">
+                        <div><span class="code-keyword">lambda</span> x, y: x + y</div>
+                        <div>calculate = <span class="code-keyword">lambda</span> x: x ** <span class="code-number">2</span></div>
+                    </div>
+                `,
+                challenge: `
+                    <div class="learning-title">
+                        <span>🏆</span>
+                        <span>도전: 복잡한 수식</span>
+                    </div>
+                    <div class="code-example">
+                        <div><span class="code-comment"># 도전 과제</span></div>
+                        <div>((2 + 3) * 4) ** 2 / 5</div>
+                        <div><span class="code-comment"># 답: 80.0</span></div>
+                    </div>
+                `
+            };
+            panel.innerHTML = contents[mode];
+        }
+
+        function appendNumber(num) {
+            expression += num;
+            updateDisplay();
+            createParticle(event.clientX, event.clientY);
+        }
+
+        function appendOperator(op) {
+            expression += ` ${op} `;
+            updateDisplay();
+        }
+
+        function clearScreen() {
+            expression = '';
+            document.getElementById('result').textContent = '0';
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                const result = eval(expression.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-'));
+                document.getElementById('result').textContent = result;
+                
+                calculations++;
+                checkAchievements();
+                
+                // 성공 효과
+                createSuccessEffect();
+                
+                // 다음 단계로
+                updateProgress();
+            } catch (e) {
+                document.getElementById('result').textContent = 'Error';
+                showHint();
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('expression').textContent = expression || '0';
+        }
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.setProperty('--x', (Math.random() - 0.5) * 100 + 'px');
+            particle.style.setProperty('--y', (Math.random() - 0.5) * 100 + 'px');
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 3000);
+        }
+
+        function createSuccessEffect() {
+            const screen = document.querySelector('.calculator-screen');
+            screen.style.borderColor = '#10b981';
+            setTimeout(() => {
+                screen.style.borderColor = 'rgba(102, 126, 234, 0.3)';
+            }, 500);
+        }
+
+        function showHint() {
+            const hint = document.getElementById('hint');
+            hint.classList.add('show');
+            hint.style.top = '300px';
+            hint.style.left = '50px';
+            
+            setTimeout(() => {
+                hint.classList.remove('show');
+            }, 3000);
+        }
+
+        function checkAchievements() {
+            if (calculations >= 5 && !achievements[2]) {
+                achievements[2] = true;
+                unlockAchievement(2);
+            }
+            if (calculations >= 10 && !achievements[3]) {
+                achievements[3] = true;
+                unlockAchievement(3);
+            }
+            if (expression.includes('**') && !achievements[4]) {
+                achievements[4] = true;
+                unlockAchievement(4);
+            }
+        }
+
+        function unlockAchievement(index) {
+            const achievement = document.querySelectorAll('.achievement')[index];
+            achievement.classList.add('unlocked');
+        }
+
+        function updateProgress() {
+            const steps = document.querySelectorAll('.progress-step');
+            const current = document.querySelector('.progress-step.active');
+            const currentIndex = Array.from(steps).indexOf(current);
+            
+            if (currentIndex < steps.length - 1) {
+                current.classList.remove('active');
+                current.classList.add('completed');
+                steps[currentIndex + 1].classList.add('active');
+            }
+        }
+
+        // 초기 애니메이션
+        setTimeout(() => {
+            showHint();
+        }, 2000);
+
+        // 자동 데모
+        setTimeout(() => {
+            const demo = ['2', '+', '3', '*', '4'];
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < demo.length) {
+                    if (isNaN(demo[i])) {
+                        appendOperator(demo[i]);
+                    } else {
+                        appendNumber(demo[i]);
+                    }
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(calculate, 500);
+                }
+            }, 500);
+        }, 3000);
+    </script>
+</body>
+</html>

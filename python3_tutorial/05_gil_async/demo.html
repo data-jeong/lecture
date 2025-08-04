@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python GIL & Async Programming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .demo-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+        .process-visualization {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .thread-container {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .thread-box {
+            flex: 1;
+            min-width: 80px;
+            padding: 15px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .thread-box.active {
+            background: #667eea;
+            color: white;
+            animation: activeThread 1s ease infinite;
+        }
+
+        @keyframes activeThread {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .gil-lock {
+            width: 60px;
+            height: 60px;
+            margin: 20px auto;
+            background: #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .async-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .async-task {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .async-task:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .async-task:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #667eea;
+            animation: slideRight 1.5s ease-in-out infinite;
+        }
+
+        @keyframes slideRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        .code-snippet {
+            background: #2d3748;
+            color: #48bb78;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-snippet::before {
+            content: 'Python';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.8em;
+            color: #718096;
+        }
+
+        .typing-effect {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end);
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .performance-bars {
+            margin: 20px 0;
+        }
+
+        .bar-container {
+            margin: 10px 0;
+        }
+
+        .bar-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .bar {
+            height: 30px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .bar.thread { width: 40%; }
+        .bar.process { width: 80%; }
+        .bar.async { width: 95%; }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .feature-list li:nth-child(1) { animation-delay: 0.1s; }
+        .feature-list li:nth-child(2) { animation-delay: 0.2s; }
+        .feature-list li:nth-child(3) { animation-delay: 0.3s; }
+        .feature-list li:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+        }
+
+        .feature-list li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            animation: sparkle 1s ease infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            animation: countUp 2s ease;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python GIL & Async</h1>
+            <p>동시성 프로그래밍의 모든 것</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="demo-title">
+                    <div class="demo-icon">🔒</div>
+                    <span>GIL (Global Interpreter Lock)</span>
+                </div>
+                <div class="gil-lock">🔒</div>
+                <div class="thread-container">
+                    <div class="thread-box active">Thread 1</div>
+                    <div class="thread-box">Thread 2</div>
+                    <div class="thread-box">Thread 3</div>
+                </div>
+                <div class="code-snippet">
+                    <div class="typing-effect">import threading</div>
+                    <div>threads = []</div>
+                    <div>for i in range(3):</div>
+                    <div>    t = threading.Thread(target=work)</div>
+                    <div>    threads.append(t)</div>
+                </div>
+                <ul class="feature-list">
+                    <li>한 번에 하나의 스레드만 실행</li>
+                    <li>CPU 바운드 작업에서 병목</li>
+                    <li>I/O 작업에서는 해제</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <div class="demo-title">
+                    <div class="demo-icon">⚡</div>
+                    <span>Async/Await</span>
+                </div>
+                <div class="async-flow">
+                    <div class="async-task">Task 1</div>
+                    <span class="arrow">→</span>
+                    <div class="async-task">Task 2</div>
+                    <span class="arrow">→</span>
+                    <div class="async-task">Task 3</div>
+                </div>
+                <div class="code-snippet">
+                    <div>async def main():</div>
+                    <div>    tasks = []</div>
+                    <div>    for url in urls:</div>
+                    <div>        task = fetch_data(url)</div>
+                    <div>        tasks.append(task)</div>
+                    <div>    await asyncio.gather(*tasks)</div>
+                </div>
+                <ul class="feature-list">
+                    <li>논블로킹 I/O 처리</li>
+                    <li>단일 스레드 동시성</li>
+                    <li>높은 처리량과 효율성</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <div class="demo-title">
+                    <div class="demo-icon">🚀</div>
+                    <span>Multiprocessing</span>
+                </div>
+                <div class="process-visualization">
+                    <div class="thread-container">
+                        <div class="thread-box active">Process 1<br>CPU 1</div>
+                        <div class="thread-box active">Process 2<br>CPU 2</div>
+                        <div class="thread-box active">Process 3<br>CPU 3</div>
+                        <div class="thread-box active">Process 4<br>CPU 4</div>
+                    </div>
+                </div>
+                <div class="code-snippet">
+                    <div>from multiprocessing import Pool</div>
+                    <div>with Pool(processes=4) as pool:</div>
+                    <div>    results = pool.map(cpu_bound_task, data)</div>
+                </div>
+                <ul class="feature-list">
+                    <li>진정한 병렬 처리</li>
+                    <li>GIL 우회</li>
+                    <li>CPU 바운드 작업 최적</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <div class="demo-title">
+                    <div class="demo-icon">📊</div>
+                    <span>성능 비교</span>
+                </div>
+                <div class="performance-bars">
+                    <div class="bar-container">
+                        <div class="bar-label">Threading (I/O)</div>
+                        <div class="bar thread"></div>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-label">Multiprocessing (CPU)</div>
+                        <div class="bar process"></div>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-label">Async/Await (I/O)</div>
+                        <div class="bar async"></div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">10x</div>
+                        <div class="stat-label">I/O 속도 향상</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">4x</div>
+                        <div class="stat-label">CPU 활용률</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">동시 연결</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="demo-title">
+                    <div class="demo-icon">🔧</div>
+                    <span>실전 패턴</span>
+                </div>
+                <div class="code-snippet">
+                    <div># Producer-Consumer Pattern</div>
+                    <div>async def producer(queue):</div>
+                    <div>    while True:</div>
+                    <div>        await queue.put(item)</div>
+                    <div></div>
+                    <div>async def consumer(queue):</div>
+                    <div>    while True:</div>
+                    <div>        item = await queue.get()</div>
+                    <div>        await process(item)</div>
+                </div>
+                <ul class="feature-list">
+                    <li>Producer-Consumer 패턴</li>
+                    <li>Rate Limiting</li>
+                    <li>Batch Processing</li>
+                    <li>Connection Pooling</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <div class="demo-title">
+                    <div class="demo-icon">💡</div>
+                    <span>최적화 팁</span>
+                </div>
+                <ul class="feature-list">
+                    <li>I/O 작업 → Async/Await 사용</li>
+                    <li>CPU 작업 → Multiprocessing 사용</li>
+                    <li>네트워크 → aiohttp, httpx 활용</li>
+                    <li>DB 작업 → 비동기 드라이버 사용</li>
+                </ul>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">✨</div>
+                        <div class="stat-label">Event Loop</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">🔄</div>
+                        <div class="stat-label">Coroutines</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">📦</div>
+                        <div class="stat-label">Tasks</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
