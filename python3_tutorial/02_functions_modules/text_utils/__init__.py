@@ -46,7 +46,27 @@ from .file_handlers import (
     backup_file
 )
 
-__version__ = '1.0.0'
+# New modules
+try:
+    from .encoders import (
+        encode_base64, decode_base64, encode_url, decode_url,
+        encode_html, decode_html, hash_md5, hash_sha256, hash_sha512,
+        rot13, caesar_cipher, morse_encode, morse_decode,
+        to_hex, from_hex, to_binary, from_binary, reverse_text
+    )
+except ImportError:
+    pass
+
+try:
+    from .analyzers import (
+        analyze_sentiment, extract_keywords, language_detection,
+        text_complexity, find_named_entities, text_similarity,
+        extract_summary, detect_plagiarism
+    )
+except ImportError:
+    pass
+
+__version__ = '1.1.0'
 __author__ = '김파이썬'
 
 __all__ = [
