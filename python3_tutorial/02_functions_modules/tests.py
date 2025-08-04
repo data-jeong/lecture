@@ -4,6 +4,8 @@
 """
 
 import unittest
+import os
+import shutil
 from text_utils import *
 
 class TestStatistics(unittest.TestCase):
@@ -102,11 +104,9 @@ class TestFileHandlers(unittest.TestCase):
     
     def tearDown(self):
         """테스트 파일 삭제"""
-        import os
         if os.path.exists(self.test_file):
             os.remove(self.test_file)
         if os.path.exists('backup'):
-            import shutil
             shutil.rmtree('backup')
     
     def test_write_and_read(self):

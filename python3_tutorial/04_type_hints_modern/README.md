@@ -1,4 +1,4 @@
-# 04. Type Hints와 Modern Python - 타입 안전 ToDo 앱
+# 🏷️ 04. 타입 힌트 & 현대적 Python - Todo 애플리케이션
 
 ## 🎯 학습 목표
 

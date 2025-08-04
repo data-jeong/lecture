@@ -48,7 +48,7 @@ class StudentService:
         
     def get_student_by_id(self, id: int) -> Optional[Student]:
         """Get student by database ID"""
-        return self.session.query(Student).get(id)
+        return self.session.get(Student, id)
         
     def update_student(self, student_id: str, update_data: Dict[str, Any]) -> Optional[Student]:
         """Update student information"""

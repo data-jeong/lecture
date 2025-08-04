@@ -40,7 +40,7 @@ class CourseService:
         
     def get_course_by_id(self, id: int) -> Optional[Course]:
         """Get course by database ID"""
-        return self.session.query(Course).get(id)
+        return self.session.get(Course, id)
         
     def update_course(self, course_code: str, update_data: Dict[str, Any]) -> Optional[Course]:
         """Update course information"""
@@ -119,12 +119,12 @@ class CourseService:
                       semester: str, year: int) -> Enrollment:
         """Enroll a student in a course"""
         # Check if student exists
-        student = self.session.query(Student).get(student_id)
+        student = self.session.get(Student, student_id)
         if not student:
             raise ValueError(f"Student with ID {student_id} not found")
             
         # Check if course exists
-        course = self.session.query(Course).get(course_id)
+        course = self.session.get(Course, course_id)
         if not course:
             raise ValueError(f"Course with ID {course_id} not found")
             
@@ -251,7 +251,7 @@ class CourseService:
         
     def get_course_statistics(self, course_id: int) -> Dict[str, Any]:
         """Get comprehensive course statistics"""
-        course = self.session.query(Course).get(course_id)
+        course = self.session.get(Course, course_id)
         
         if not course:
             return {}
@@ -291,7 +291,7 @@ class CourseService:
         if not course:
             raise ValueError(f"Course {course_code} not found")
             
-        professor = self.session.query(Professor).get(professor_id)
+        professor = self.session.get(Professor, professor_id)
         if not professor:
             raise ValueError(f"Professor with ID {professor_id} not found")
             

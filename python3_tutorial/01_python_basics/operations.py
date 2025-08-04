@@ -66,3 +66,19 @@ def modulo(a, b):
     if b == 0:
         return "에러: 0으로 나눌 수 없습니다"
     return a % b
+
+def exponential(x):
+    """지수 함수를 계산합니다 (e^x)"""
+    return math.exp(x)
+
+def celsius_to_fahrenheit(celsius):
+    """섭씨를 화씨로 변환합니다"""
+    return (celsius * 9/5) + 32
+
+def fahrenheit_to_celsius(fahrenheit):
+    """화씨를 섭씨로 변환합니다"""
+    return (fahrenheit - 32) * 5/9
+
+def celsius_to_kelvin(celsius):
+    """섭씨를 켈빈으로 변환합니다"""
+    return celsius + 273.15

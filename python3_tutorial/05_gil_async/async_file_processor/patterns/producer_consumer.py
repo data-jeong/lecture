@@ -134,7 +134,7 @@ class AsyncProducerConsumer(Generic[T, R]):
                 self.stats["errors"] += 1
                 logging.error(f"Consumer {consumer_id} error: {e}")
                 
-                if work_item:
+                if 'work_item' in locals() and work_item is not None:
                     await self.results_queue.put({
                         "work_item_id": work_item.id,
                         "consumer_id": consumer_id,

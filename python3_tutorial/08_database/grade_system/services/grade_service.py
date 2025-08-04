@@ -19,7 +19,7 @@ class GradeService:
                  professor_id: Optional[int] = None) -> Grade:
         """Add or update grade for an enrollment"""
         # Check if enrollment exists
-        enrollment = self.session.query(Enrollment).get(enrollment_id)
+        enrollment = self.session.get(Enrollment, enrollment_id)
         if not enrollment:
             raise ValueError(f"Enrollment with ID {enrollment_id} not found")
             
@@ -103,7 +103,7 @@ class GradeService:
         self.session.refresh(grade)
         
         # Update student's GPA
-        enrollment = self.session.query(Enrollment).get(enrollment_id)
+        enrollment = self.session.get(Enrollment, enrollment_id)
         if enrollment:
             self._update_student_gpa(enrollment.student_id)
             
@@ -264,7 +264,7 @@ class GradeService:
         
     def _update_student_gpa(self, student_id: int):
         """Update student's GPA after grade changes"""
-        student = self.session.query(Student).get(student_id)
+        student = self.session.get(Student, student_id)
         if student:
             student.gpa = student.calculate_gpa()
             student.total_credits = sum(

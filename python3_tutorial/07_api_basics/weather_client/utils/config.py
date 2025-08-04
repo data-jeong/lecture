@@ -5,7 +5,7 @@
 import os
 from typing import Optional
 from pathlib import Path
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from dotenv import load_dotenv
 
 
@@ -43,21 +43,21 @@ class Config(BaseModel):
     log_level: str = Field("INFO", description="로그 레벨")
     log_file: Optional[str] = Field(None, description="로그 파일 경로")
     
-    @validator('openweather_api_key')
+    @field_validator('openweather_api_key')
     def validate_openweather_key(cls, v):
         """OpenWeatherMap API 키 검증"""
         if not v or v == "your_openweather_api_key_here":
             raise ValueError("유효한 OpenWeatherMap API 키가 필요합니다")
         return v
     
-    @validator('default_units')
+    @field_validator('default_units')
     def validate_units(cls, v):
         """단위 시스템 검증"""
         if v not in ['metric', 'imperial', 'kelvin']:
             raise ValueError("units는 'metric', 'imperial', 'kelvin' 중 하나여야 합니다")
         return v
     
-    @validator('default_language')
+    @field_validator('default_language')
     def validate_language(cls, v):
         """언어 코드 검증"""
         supported_languages = ['ko', 'en', 'ja', 'zh', 'es', 'fr', 'de']
@@ -65,7 +65,7 @@ class Config(BaseModel):
             raise ValueError(f"지원되는 언어: {', '.join(supported_languages)}")
         return v
     
-    @validator('log_level')
+    @field_validator('log_level')
     def validate_log_level(cls, v):
         """로그 레벨 검증"""
         valid_levels = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']

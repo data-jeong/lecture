@@ -29,6 +29,7 @@ calculator.py          # 메인 프로그램
 operations.py         # 연산 함수들
 constants.py          # 상수 정의
 utils.py             # 유틸리티 함수
+examples.py          # 사용 예제 코드
 ```
 
 ## 실행 방법

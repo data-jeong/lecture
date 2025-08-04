@@ -4,7 +4,7 @@
 """
 
 import re
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Union
 from datetime import datetime
 from bs4 import BeautifulSoup
 import logging

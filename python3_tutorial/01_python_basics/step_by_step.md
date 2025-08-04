@@ -79,6 +79,29 @@ print(f"{a} % {b} = {a % b}")     # 나머지: 1
 print(f"{a} ** {b} = {a ** b}")   # 거듭제곱: 1000
 ```
 
+### 부동소수점 연산의 정밀도 문제
+```python
+# 부동소수점 정밀도 문제 예시
+print(0.1 + 0.2)  # 0.30000000000000004 (예상: 0.3)
+print(0.1 + 0.2 == 0.3)  # False
+
+# 해결 방법 1: round() 함수 사용
+result = round(0.1 + 0.2, 1)
+print(result)  # 0.3
+print(result == 0.3)  # True
+
+# 해결 방법 2: math.isclose() 사용
+import math
+print(math.isclose(0.1 + 0.2, 0.3))  # True
+
+# 해결 방법 3: Decimal 사용 (정확한 십진 연산)
+from decimal import Decimal
+a = Decimal('0.1')
+b = Decimal('0.2')
+print(a + b)  # 0.3 (정확함)
+print(a + b == Decimal('0.3'))  # True
+```
+
 ### 비교 연산자
 ```python
 x = 5
@@ -154,11 +177,19 @@ for fruit in fruits:
 for i in range(1, 6):
     print(f"{i}번째 반복")
 
-# 구구단 출력
+# 구구단 출력 (기본 버전)
 for i in range(2, 10):
     print(f"\n[{i}단]")
     for j in range(1, 10):
         print(f"{i} x {j} = {i * j}")
+
+# 구구단 출력 (리스트 컴프리헨션 버전)
+print("\n리스트 컴프리헨션으로 구구단 생성:")
+gugudan = [[f"{i} x {j} = {i*j}" for j in range(1, 10)] for i in range(2, 10)]
+for i, dan in enumerate(gugudan, 2):
+    print(f"\n[{i}단]")
+    for item in dan:
+        print(item)
 ```
 
 ## 6. 함수 기초
