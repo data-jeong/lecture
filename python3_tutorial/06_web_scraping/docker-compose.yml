@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  scraper:
+    build: .
+    volumes:
+      - ./news_crawler:/app/news_crawler
+      - ./data:/app/data
+      - ./output:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
+      - USER_AGENT=Mozilla/5.0
+    networks:
+      - scraper-network
+    
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - scraper-network
+    
+  selenium:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "4444:4444"
+    shm_size: 2gb
+    networks:
+      - scraper-network
+
+networks:
+  scraper-network:
+    driver: bridge

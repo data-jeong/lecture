@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+
+# Streamlit
+.streamlit/secrets.toml
+*.log
+
+# Data
+dashboard/data/
+dashboard/.cache/
+*.csv
+*.xlsx
+*.json
+*.db
+*.sqlite
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml

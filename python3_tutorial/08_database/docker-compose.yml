@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: gradeuser
+      POSTGRES_PASSWORD: gradepass
+      POSTGRES_DB: gradedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    networks:
+      - grade-network
+  
+  app:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://gradeuser:gradepass@postgres:5432/gradedb
+    volumes:
+      - ./grade_system:/app/grade_system
+      - ./exports:/app/exports
+    networks:
+      - grade-network
+    command: python main.py
+
+volumes:
+  postgres_data:
+
+networks:
+  grade-network:
+    driver: bridge

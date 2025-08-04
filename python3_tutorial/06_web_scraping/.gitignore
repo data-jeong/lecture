@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+
+# Scrapy
+.scrapy/
+*.log
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Project specific
+downloads/
+data/
+output/
+cache/
+*.csv
+*.json
+*.html
+chromedriver
+geckodriver
