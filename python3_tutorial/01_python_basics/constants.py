@@ -27,22 +27,7 @@ KILOGRAM_TO_GRAM = 1000
 KILOGRAM_TO_POUND = 2.20462
 KILOGRAM_TO_OUNCE = 35.274
 
-# 온도 변환은 함수로 처리 (선형 변환이 아니므로)
-def celsius_to_fahrenheit(celsius):
-    """섭씨를 화씨로 변환"""
-    return (celsius * 9/5) + 32
-
-def fahrenheit_to_celsius(fahrenheit):
-    """화씨를 섭씨로 변환"""
-    return (fahrenheit - 32) * 5/9
-
-def celsius_to_kelvin(celsius):
-    """섭씨를 켈빈으로 변환"""
-    return celsius + 273.15
-
-def kelvin_to_celsius(kelvin):
-    """켈빈을 섭씨로 변환"""
-    return kelvin - 273.15
+# 온도 변환 함수는 operations.py에 정의되어 있습니다
 
 # 메뉴 상수
 BASIC_MENU = {

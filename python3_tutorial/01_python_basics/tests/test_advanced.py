@@ -41,7 +41,9 @@ class TestAdvancedOperations(unittest.TestCase):
         self.assertEqual(factorial(0), 1)
         self.assertEqual(factorial(5), 120)
         self.assertEqual(factorial(10), 3628800)
-        # factorial 함수는 정수로 변환하므로 에러가 아님
+        # factorial 함수는 float를 int로 자동 변환합니다
+        # 예: factorial(3.5) -> int(3.5) = 3 -> factorial(3) = 6
+        # 이는 사용자 편의를 위한 기능입니다
         self.assertEqual(factorial(3.5), 6)  # factorial(3) = 6
         self.assertIn("음수", factorial(-1))
     

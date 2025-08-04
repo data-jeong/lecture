@@ -3,33 +3,59 @@
 Python 기초 학습을 위한 간단한 계산기 프로그램
 """
 
-def add(a, b):
+from typing import Union
+
+def add(a: float, b: float) -> float:
     """두 수를 더합니다"""
     return a + b
 
-def subtract(a, b):
+def subtract(a: float, b: float) -> float:
     """두 수를 뺍니다"""
     return a - b
 
-def multiply(a, b):
+def multiply(a: float, b: float) -> float:
     """두 수를 곱합니다"""
     return a * b
 
-def divide(a, b):
-    """두 수를 나눕니다"""
+def divide(a: float, b: float) -> Union[float, str]:
+    """두 수를 나눕니다
+    
+    Args:
+        a: 피제수
+        b: 제수
+    
+    Returns:
+        나눗셈 결과 또는 에러 메시지
+    
+    Raises:
+        None (에러는 문자열로 반환)
+    """
     if b == 0:
         return "에러: 0으로 나눌 수 없습니다"
     return a / b
 
-def get_number(prompt):
-    """사용자로부터 숫자를 입력받습니다"""
+def get_number(prompt: str) -> float:
+    """사용자로부터 숫자를 입력받습니다
+    
+    Args:
+        prompt: 사용자에게 보여줄 프롬프트 메시지
+    
+    Returns:
+        입력받은 숫자 (float)
+    """
     while True:
         try:
             return float(input(prompt))
         except ValueError:
             print("올바른 숫자를 입력해주세요.")
+        except KeyboardInterrupt:
+            print("\n입력이 취소되었습니다.")
+            raise
+        except EOFError:
+            print("\n입력이 종료되었습니다.")
+            raise
 
-def main():
+def main() -> None:
     """메인 프로그램"""
     print("=" * 30)
     print("   파이썬 기본 계산기")

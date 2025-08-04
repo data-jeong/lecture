@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 기초 - 공학용 계산기 프로젝트</title>
+    
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <!-- Chart.js for progress visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #10B981;
+            --accent-color: #F59E0B;
+            --danger-color: #EF4444;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #e5e7eb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #d1d5db;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --code-bg: #2d2d2d;
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #1f2937;
+            --bg-secondary: #111827;
+            --bg-tertiary: #374151;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --border-color: #4b5563;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--bg-primary);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .header h1 {
+            font-size: 1.75rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        /* Layout Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            transform: translateX(5px);
+            border-color: var(--primary-color);
+        }
+        
+        .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            min-height: 600px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Progress Tracker */
+        .progress-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+        
+        .progress-bar {
+            height: 30px;
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Calculator Demo */
+        .calculator {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+        
+        .calc-display {
+            background: var(--code-bg);
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            padding: 1rem;
+            text-align: right;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            min-height: 60px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .calc-btn {
+            padding: 1.25rem;
+            font-size: 1.25rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+        
+        .calc-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .calc-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .calc-btn.operator {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .calc-btn.equals {
+            background: var(--secondary-color);
+            color: white;
+            grid-column: span 2;
+        }
+        
+        .calc-btn.clear {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        .calc-btn.advanced {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        /* Quiz Section */
+        .quiz-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+        
+        .quiz-question {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .quiz-question h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .quiz-option {
+            padding: 0.75rem 1rem;
+            background: var(--bg-tertiary);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--secondary-color);
+        }
+        
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--danger-color);
+        }
+        
+        /* Code Examples */
+        .code-example {
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .code-header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        pre {
+            margin: 0 !important;
+            border-radius: 0 !important;
+        }
+        
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Checklist */
+        .checklist {
+            margin: 2rem 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+        
+        .checklist-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+            
+            .calc-buttons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calc-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Animations */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--secondary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--shadow);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid var(--bg-tertiary);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>
+                <span>🐍</span>
+                Python 기초 - 공학용 계산기 프로젝트
+            </h1>
+            <div class="header-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <span id="progress-text" style="font-weight: bold; color: var(--primary-color);">진도: 0%</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h3>📚 학습 내용</h3>
+            <nav>
+                <a class="nav-item active" onclick="showTab('overview')">📋 프로젝트 개요</a>
+                <a class="nav-item" onclick="showTab('concepts')">💡 핵심 개념</a>
+                <a class="nav-item" onclick="showTab('calculator')">🧮 계산기 실습</a>
+                <a class="nav-item" onclick="showTab('examples')">📝 코드 예제</a>
+                <a class="nav-item" onclick="showTab('quiz')">🎯 퀴즈</a>
+                <a class="nav-item" onclick="showTab('checklist')">✅ 체크리스트</a>
+                <a class="nav-item" onclick="showTab('advanced')">🚀 심화 학습</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">🎯 프로젝트 목표</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Python의 기본 문법을 마스터하면서 실제로 사용 가능한 공학용 계산기를 구현합니다.
+                    이 프로젝트를 통해 변수, 자료형, 제어문, 함수, 예외 처리 등 Python의 핵심 개념을 실습합니다.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📐</div>
+                        <h3 class="feature-title">기본 계산기</h3>
+                        <p>사칙연산과 기본 수학 함수를 구현하며 Python 기초를 학습합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3 class="feature-title">공학용 계산기</h3>
+                        <p>삼각함수, 로그, 단위 변환 등 고급 기능을 추가합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3 class="feature-title">데이터 관리</h3>
+                        <p>계산 히스토리를 JSON으로 저장하고 불러오는 기능을 구현합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧪</div>
+                        <h3 class="feature-title">테스트 작성</h3>
+                        <p>pytest를 사용한 단위 테스트로 코드 품질을 보장합니다.</p>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <h3 style="margin-bottom: 1rem;">📊 학습 진도</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="main-progress" style="width: 0%">
+                            0%
+                        </div>
+                    </div>
+                    <canvas id="progressChart" style="margin-top: 2rem; max-height: 300px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Core Concepts Tab -->
+            <div id="concepts" class="tab-content">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">💡 Python 핵심 개념</h2>
+                
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>1. 변수와 자료형</span>
+                        <button class="copy-btn" onclick="copyCode('code1')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="code1"># 숫자형
+integer_num = 42           # 정수
+float_num = 3.14159        # 실수
+complex_num = 3 + 4j       # 복소수
+
+# 문자열
+name = "Python"
+message = f"Hello, {name}!"  # f-string 포맷팅
+
+# 리스트와 딕셔너리
+numbers = [1, 2, 3, 4, 5]
+calculator_ops = {
+    '+': 'addition',
+    '-': 'subtraction',
+    '*': 'multiplication',
+    '/': 'division'
+}
+
+# 타입 확인
+print(type(integer_num))  # <class 'int'>
+print(isinstance(float_num, float))  # True</code></pre>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>2. 제어문</span>
+                        <button class="copy-btn" onclick="copyCode('code2')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="code2"># 조건문
+def check_number(n):
+    if n > 0:
+        return "양수"
+    elif n < 0:
+        return "음수"
+    else:
+        return "영"
+
+# 반복문
+# for 루프
+for i in range(1, 6):
+    print(f"{i}의 제곱: {i**2}")
+
+# while 루프
+count = 0
+while count < 5:
+    print(f"카운트: {count}")
+    count += 1
+
+# 리스트 컴프리헨션
+squares = [x**2 for x in range(10)]
+even_squares = [x**2 for x in range(10) if x % 2 == 0]</code></pre>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>3. 함수와 타입 힌트</span>
+                        <button class="copy-btn" onclick="copyCode('code3')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="code3">from typing import Union, List, Optional
+
+def calculate(a: float, b: float, operation: str) -> Union[float, str]:
+    """
+    두 수에 대한 연산을 수행합니다.
+    
+    Args:
+        a: 첫 번째 숫자
+        b: 두 번째 숫자
+        operation: 연산 종류 (+, -, *, /)
+    
+    Returns:
+        연산 결과 또는 에러 메시지
+    """
+    operations = {
+        '+': lambda x, y: x + y,
+        '-': lambda x, y: x - y,
+        '*': lambda x, y: x * y,
+        '/': lambda x, y: x / y if y != 0 else "에러: 0으로 나눌 수 없습니다"
+    }
+    
+    if operation in operations:
+        return operations[operation](a, b)
+    return "에러: 지원하지 않는 연산입니다"
+
+# 기본값과 가변 인자
+def advanced_sum(*args: float, initial: float = 0) -> float:
+    """여러 숫자의 합을 계산합니다"""
+    return sum(args) + initial</code></pre>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>4. 예외 처리</span>
+                        <button class="copy-btn" onclick="copyCode('code4')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="code4">def safe_divide(a: float, b: float) -> Union[float, str]:
+    """안전한 나눗셈 처리"""
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError:
+        print("⚠️ 경고: 0으로 나누기 시도")
+        return "무한대"
+    except TypeError as e:
+        print(f"❌ 타입 에러: {e}")
+        return "에러: 숫자만 입력 가능합니다"
+    except Exception as e:
+        print(f"❌ 예상치 못한 에러: {e}")
+        return "에러: 계산할 수 없습니다"
+    finally:
+        print(f"계산 시도: {a} / {b}")
+
+# 커스텀 예외 클래스
+class CalculatorError(Exception):
+    """계산기 관련 예외"""
+    pass
+
+class InvalidOperationError(CalculatorError):
+    """잘못된 연산 예외"""
+    def __init__(self, operation):
+        self.operation = operation
+        super().__init__(f"지원하지 않는 연산: {operation}")</code></pre>
+                </div>
+            </div>
+
+            <!-- Calculator Demo Tab -->
+            <div id="calculator" class="tab-content">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">🧮 인터랙티브 계산기</h2>
+                
+                <div class="calculator">
+                    <div class="calc-display" id="display">0</div>
+                    <div class="calc-buttons">
+                        <button class="calc-btn clear" onclick="clearDisplay()">C</button>
+                        <button class="calc-btn advanced" onclick="calcFunction('sqrt')">√</button>
+                        <button class="calc-btn advanced" onclick="calcFunction('pow')">x²</button>
+                        <button class="calc-btn operator" onclick="appendOperator('/')">÷</button>
+                        
+                        <button class="calc-btn" onclick="appendNumber('7')">7</button>
+                        <button class="calc-btn" onclick="appendNumber('8')">8</button>
+                        <button class="calc-btn" onclick="appendNumber('9')">9</button>
+                        <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
+                        
+                        <button class="calc-btn" onclick="appendNumber('4')">4</button>
+                        <button class="calc-btn" onclick="appendNumber('5')">5</button>
+                        <button class="calc-btn" onclick="appendNumber('6')">6</button>
+                        <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
+                        
+                        <button class="calc-btn" onclick="appendNumber('1')">1</button>
+                        <button class="calc-btn" onclick="appendNumber('2')">2</button>
+                        <button class="calc-btn" onclick="appendNumber('3')">3</button>
+                        <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
+                        
+                        <button class="calc-btn" onclick="appendNumber('0')">0</button>
+                        <button class="calc-btn" onclick="appendNumber('.')">.</button>
+                        <button class="calc-btn equals" onclick="calculate()">=</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 12px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📊 계산 히스토리</h3>
+                    <div id="calc-history" style="max-height: 200px; overflow-y: auto;">
+                        <p style="color: var(--text-secondary);">계산 기록이 여기에 표시됩니다...</p>
+                    </div>
+                </div>
+
+                <div class="code-example" style="margin-top: 2rem;">
+                    <div class="code-header">
+                        <span>Python 구현 코드</span>
+                        <button class="copy-btn" onclick="copyCode('calc-code')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="calc-code">class Calculator:
+    def __init__(self):
+        self.history = []
+        self.memory = 0
+    
+    def add(self, a: float, b: float) -> float:
+        result = a + b
+        self.history.append(f"{a} + {b} = {result}")
+        return result
+    
+    def subtract(self, a: float, b: float) -> float:
+        result = a - b
+        self.history.append(f"{a} - {b} = {result}")
+        return result
+    
+    def multiply(self, a: float, b: float) -> float:
+        result = a * b
+        self.history.append(f"{a} × {b} = {result}")
+        return result
+    
+    def divide(self, a: float, b: float) -> Union[float, str]:
+        if b == 0:
+            return "에러: 0으로 나눌 수 없습니다"
+        result = a / b
+        self.history.append(f"{a} ÷ {b} = {result}")
+        return result
+    
+    def get_history(self) -> List[str]:
+        return self.history[-10:]  # 최근 10개만 반환</code></pre>
+                </div>
+            </div>
+
+            <!-- Code Examples Tab -->
+            <div id="examples" class="tab-content">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">📝 실제 코드 예제</h2>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>고급 연산 함수들</span>
+                        <button class="copy-btn" onclick="copyCode('ex1')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="ex1">import math
+from typing import Union
+
+def factorial(n: int) -> Union[int, str]:
+    """팩토리얼을 계산합니다"""
+    if n < 0:
+        return "에러: 음수의 팩토리얼은 정의되지 않습니다"
+    if n == 0 or n == 1:
+        return 1
+    return math.factorial(n)
+
+def sin_degrees(degrees: float) -> float:
+    """각도(도)로 사인값을 계산합니다"""
+    radians = math.radians(degrees)
+    return math.sin(radians)
+
+def logarithm(number: float, base: float = 10) -> Union[float, str]:
+    """로그를 계산합니다"""
+    if number <= 0:
+        return "에러: 양수만 가능합니다"
+    if base <= 0 or base == 1:
+        return "에러: 밑은 양수(1 제외)여야 합니다"
+    return math.log(number, base)
+
+# 단위 변환 함수들
+def celsius_to_fahrenheit(celsius: float) -> float:
+    """섭씨를 화씨로 변환"""
+    return (celsius * 9/5) + 32
+
+def meters_to_feet(meters: float) -> float:
+    """미터를 피트로 변환"""
+    return meters * 3.28084</code></pre>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>데코레이터 패턴</span>
+                        <button class="copy-btn" onclick="copyCode('ex2')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="ex2">import time
+from functools import wraps
+
+def measure_time(func):
+    """함수 실행 시간 측정 데코레이터"""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"⏱️ {func.__name__} 실행 시간: {end-start:.4f}초")
+        return result
+    return wrapper
+
+def validate_input(func):
+    """입력값 검증 데코레이터"""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        for arg in args:
+            if not isinstance(arg, (int, float)):
+                raise TypeError(f"숫자만 입력 가능합니다: {arg}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@measure_time
+@validate_input
+def complex_calculation(a: float, b: float) -> float:
+    """복잡한 계산 예제"""
+    result = 0
+    for i in range(1000000):
+        result += (a * b) / (i + 1)
+    return result</code></pre>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>JSON 데이터 관리</span>
+                        <button class="copy-btn" onclick="copyCode('ex3')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="ex3">import json
+from datetime import datetime
+from typing import List, Dict, Any
+
+class HistoryManager:
+    def __init__(self, filename: str = 'calculator_history.json'):
+        self.filename = filename
+        self.history = self.load_history()
+    
+    def add_calculation(self, expression: str, result: Any) -> None:
+        """계산 기록 추가"""
+        entry = {
+            'timestamp': datetime.now().isoformat(),
+            'expression': expression,
+            'result': str(result)
+        }
+        self.history.append(entry)
+        self.save_history()
+    
+    def save_history(self) -> None:
+        """히스토리를 JSON 파일로 저장"""
+        data = {
+            'version': '1.0',
+            'last_updated': datetime.now().isoformat(),
+            'calculations': self.history
+        }
+        with open(self.filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+    
+    def load_history(self) -> List[Dict]:
+        """JSON 파일에서 히스토리 불러오기"""
+        try:
+            with open(self.filename, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                return data.get('calculations', [])
+        except FileNotFoundError:
+            return []
+        except json.JSONDecodeError:
+            print("⚠️ 히스토리 파일이 손상되었습니다. 새로 시작합니다.")
+            return []
+    
+    def get_recent(self, n: int = 10) -> List[Dict]:
+        """최근 n개의 계산 기록 반환"""
+        return self.history[-n:] if self.history else []</code></pre>
+                </div>
+            </div>
+
+            <!-- Quiz Tab -->
+            <div id="quiz" class="tab-content">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">🎯 Python 기초 퀴즈</h2>
+                
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <h4>문제 1: Python에서 0으로 나누기를 시도하면 어떤 예외가 발생하나요?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">ValueError</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true)">ZeroDivisionError</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">TypeError</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">ArithmeticError</div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>문제 2: 다음 중 Python의 불변(immutable) 자료형이 아닌 것은?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">튜플(tuple)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">문자열(str)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true)">리스트(list)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">정수(int)</div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>문제 3: 함수에서 여러 개의 값을 반환하려면?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">반환할 수 없다</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true)">튜플로 반환한다</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">global 변수를 사용한다</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">print()를 사용한다</div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>문제 4: 다음 코드의 출력은?<br><code>[x**2 for x in range(5) if x % 2 == 0]</code></h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">[0, 1, 4, 9, 16]</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true)">[0, 4, 16]</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">[1, 9]</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">[0, 2, 4]</div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>문제 5: 데코레이터는 무엇을 위해 사용되나요?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">변수를 장식하기 위해</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true)">함수의 동작을 수정하거나 확장하기 위해</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">클래스를 상속하기 위해</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false)">모듈을 import하기 위해</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="calc-btn advanced" onclick="resetQuiz()" style="padding: 1rem 2rem;">
+                        퀴즈 다시 풀기
+                    </button>
+                </div>
+            </div>
+
+            <!-- Checklist Tab -->
+            <div id="checklist" class="tab-content">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">✅ 학습 체크리스트</h2>
+                
+                <div class="checklist">
+                    <h3 style="color: var(--secondary-color); margin: 1.5rem 0;">🎯 초급 단계</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check1" onchange="updateProgress()">
+                        <label for="check1">변수 선언과 자료형 이해</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check2" onchange="updateProgress()">
+                        <label for="check2">조건문으로 분기 처리</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check3" onchange="updateProgress()">
+                        <label for="check3">반복문으로 메뉴 시스템 구현</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check4" onchange="updateProgress()">
+                        <label for="check4">함수로 코드 모듈화</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check5" onchange="updateProgress()">
+                        <label for="check5">기본 예외 처리</label>
+                    </div>
+
+                    <h3 style="color: var(--secondary-color); margin: 1.5rem 0;">🚀 중급 단계</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check6" onchange="updateProgress()">
+                        <label for="check6">모듈 import와 활용</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check7" onchange="updateProgress()">
+                        <label for="check7">복잡한 수학 연산 구현</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check8" onchange="updateProgress()">
+                        <label for="check8">파일 I/O로 데이터 영속성</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check9" onchange="updateProgress()">
+                        <label for="check9">클래스 기초 이해</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check10" onchange="updateProgress()">
+                        <label for="check10">리스트/딕셔너리 활용</label>
+                    </div>
+
+                    <h3 style="color: var(--secondary-color); margin: 1.5rem 0;">💎 고급 단계</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check11" onchange="updateProgress()">
+                        <label for="check11">데코레이터 작성</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check12" onchange="updateProgress()">
+                        <label for="check12">제너레이터 활용</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check13" onchange="updateProgress()">
+                        <label for="check13">컨텍스트 매니저</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check14" onchange="updateProgress()">
+                        <label for="check14">타입 힌트 적용</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check15" onchange="updateProgress()">
+                        <label for="check15">단위 테스트 작성</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Tab -->
+            <div id="advanced" class="tab-content">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">🚀 심화 학습</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧪</div>
+                        <h3 class="feature-title">테스트 작성</h3>
+                        <p>pytest를 사용하여 단위 테스트와 통합 테스트를 작성하는 방법을 학습합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">데이터 시각화</h3>
+                        <p>matplotlib과 seaborn을 사용하여 계산 결과를 그래프로 표현합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="feature-title">성능 최적화</h3>
+                        <p>프로파일링 도구를 사용하여 코드의 병목 지점을 찾고 최적화합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3 class="feature-title">웹 인터페이스</h3>
+                        <p>Flask나 Streamlit을 사용하여 웹 기반 계산기를 만듭니다.</p>
+                    </div>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span>pytest를 사용한 테스트 예제</span>
+                        <button class="copy-btn" onclick="copyCode('test-ex')">복사</button>
+                    </div>
+                    <pre><code class="language-python" id="test-ex">import pytest
+from calculator import Calculator
+
+class TestCalculator:
+    @pytest.fixture
+    def calc(self):
+        """테스트용 계산기 인스턴스 생성"""
+        return Calculator()
+    
+    def test_addition(self, calc):
+        """덧셈 테스트"""
+        assert calc.add(2, 3) == 5
+        assert calc.add(-1, 1) == 0
+        assert calc.add(0.1, 0.2) == pytest.approx(0.3)
+    
+    def test_division(self, calc):
+        """나눗셈 테스트"""
+        assert calc.divide(10, 2) == 5
+        assert calc.divide(7, 3) == pytest.approx(2.333, rel=1e-3)
+    
+    def test_division_by_zero(self, calc):
+        """0으로 나누기 예외 테스트"""
+        result = calc.divide(10, 0)
+        assert "에러" in result
+    
+    @pytest.mark.parametrize("a,b,expected", [
+        (2, 3, 5),
+        (10, -5, 5),
+        (0, 0, 0),
+        (1.5, 2.5, 4.0)
+    ])
+    def test_add_parametrized(self, calc, a, b, expected):
+        """매개변수화된 테스트"""
+        assert calc.add(a, b) == expected</code></pre>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 12px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📚 추천 학습 자료</h3>
+                    <ul style="line-height: 2;">
+                        <li><a href="https://docs.python.org/3/" target="_blank" style="color: var(--primary-color);">Python 공식 문서</a></li>
+                        <li><a href="https://docs.python.org/3/library/math.html" target="_blank" style="color: var(--primary-color);">Python 수학 모듈</a></li>
+                        <li><a href="https://docs.pytest.org/" target="_blank" style="color: var(--primary-color);">pytest 문서</a></li>
+                        <li><a href="https://realpython.com/" target="_blank" style="color: var(--primary-color);">Real Python 튜토리얼</a></li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 12px; color: white;">
+                    <h3 style="margin-bottom: 1rem;">🎯 다음 프로젝트</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        <strong>02_functions_modules</strong>: 함수와 모듈을 심화 학습하며 텍스트 처리 유틸리티를 구현합니다.
+                        이 프로젝트에서는 더 복잡한 함수 패턴, 모듈 구조화, 패키지 관리 등을 다룹니다.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toast-message">알림 메시지</span>
+    </div>
+
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <script>
+        // Calculator functionality
+        let display = document.getElementById('display');
+        let currentValue = '0';
+        let previousValue = '';
+        let operation = null;
+        let shouldResetDisplay = false;
+        let history = [];
+
+        function updateDisplay() {
+            display.textContent = currentValue;
+        }
+
+        function clearDisplay() {
+            currentValue = '0';
+            previousValue = '';
+            operation = null;
+            updateDisplay();
+        }
+
+        function appendNumber(num) {
+            if (shouldResetDisplay) {
+                currentValue = '0';
+                shouldResetDisplay = false;
+            }
+            
+            if (num === '.' && currentValue.includes('.')) return;
+            
+            if (currentValue === '0' && num !== '.') {
+                currentValue = num;
+            } else {
+                currentValue += num;
+            }
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (operation !== null) calculate();
+            
+            previousValue = currentValue;
+            operation = op;
+            shouldResetDisplay = true;
+        }
+
+        function calculate() {
+            if (operation === null || previousValue === '') return;
+            
+            let result;
+            const prev = parseFloat(previousValue);
+            const current = parseFloat(currentValue);
+            
+            switch(operation) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    if (current === 0) {
+                        showToast('에러: 0으로 나눌 수 없습니다');
+                        return;
+                    }
+                    result = prev / current;
+                    break;
+                default:
+                    return;
+            }
+            
+            // Add to history
+            const historyEntry = `${prev} ${operation} ${current} = ${result}`;
+            history.unshift(historyEntry);
+            updateHistory();
+            
+            currentValue = result.toString();
+            operation = null;
+            previousValue = '';
+            shouldResetDisplay = true;
+            updateDisplay();
+        }
+
+        function calcFunction(func) {
+            const current = parseFloat(currentValue);
+            let result;
+            
+            switch(func) {
+                case 'sqrt':
+                    if (current < 0) {
+                        showToast('에러: 음수의 제곱근은 계산할 수 없습니다');
+                        return;
+                    }
+                    result = Math.sqrt(current);
+                    history.unshift(`√${current} = ${result}`);
+                    break;
+                case 'pow':
+                    result = current * current;
+                    history.unshift(`${current}² = ${result}`);
+                    break;
+            }
+            
+            currentValue = result.toString();
+            shouldResetDisplay = true;
+            updateDisplay();
+            updateHistory();
+        }
+
+        function updateHistory() {
+            const historyDiv = document.getElementById('calc-history');
+            if (history.length === 0) {
+                historyDiv.innerHTML = '<p style="color: var(--text-secondary);">계산 기록이 여기에 표시됩니다...</p>';
+            } else {
+                historyDiv.innerHTML = history.slice(0, 10).map(entry => 
+                    `<div style="padding: 0.5rem; margin: 0.25rem 0; background: var(--bg-primary); border-radius: 6px; font-family: monospace;">${entry}</div>`
+                ).join('');
+            }
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+        }
+
+        // Tab navigation
+        function showTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Quiz functionality
+        function checkAnswer(element, isCorrect) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                showToast('정답입니다! 🎉');
+                updateQuizProgress();
+            } else {
+                element.classList.add('incorrect');
+                showToast('틀렸습니다. 다시 생각해보세요! 🤔');
+            }
+        }
+
+        function resetQuiz() {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+            });
+            
+            // Re-enable quiz options
+            const questions = document.querySelectorAll('.quiz-question');
+            questions.forEach((q, idx) => {
+                const opts = q.querySelectorAll('.quiz-option');
+                const answers = [false, true, false, false]; // Simplified for demo
+                opts.forEach((opt, optIdx) => {
+                    opt.onclick = function() {
+                        checkAnswer(this, idx === 1 ? optIdx === 2 : optIdx === 1);
+                    };
+                });
+            });
+        }
+
+        let quizScore = 0;
+        function updateQuizProgress() {
+            quizScore++;
+            if (quizScore >= 5) {
+                showToast('모든 퀴즈를 완료했습니다! 🏆');
+            }
+        }
+
+        // Progress tracking
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+            const checked = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked');
+            const progress = Math.round((checked.length / checkboxes.length) * 100);
+            
+            document.getElementById('progress-text').textContent = `진도: ${progress}%`;
+            document.getElementById('main-progress').style.width = `${progress}%`;
+            document.getElementById('main-progress').textContent = `${progress}%`;
+            
+            // Save progress to localStorage
+            const progressData = {};
+            checkboxes.forEach(cb => {
+                progressData[cb.id] = cb.checked;
+            });
+            localStorage.setItem('pythonBasicsProgress', JSON.stringify(progressData));
+            
+            // Update chart if on overview tab
+            if (document.getElementById('overview').classList.contains('active')) {
+                updateProgressChart();
+            }
+            
+            // Update checklist item styles
+            checked.forEach(cb => {
+                cb.parentElement.classList.add('completed');
+            });
+        }
+
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('pythonBasicsProgress');
+            if (saved) {
+                const progressData = JSON.parse(saved);
+                Object.keys(progressData).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = progressData[id];
+                    }
+                });
+                updateProgress();
+            }
+        }
+
+        // Progress Chart
+        let progressChart = null;
+        function updateProgressChart() {
+            const ctx = document.getElementById('progressChart');
+            if (!ctx) return;
+            
+            const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+            const basicCompleted = Array.from(document.querySelectorAll('#check1, #check2, #check3, #check4, #check5'))
+                .filter(cb => cb.checked).length;
+            const intermediateCompleted = Array.from(document.querySelectorAll('#check6, #check7, #check8, #check9, #check10'))
+                .filter(cb => cb.checked).length;
+            const advancedCompleted = Array.from(document.querySelectorAll('#check11, #check12, #check13, #check14, #check15'))
+                .filter(cb => cb.checked).length;
+            
+            const data = {
+                labels: ['초급', '중급', '고급'],
+                datasets: [{
+                    label: '완료한 항목',
+                    data: [basicCompleted, intermediateCompleted, advancedCompleted],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(245, 158, 11, 1)'
+                    ],
+                    borderWidth: 2
+                }, {
+                    label: '전체 항목',
+                    data: [5, 5, 5],
+                    backgroundColor: 'rgba(229, 231, 235, 0.5)',
+                    borderColor: 'rgba(229, 231, 235, 1)',
+                    borderWidth: 2
+                }]
+            };
+            
+            if (progressChart) {
+                progressChart.destroy();
+            }
+            
+            progressChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: true,
+                            text: '단계별 학습 진도'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Copy code functionality
+        function copyCode(codeId) {
+            const codeElement = document.getElementById(codeId);
+            const text = codeElement.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('코드가 클립보드에 복사되었습니다! 📋');
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                showToast('복사에 실패했습니다. 다시 시도해주세요.');
+            });
+        }
+
+        // Toast notification
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateProgressChart();
+            
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Initialize Prism.js
+            Prism.highlightAll();
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (progressChart) {
+                progressChart.resize();
+            }
+        });
+    </script>
+</body>
+</html>

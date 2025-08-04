@@ -4,8 +4,13 @@
 """
 
 from calculator import add, subtract, multiply, divide
-from operations import *
-from constants import *
+from operations import (
+    power, square_root, factorial, 
+    sin_degrees, cos_degrees, tan_degrees,
+    celsius_to_fahrenheit, celsius_to_kelvin,
+    percentage
+)
+from constants import PI, E
 from utils import format_number
 
 def example_basic():

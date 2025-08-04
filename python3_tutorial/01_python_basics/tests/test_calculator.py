@@ -3,9 +3,18 @@
 계산기 함수들이 올바르게 작동하는지 확인합니다
 """
 
+import sys
+import os
+# 상위 디렉토리를 path에 추가
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from calculator import add, subtract, multiply, divide
-from operations import *
-from constants import *
+from operations import (
+    power, square_root, factorial,
+    sin_degrees, cos_degrees, tan_degrees,
+    celsius_to_fahrenheit, fahrenheit_to_celsius, celsius_to_kelvin
+)
+from constants import METER_TO_KILOMETER, METER_TO_CENTIMETER
 
 def test_basic_operations():
     """기본 연산 테스트"""

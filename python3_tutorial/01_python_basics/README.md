@@ -26,11 +26,13 @@ Python의 기본 문법을 마스터하면서 실제로 사용 가능한 공학�
 ├── requirements.txt       # 필요 패키지
 ├── demo.html             # 인터랙티브 데모
 │
+├── __init__.py           # 패키지 초기화 파일
 ├── calculator.py          # 기본 계산기 (초급)
 ├── advanced_calculator.py # 공학용 계산기 (중급)
 ├── operations.py          # 연산 함수 모듈
 ├── constants.py           # 수학/물리 상수
 ├── utils.py              # 유틸리티 함수
+├── examples.py           # 사용 예제 모음
 │
 └── tests/
     ├── test_calculator.py     # 기본 계산기 테스트

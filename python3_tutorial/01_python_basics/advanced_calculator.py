@@ -3,13 +3,21 @@
 모든 기능이 통합된 계산기 프로그램
 """
 
+# 모듈 import를 체계적으로 정리
+from typing import Dict, Tuple, Callable, Optional, Union
+
+# 기본 계산기 모듈
 from calculator import add, subtract, multiply, divide, get_number
+
+# 고급 연산 모듈
 from operations import (
     power, square_root, factorial, modulo,
     sin_degrees, cos_degrees, tan_degrees,
     logarithm, natural_log, exponential,
     celsius_to_fahrenheit, fahrenheit_to_celsius, celsius_to_kelvin
 )
+
+# 상수 모듈
 from constants import (
     PI, E, GOLDEN_RATIO,
     SPEED_OF_LIGHT, GRAVITY,
@@ -17,12 +25,14 @@ from constants import (
     KILOMETER_TO_MILE, KILOGRAM_TO_GRAM, KILOGRAM_TO_POUND,
     BASIC_MENU, ADVANCED_MENU, TRIGONOMETRY_MENU, LOGARITHM_MENU
 )
+
+# 유틸리티 모듈
 from utils import (
     format_number, format_calculation, save_history, load_history,
     print_header, print_menu, get_choice, Calculator
 )
 
-def show_full_menu():
+def show_full_menu() -> None:
     """전체 메뉴를 표시합니다"""
     print("\n[기본 연산]")
     print_menu(BASIC_MENU)
@@ -44,7 +54,7 @@ def show_full_menu():
     print(" 19. 상수 보기")
     print("  0. 종료")
 
-def unit_conversion():
+def unit_conversion() -> None:
     """단위 변환 기능"""
     print("\n[단위 변환]")
     print("1. 길이")
@@ -110,7 +120,7 @@ def unit_conversion():
             result = celsius_to_kelvin(value)
             print(f"{value}°C = {result}K")
 
-def memory_operations(calc):
+def memory_operations(calc: Calculator) -> None:
     """메모리 기능"""
     print("\n[메모리 기능]")
     print(f"현재 메모리: {format_number(calc.get_memory())}")
@@ -135,7 +145,7 @@ def memory_operations(calc):
         calc.clear_memory()
         print("메모리가 초기화되었습니다.")
 
-def show_constants():
+def show_constants() -> None:
     """상수 표시"""
     print("\n[수학 상수]")
     print(f"π (파이) = {PI}")
@@ -146,7 +156,7 @@ def show_constants():
     print(f"빛의 속도 = {SPEED_OF_LIGHT} m/s")
     print(f"중력가속도 = {GRAVITY} m/s²")
 
-def main():
+def main() -> None:
     """메인 프로그램"""
     calc = Calculator()
     
@@ -222,23 +232,20 @@ def main():
                 print("올바른 숫자를 입력해주세요.")
                 continue
         
-        # 단항 연산
-        if choice in ["6", "7", "9", "10", "11", "12", "13"]:
-            if choice == "6":  # 제곱근
-                result = square_root(num1)
-            elif choice == "7":  # 팩토리얼
-                result = factorial(num1)
-            elif choice == "9":  # 사인
-                result = sin_degrees(num1)
-            elif choice == "10":  # 코사인
-                result = cos_degrees(num1)
-            elif choice == "11":  # 탄젠트
-                result = tan_degrees(num1)
-            elif choice == "12":  # 상용로그
-                result = logarithm(num1, 10)
-            elif choice == "13":  # 자연로그
-                result = natural_log(num1)
-            
+        # 단항 연산 딕셔너리 매핑
+        unary_operations: Dict[str, Callable[[float], Union[float, str, int]]] = {
+            "6": square_root,        # 제곱근
+            "7": factorial,           # 팩토리얼
+            "9": sin_degrees,         # 사인
+            "10": cos_degrees,        # 코사인
+            "11": tan_degrees,        # 탄젠트
+            "12": lambda x: logarithm(x, 10),  # 상용로그
+            "13": natural_log         # 자연로그
+        }
+        
+        # 단항 연산 처리
+        if choice in unary_operations:
+            result = unary_operations[choice](num1)
             record = format_calculation(num1, operation_symbol, None, result)
         
         # 이항 연산
@@ -254,20 +261,21 @@ def main():
                     print("올바른 숫자를 입력해주세요.")
                     continue
             
-            if choice == "1":
-                result = add(num1, num2)
-            elif choice == "2":
-                result = subtract(num1, num2)
-            elif choice == "3":
-                result = multiply(num1, num2)
-            elif choice == "4":
-                result = divide(num1, num2)
-            elif choice == "5":
-                result = power(num1, num2)
-            elif choice == "8":
-                result = modulo(num1, num2)
-            elif choice == "14":  # 임의 밑 로그
-                result = logarithm(num1, num2)
+            # 이항 연산 딕셔너리 매핑
+            binary_operations: Dict[str, Callable[[float, float], Union[float, str]]] = {
+                "1": add,
+                "2": subtract,
+                "3": multiply,
+                "4": divide,
+                "5": power,
+                "8": modulo,
+                "14": logarithm  # 임의 밑 로그
+            }
+            
+            if choice in binary_operations:
+                result = binary_operations[choice](num1, num2)
+            else:
+                result = "에러: 지원되지 않는 연산"
             
             record = format_calculation(num1, operation_symbol, num2, result)
         
